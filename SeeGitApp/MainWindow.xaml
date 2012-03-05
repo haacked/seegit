@@ -23,17 +23,15 @@
           <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
             <Border BorderBrush="White" Background="Black" BorderThickness="2" CornerRadius="10,10,10,10"
                     Padding="{TemplateBinding Padding}">
-              <StackPanel Orientation="Vertical">
-                <Expander IsExpanded="False" Header="{Binding Path=., Mode=OneWay}">
-                  <Expander.Style>
-                    <Style TargetType="Expander">
-                      <Setter Property="Foreground" Value="White" />
-                    </Style>
-                  </Expander.Style>
-                  <ContentPresenter Content="{TemplateBinding Vertex}"
-                                    ContentTemplate="{StaticResource commitDetailsTemplate}" />
-                </Expander>
-              </StackPanel>
+              <Expander IsExpanded="False" Header="{Binding Path=., Mode=OneWay}">
+                <Expander.Style>
+                  <Style TargetType="Expander">
+                    <Setter Property="Foreground" Value="White" />
+                  </Style>
+                </Expander.Style>
+                <ContentPresenter Content="{TemplateBinding Vertex}"
+                                  ContentTemplate="{StaticResource commitDetailsTemplate}" />
+              </Expander>
               <Border.Effect>
                 <DropShadowEffect BlurRadius="2" Color="LightGray" Opacity="0.3" Direction="315" />
               </Border.Effect>
