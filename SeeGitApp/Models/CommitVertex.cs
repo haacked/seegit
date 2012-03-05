@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SeeGit
 {
@@ -12,6 +13,7 @@ namespace SeeGit
         {
             Sha = sha;
             Message = message;
+            Annotations = new List<string>();
         }
 
         public string Description { get; set; }
@@ -45,6 +47,11 @@ namespace SeeGit
                 result = (result*397) ^ (Description != null ? Description.GetHashCode() : 0);
                 return result;
             }
+        }
+
+        public IList<string> Annotations { 
+            get; 
+            private set;
         }
     }
 }

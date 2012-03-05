@@ -1,4 +1,6 @@
-﻿namespace SeeGit
+﻿using System.Linq;
+
+namespace SeeGit
 {
     public class DesignTimeMainWindowViewModel : MainWindowViewModel
     {
@@ -20,6 +22,7 @@
                               new CommitVertex("a", "Added readme")
                           };
 
+            commits.First().Annotations.Add("head");
             graph.AddVertexRange(commits);
             graph.AddEdge(new CommitEdge(commits[1], commits[2]));
             graph.AddEdge(new CommitEdge(commits[0], commits[1]));
