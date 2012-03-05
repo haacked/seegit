@@ -11,7 +11,7 @@ namespace SeeGit
 
         public MainWindow()
         {
-            const string gitRepositoryPath = @"C:\dev\git\Test";
+            const string gitRepositoryPath = @"C:\Users\Administrator\Desktop\SeeGit";
 
             var graphBuilder = new RepositoryGraphBuilder(gitRepositoryPath);
             DataContext = _viewModel = new MainWindowViewModel(graphBuilder);

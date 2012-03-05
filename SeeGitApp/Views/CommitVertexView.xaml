@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="SeeGit.Views.CommitVertexView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:local="clr-namespace:SeeGit"
+             mc:Ignorable="d" 
+             x:Name="View"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid DataContext="{Binding Model, ElementName=View}">
+
+        <AdornerDecorator>
+                
+            <Border BorderBrush="White" Background="Black" BorderThickness="2" CornerRadius="10,10,10,10">  							
+                <i:Interaction.Behaviors>
+                    <local:CaAdornerBehavior AdornerVisible="Visible" AdornerMargin="100,10,0,0" DataContext="{Binding}">
+                        <local:CaAdornerBehavior.AdornerTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" />
+                                </StackPanel>						  					
+                            </DataTemplate>		
+                        </local:CaAdornerBehavior.AdornerTemplate>
+                    </local:CaAdornerBehavior>
+                </i:Interaction.Behaviors>
+           
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="2" Color="LightGray" Opacity="0.3" Direction="315" />
+                </Border.Effect>
+        
+                <Expander IsExpanded="False" Header="{Binding ShortSha, Mode=OneWay}">
+                    <Expander.Style>
+                        <Style TargetType="{x:Type Expander}">
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="FontFamily" Value="Lucida Console" />
+                        </Style>
+                    </Expander.Style>
+                </Expander>
+            </Border>
+        </AdornerDecorator>
+    </Grid>
+</UserControl>
