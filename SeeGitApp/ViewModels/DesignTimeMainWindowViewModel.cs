@@ -1,9 +1,19 @@
-﻿namespace SeeGit
+﻿using SeeGit.Models;
+
+namespace SeeGit
 {
     public class DesignTimeMainWindowViewModel : MainWindowViewModel
     {
-        protected override void CreateGraphData()
+        public DesignTimeMainWindowViewModel() : base(new DesignTimeGraphBuilder())
         {
+        }
+    }
+
+    public class DesignTimeGraphBuilder : IRepositoryGraphBuilder
+    {
+        public RepositoryGraph Graph()
+        {
+            var graph = new RepositoryGraph();
             var commits = new[]
                           {
                               new CommitVertex("c", "Wrote some code")
@@ -12,9 +22,10 @@
                               new CommitVertex("a", "Added readme")
                           };
 
-            Graph.AddVertexRange(commits);
-            Graph.AddEdge(new CommitEdge(commits[1], commits[2]));
-            Graph.AddEdge(new CommitEdge(commits[0], commits[1]));
+            graph.AddVertexRange(commits);
+            graph.AddEdge(new CommitEdge(commits[1], commits[2]));
+            graph.AddEdge(new CommitEdge(commits[0], commits[1]));
+            return graph;
         }
     }
 }

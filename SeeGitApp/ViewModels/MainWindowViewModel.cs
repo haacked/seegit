@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using GraphSharp.Controls;
+using SeeGit.Models;
 
 namespace SeeGit
 {
@@ -11,38 +12,16 @@ namespace SeeGit
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private RepositoryGraph _graph;
+        private readonly IRepositoryGraphBuilder _graphBuilder;
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IRepositoryGraphBuilder graphBuilder)
         {
-            _graph = new RepositoryGraph();
-            PopulateGraph();
+            _graphBuilder = graphBuilder;
+            Graph = _graphBuilder.Graph();
             LayoutAlgorithmType = "Tree";
         }
 
-        public void PopulateGraph()
-        {
-            _graph.Clear();
-            CreateGraphData();
-            NotifyPropertyChanged("Graph");
-        }
-
-        protected virtual void CreateGraphData()
-        {
-            var commits = new[]
-                          {
-                              new CommitVertex("c", "Wrote some code")
-                              {Description = "This is a long form description of the commit"},
-                              new CommitVertex("b", "Initial commit"),
-                              new CommitVertex("a", "Added readme")
-                          };
-
-            Graph.AddVertexRange(commits);
-            Graph.AddEdge(new CommitEdge(commits[1], commits[2]));
-            Graph.AddEdge(new CommitEdge(commits[0], commits[1]));
-        }
-
         public string LayoutAlgorithmType { get; private set; }
-
 
         public RepositoryGraph Graph
         {
@@ -52,6 +31,11 @@ namespace SeeGit
                 _graph = value;
                 NotifyPropertyChanged("Graph");
             }
+        }
+
+        public void Refresh()
+        {
+            Graph = _graphBuilder.Graph();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
