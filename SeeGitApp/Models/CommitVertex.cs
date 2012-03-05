@@ -6,21 +6,26 @@ namespace SeeGit
     [DebuggerDisplay("{Sha}: {Message}")]
     public class CommitVertex
     {
-        public string Sha { get; private set; }
-        public string Message { get; private set; }
-
         public CommitVertex(string sha, string message)
         {
             Sha = sha;
             Message = message;
-            Annotations = new List<string>();
+            Branches = new List<string>();
         }
 
+        public string Sha { get; private set; }
+
+        public string ShortSha
+        {
+            get { return Sha.AtMost(8); }
+        }
+
+        public string Message { get; private set; }
         public string Description { get; set; }
 
         public override string ToString()
         {
-            return string.Format("{0}: {1}", Sha.AtMost(8), Message);
+            return string.Format("{0}: {1}", ShortSha, Message);
         }
 
         public override bool Equals(object obj)
@@ -49,9 +54,6 @@ namespace SeeGit
             }
         }
 
-        public IList<string> Annotations { 
-            get; 
-            private set;
-        }
+        public IList<string> Branches { get; private set; }
     }
 }

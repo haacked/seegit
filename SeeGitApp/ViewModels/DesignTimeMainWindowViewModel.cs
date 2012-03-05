@@ -16,13 +16,15 @@ namespace SeeGit
             var graph = new RepositoryGraph();
             var commits = new[]
                           {
-                              new CommitVertex("c", "Wrote some code")
+                              new CommitVertex("c34173273", "Wrote some code")
                               {Description = "This is a long form description of the commit"},
-                              new CommitVertex("b", "Initial commit"),
-                              new CommitVertex("a", "Added readme")
+                              new CommitVertex("b1ae7a123", "Initial commit"),
+                              new CommitVertex("aa3823ca1", "Added readme")
                           };
 
-            commits.First().Annotations.Add("head");
+            commits.First().Branches.Add("master");
+            commits.First().Branches.Add("remotes/origin/master");
+
             graph.AddVertexRange(commits);
             graph.AddEdge(new CommitEdge(commits[1], commits[2]));
             graph.AddEdge(new CommitEdge(commits[0], commits[1]));

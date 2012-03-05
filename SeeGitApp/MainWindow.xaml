@@ -17,21 +17,32 @@
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
-            <Border BorderBrush="White" Background="Black" BorderThickness="2" CornerRadius="10,10,10,10"
-                    Padding="{TemplateBinding Padding}">
-              <Expander IsExpanded="False" Header="{Binding Path=., Mode=OneWay}">
-                <Expander.Style>
-                  <Style TargetType="Expander">
-                    <Setter Property="Foreground" Value="White" />
-                  </Style>
-                </Expander.Style>
-                <ContentPresenter Content="{TemplateBinding Vertex}"
-                                  ContentTemplate="{StaticResource commitDetailsTemplate}" />
-              </Expander>
-              <Border.Effect>
-                <DropShadowEffect BlurRadius="2" Color="LightGray" Opacity="0.3" Direction="315" />
-              </Border.Effect>
-            </Border>
+            <Grid>
+              <Border BorderBrush="White" Background="Black" BorderThickness="2" CornerRadius="10,10,10,10"
+                      Padding="{TemplateBinding Padding}">
+                <Expander IsExpanded="False" Header="{Binding Path=ShortSha, Mode=OneWay}">
+                  <Expander.Style>
+                    <Style TargetType="Expander">
+                      <Setter Property="Foreground" Value="White" />
+                      <Setter Property="FontFamily" Value="Lucida Console" />
+                    </Style>
+                  </Expander.Style>
+                </Expander>
+
+                <Border.Effect>
+                  <DropShadowEffect BlurRadius="2" Color="LightGray" Opacity="0.3" Direction="315" />
+                </Border.Effect>
+
+              </Border>
+              <Border>
+                <Border.RenderTransform>
+                  <TranslateTransform X="100" Y="5" />
+                </Border.RenderTransform>
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{Binding Path=Message}" Foreground="White" />
+                </StackPanel>
+              </Border>
+            </Grid>
           </ControlTemplate>
         </Setter.Value>
       </Setter>
