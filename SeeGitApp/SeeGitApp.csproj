@@ -84,6 +84,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\IRepositoryGraphBuilder.cs" />
     <Compile Include="Models\RepositoryGraphBuilder.cs" />
+    <Compile Include="Models\RepositoryGraphLayout.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">

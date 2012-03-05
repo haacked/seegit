@@ -1,13 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using GraphSharp.Controls;
 
 namespace SeeGit
 {
-    public class RepositoryGraphLayout : GraphLayout<CommitVertex, CommitEdge, RepositoryGraph>
-    {
-    }
-
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private RepositoryGraph _graph;
