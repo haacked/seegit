@@ -7,10 +7,6 @@
         mc:Ignorable="d" Width="708">
   <Window.Resources>
 
-    <DataTemplate x:Key="commitTemplate" DataType="{x:Type local:CommitVertex}">
-      <StackPanel Orientation="Horizontal" Margin="5"></StackPanel>
-    </DataTemplate>
-
     <DataTemplate x:Key="commitDetailsTemplate" DataType="{x:Type local:CommitVertex}">
       <StackPanel Orientation="Horizontal" Margin="5">
         <TextBlock Text="{Binding Path=Description, Mode=OneWay}" Foreground="White" />
