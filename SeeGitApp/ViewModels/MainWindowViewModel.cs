@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using GraphSharp.Controls;
-using SeeGit.Models;
 
 namespace SeeGit
 {

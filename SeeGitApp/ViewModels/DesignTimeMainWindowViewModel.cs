@@ -1,6 +1,4 @@
-﻿using SeeGit.Models;
-
-namespace SeeGit
+﻿namespace SeeGit
 {
     public class DesignTimeMainWindowViewModel : MainWindowViewModel
     {

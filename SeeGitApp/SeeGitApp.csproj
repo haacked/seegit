@@ -94,9 +94,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GraphBits\CommitEdge.cs" />
-    <Compile Include="GraphBits\RepositoryGraph.cs" />
-    <Compile Include="GraphBits\CommitVertex.cs" />
+    <Compile Include="Models\CommitEdge.cs" />
+    <Compile Include="Models\RepositoryGraph.cs" />
+    <Compile Include="Models\CommitVertex.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

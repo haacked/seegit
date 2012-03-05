@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using LibGit2Sharp;
 
-namespace SeeGit.Models
+namespace SeeGit
 {
     public class RepositoryGraphBuilder : IRepositoryGraphBuilder
     {
