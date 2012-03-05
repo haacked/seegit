@@ -18,7 +18,7 @@ namespace SeeGit
 
         public override string ToString()
         {
-            return string.Format("{0}: {1}", Sha.Substring(0, 8), Message);
+            return string.Format("{0}: {1}", Sha.AtMost(8), Message);
         }
 
         public override bool Equals(object obj)

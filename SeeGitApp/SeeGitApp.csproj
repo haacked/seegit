@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Models\IRepositoryGraphBuilder.cs" />
     <Compile Include="Models\RepositoryGraphBuilder.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
