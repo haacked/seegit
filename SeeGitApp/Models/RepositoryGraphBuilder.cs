@@ -33,7 +33,7 @@ namespace SeeGit
                 graph.AddEdge(new CommitEdge(childVertex, commitVertex));
             }
 
-            foreach (var parent in commit.Parents.Take(20))
+            foreach (var parent in commit.Parents)
             {
                 AddCommitsToGraph(graph, parent, commitVertex);
             }

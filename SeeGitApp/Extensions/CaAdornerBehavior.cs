@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Interactivity;
-using System.Diagnostics;
+using System.Windows.Media;
 using Microsoft.Expression.Interactivity.Core;
 
 // Lovingly borrowed from http://www.codeproject.com/Articles/271082/Use-and-DataTemplate-as-an-Adorner
@@ -20,7 +15,7 @@ namespace SeeGit
     /// <summary>
     /// Custom Adorner hosting a ContentControl with a ContentTemplate
     /// </summary>
-    class CaTemplatedAdorner : Adorner
+    internal class CaTemplatedAdorner : Adorner
     {
         /// <summary>
         /// 
@@ -48,10 +43,7 @@ namespace SeeGit
         /// </summary>
         protected override int VisualChildrenCount
         {
-            get
-            {
-                return 1; 
-            }
+            get { return 1; }
         }
 
         /// <summary>
@@ -83,47 +75,47 @@ namespace SeeGit
         /// <summary>
         /// 
         /// </summary>
-        FrameworkElement _frameworkElementAdorner;
+        private readonly FrameworkElement _frameworkElementAdorner;
     }
-
-
 
 
     /// <summary>
     /// Behavior managing an adorner datatemplate
     /// </summary>
-	public class CaAdornerBehavior : Behavior<DependencyObject>
-	{
+    public class CaAdornerBehavior : Behavior<DependencyObject>
+    {
         /// <summary>
         /// Custom Adorner class
         /// </summary>
-        CaTemplatedAdorner _caTemplatedAdorner = null;
+        private CaTemplatedAdorner _caTemplatedAdorner;
 
         /// <summary>
         /// Adorner control holder. This object is passed to the Adorner
         /// </summary>
-        ContentControl _adornerControl;
+        private ContentControl _adornerControl;
 
         /// <summary>
         /// Preset actions to handle delayed contruction/destruction
         /// </summary>
-        Func<bool> _delayedFactory;
-        Func<bool> _delayedDestruction;
-        Func<bool> _nonDelayedFactory;
-        Func<bool> _nonDelayedDestruction;
+        private Func<bool> _delayedFactory;
+
+        private Func<bool> _delayedDestruction;
+        private Func<bool> _nonDelayedFactory;
+        private Func<bool> _nonDelayedDestruction;
 
         /// <summary>
         /// Preset actions
         /// </summary>
-        readonly Func<bool> _factor;
-        readonly Func<bool> _dispose;
-        readonly Func<bool> _emptyAction;
+        private readonly Func<bool> _factor;
+
+        private readonly Func<bool> _dispose;
+        private readonly Func<bool> _emptyAction;
 
         /// <summary>
         /// 
         /// </summary>
-		public CaAdornerBehavior()
-		{
+        public CaAdornerBehavior()
+        {
             //
             // create three static Actions to work with delayed, or not, construction
             //
@@ -133,47 +125,52 @@ namespace SeeGit
             // Delay factory action
             //
             _factor = () =>
-                {
-                    if (AdornerTemplate != null)
-                    {
-                        AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(AssociatedObject as UIElement);
+                      {
+                          if (AdornerTemplate != null)
+                          {
+                              AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(AssociatedObject as UIElement);
 
-                        if (null == adornerLayer) throw new NullReferenceException(string.Format("No adorner found in attached object: {0}", AssociatedObject));
+                              if (null == adornerLayer)
+                                  throw new NullReferenceException(
+                                      string.Format("No adorner found in attached object: {0}", AssociatedObject));
 
-                        // Create adorner
-                        _adornerControl = new ContentControl();
+                              // Create adorner
+                              _adornerControl = new ContentControl();
 
-                        // Add to adorner
-                        adornerLayer.Add(_caTemplatedAdorner = new CaTemplatedAdorner(AssociatedObject as UIElement, _adornerControl));
+                              // Add to adorner
+                              adornerLayer.Add(
+                                  _caTemplatedAdorner =
+                                  new CaTemplatedAdorner(AssociatedObject as UIElement, _adornerControl));
 
-                        // set realted bindings
-                        _adornerControl.Content = AdornerTemplate.LoadContent();
-                        _adornerControl.Visibility = AdornerVisible;
+                              // set realted bindings
+                              _adornerControl.Content = AdornerTemplate.LoadContent();
+                              _adornerControl.Visibility = AdornerVisible;
 
-                        // Bind internal dependency to external 
-                        Binding bindingMargin = new Binding("AdornerMargin");
-                        bindingMargin.Source = this;
-                        BindingOperations.SetBinding(_caTemplatedAdorner, ContentControl.MarginProperty, bindingMargin);
-                    }
+                              // Bind internal dependency to external 
+                              Binding bindingMargin = new Binding("AdornerMargin");
+                              bindingMargin.Source = this;
+                              BindingOperations.SetBinding(_caTemplatedAdorner, FrameworkElement.MarginProperty,
+                                                           bindingMargin);
+                          }
 
-                    return true;
-                };
+                          return true;
+                      };
 
             //
             // proper dispose
             //
             _dispose = () =>
-                {
-                    if (null != _caTemplatedAdorner)
-                    {
-                        AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(AssociatedObject as UIElement);
-                        adornerLayer.Remove(_caTemplatedAdorner);
-                        BindingOperations.ClearBinding(_caTemplatedAdorner, ContentControl.MarginProperty);
-                        _caTemplatedAdorner = null;
-                        _adornerControl = null;
-                    }
-                    return true;
-                };
+                       {
+                           if (null != _caTemplatedAdorner)
+                           {
+                               AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(AssociatedObject as UIElement);
+                               adornerLayer.Remove(_caTemplatedAdorner);
+                               BindingOperations.ClearBinding(_caTemplatedAdorner, FrameworkElement.MarginProperty);
+                               _caTemplatedAdorner = null;
+                               _adornerControl = null;
+                           }
+                           return true;
+                       };
 
             // set intial actions 
             SetDelayedState(DelayConstruction);
@@ -186,8 +183,8 @@ namespace SeeGit
         /// <summary>
         /// Standard behavior OnAttached() override
         /// </summary>
-		protected override void OnAttached()
-		{
+        protected override void OnAttached()
+        {
             base.OnAttached();
             _nonDelayedFactory();
         }
@@ -212,7 +209,7 @@ namespace SeeGit
 
             // Set Data context here because default template assigment is  not setting the context
             var dtContext = (this.AssociatedObject as FrameworkElement).DataContext;
-            if ( null == _adornerControl.DataContext )
+            if (null == _adornerControl.DataContext)
                 _adornerControl.DataContext = dtContext;
 
             _adornerControl.Visibility = Visibility.Visible;
@@ -236,28 +233,19 @@ namespace SeeGit
                     _adornerControl.Visibility = AdornerVisible;
                 }
             }
-
         }
 
 
         /// <summary>
         /// ShowAdornerCommand
         /// </summary>
-        public ICommand ShowAdornerCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand ShowAdornerCommand { get; private set; }
 
 
         /// <summary>
         /// HideAdornerCommand
         /// </summary>
-        public ICommand HideAdornerCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand HideAdornerCommand { get; private set; }
 
 
         /// <summary>
@@ -266,13 +254,13 @@ namespace SeeGit
         /// </summary>
         public static readonly DependencyProperty AdornerTemplateProperty = DependencyProperty.Register(
             "AdornerTemplate",
-            typeof(DataTemplate),
-            typeof(CaAdornerBehavior), new PropertyMetadata(new PropertyChangedCallback((d, o) => 
-            {
-                if (null != ((CaAdornerBehavior)d)._adornerControl)
-                    ((CaAdornerBehavior)d)._adornerControl.ContentTemplate = (DataTemplate)o.NewValue;
-            }
-          )));
+            typeof (DataTemplate),
+            typeof (CaAdornerBehavior), new PropertyMetadata((d, o) =>
+                                                             {
+                                                                 if (null != ((CaAdornerBehavior)d)._adornerControl)
+                                                                     ((CaAdornerBehavior)d)._adornerControl.
+                                                                         ContentTemplate = (DataTemplate)o.NewValue;
+                                                             }));
 
         /// <summary>
         /// Data template for the adroner. Used inside a ContentControl. 
@@ -284,16 +272,14 @@ namespace SeeGit
         }
 
 
-
-
         /// <summary>
         /// Adorner Margin
         /// </summary>
         public static readonly DependencyProperty AdornerMarginProperty = DependencyProperty.Register(
             "AdornerMargin",
-            typeof(Thickness),
-            typeof(CaAdornerBehavior)
-          );
+            typeof (Thickness),
+            typeof (CaAdornerBehavior)
+            );
 
         /// <summary>
         /// Adorner Margin
@@ -305,20 +291,19 @@ namespace SeeGit
         }
 
 
-
         /// <summary>
         /// AdornerVisibleProperty
         /// </summary>
         public static readonly DependencyProperty AdornerVisibleProperty = DependencyProperty.Register(
             "AdornerVisible",
-            typeof(Visibility),
-            typeof(CaAdornerBehavior),
-            new PropertyMetadata((object)Visibility.Hidden, new PropertyChangedCallback((d, o) => 
-                { 
-                    if (null != ((CaAdornerBehavior)d)._adornerControl)
-                        ((CaAdornerBehavior)d)._adornerControl.Visibility = (Visibility)o.NewValue;
-                }
-          )));
+            typeof (Visibility),
+            typeof (CaAdornerBehavior),
+            new PropertyMetadata(Visibility.Hidden, (d, o) =>
+                                                    {
+                                                        if (null != ((CaAdornerBehavior)d)._adornerControl)
+                                                            ((CaAdornerBehavior)d)._adornerControl.Visibility =
+                                                                (Visibility)o.NewValue;
+                                                    }));
 
         /// <summary>
         /// Data template for the adroner. Used inside a ContentControl. 
@@ -335,13 +320,14 @@ namespace SeeGit
         /// </summary>
         public static readonly DependencyProperty DelayConstructionProperty = DependencyProperty.Register(
             "DelayConstruction",
-            typeof(bool),
-            typeof(CaAdornerBehavior),
-            new PropertyMetadata((object)false, new PropertyChangedCallback((d, o) => 
-                {
-                    ((CaAdornerBehavior)d).SetDelayedState((bool) o.NewValue);
-                })
-          ));
+            typeof (bool),
+            typeof (CaAdornerBehavior),
+            new PropertyMetadata(false, (d, o) =>
+                                        {
+                                            var adorner = d as CaAdornerBehavior;
+                                            if (d == null) return;
+                                            adorner.SetDelayedState((bool)o.NewValue);
+                                        }));
 
         /// <summary>
         /// Data template for the adroner. Used inside a ContentControl. 
@@ -365,18 +351,21 @@ namespace SeeGit
 
         public object DataContext
         {
-            get { return (object)GetValue(DataContextProperty); }
+            get { return GetValue(DataContextProperty); }
             set { SetValue(DataContextProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for DataContext.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DataContextProperty =
-            DependencyProperty.Register("DataContext", typeof(object), typeof(CaAdornerBehavior), new UIPropertyMetadata(OnDataContextChanged));
+            DependencyProperty.Register("DataContext", typeof (object), typeof (CaAdornerBehavior),
+                                        new UIPropertyMetadata(OnDataContextChanged));
 
         private static void OnDataContextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var This = (CaAdornerBehavior) d;
-            This._adornerControl.DataContext = This.DataContext;
+            var adorner = d as CaAdornerBehavior;
+            if (adorner == null || adorner._adornerControl == null) return;
+
+            adorner._adornerControl.DataContext = adorner.DataContext;
         }
-	}
+    }
 }
