@@ -1,29 +1,35 @@
-﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls" xmlns:local="clr-namespace:SeeGit" xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:view="clr-namespace:SeeGit.Views" x:Class="SeeGit.MainWindow" Title="GraphSharpDemo" Height="465"
-        Width="708" mc:Ignorable="d">
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls" 
+        xmlns:local="clr-namespace:SeeGit"
+        xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:view="clr-namespace:SeeGit.Views"
+        x:Class="SeeGit.MainWindow" Title="GraphSharpDemo" Height="465" Width="708" mc:Ignorable="d">
   <Window.Resources>
 
-  	<DataTemplate x:Key="commitDetailsTemplate" DataType="{x:Type local:CommitVertex}">
-  		<StackPanel Orientation="Horizontal" Margin="5">
-  			<TextBlock Text="{Binding Description, Mode=OneWay}" Foreground="White" />
-  		</StackPanel>
-  	</DataTemplate>
+    <DataTemplate x:Key="commitDetailsTemplate" DataType="{x:Type local:CommitVertex}">
+      <StackPanel Orientation="Horizontal" Margin="5">
+        <TextBlock Text="{Binding Description, Mode=OneWay}" Foreground="White" />
+      </StackPanel>
+    </DataTemplate>
 
-  	<Style TargetType="{x:Type graphsharp:VertexControl}">
-  		<Setter Property="Template">
-  			<Setter.Value>
-  				<ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
-                    <view:CommitVertexView Model="{Binding}" />
-                </ControlTemplate>
-  			</Setter.Value>
-  		</Setter>
-  	</Style>
+    <Style TargetType="{x:Type graphsharp:VertexControl}">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
+            <view:CommitVertexView Model="{Binding}" />
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
   </Window.Resources>
 
-  <Grid d:DataContext="{d:DesignInstance {x:Type local:DesignTimeMainWindowViewModel}, IsDesignTimeCreatable=True}">
+  <Grid d:DataContext="{ d:DesignInstance {x:Type local:DesignTimeMainWindowViewModel}, IsDesignTimeCreatable=True}">
     <Grid.RowDefinitions>
-    	<RowDefinition Height="Auto" />
-    	<RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
     <StackPanel Orientation="Vertical" Grid.Row="0">
@@ -32,8 +38,11 @@
                FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="Repository Path:" />
         <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
                FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="{Binding Path=RepositoryPath}" />
-                <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3" Click="OnChooseRepository">Browse For a Repository...</Button>
-            </StackPanel>
+        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
+                Click="OnChooseRepository">
+          Browse For a Repository...
+        </Button>
+      </StackPanel>
     </StackPanel>
 
     <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">

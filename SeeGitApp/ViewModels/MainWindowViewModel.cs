@@ -1,29 +1,33 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.Windows.Threading;
 
 namespace SeeGit
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private RepositoryGraph _graph;
-        private readonly IRepositoryGraphBuilder _graphBuilder;
-        private string layoutAlgorithmType = "Tree";
 
-        public MainWindowViewModel(IRepositoryGraphBuilder graphBuilder, string repositoryPath)
+        private IRepositoryGraphBuilder _graphBuilder;
+        // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
+
+        private string _layoutAlgorithmType = "Tree";
+        private readonly Dispatcher _uiDispatcher;
+        private readonly Func<string, IRepositoryGraphBuilder> _graphBuilderThunk;
+
+        public MainWindowViewModel(Dispatcher uiDispatcher, Func<string, IRepositoryGraphBuilder> graphBuilderThunk)
         {
-            _graphBuilder = graphBuilder;
-            RepositoryPath = repositoryPath;
-            Graph = _graphBuilder.Graph();
-            LayoutAlgorithmType = "Tree";
-            // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
+            _uiDispatcher = uiDispatcher;
+            _graphBuilderThunk = graphBuilderThunk ?? (path => new RepositoryGraphBuilder(path));
         }
 
         public string LayoutAlgorithmType
         {
-            get { return layoutAlgorithmType; }
+            get { return _layoutAlgorithmType; }
             set
             {
-                layoutAlgorithmType = value;
+                _layoutAlgorithmType = value;
                 NotifyPropertyChanged("LayoutAlgorithmType");
             }
         }
@@ -40,6 +44,35 @@ namespace SeeGit
         }
 
         public string RepositoryPath { get; private set; }
+
+                public void MonitorRepository(string repositoryWorkingPath)
+        {
+            if (repositoryWorkingPath == null) return;
+            string gitPath = repositoryWorkingPath.NormalizeGitRepositoryPath();
+            if (!Directory.Exists(gitPath))
+            {
+                MonitorForRepositoryCreation(repositoryWorkingPath);
+                return;
+            }
+
+            _graphBuilder = _graphBuilderThunk(gitPath);
+            Graph = _graphBuilder.Graph();
+            LayoutAlgorithmType = "Tree";
+
+            MonitorForRepositoryChanges(gitPath);
+        }
+
+        private void MonitorForRepositoryCreation(string repositoryWorkingPath)
+        {
+            ModelExtensions.CreateGitRepositoryCreationObservable(repositoryWorkingPath)
+                .Subscribe(_ => _uiDispatcher.Invoke(new Action(() => MonitorRepository(repositoryWorkingPath))));
+        }
+
+        private void MonitorForRepositoryChanges(string gitRepositoryPath)
+        {
+            ModelExtensions.CreateGitRepositoryChangesObservable(gitRepositoryPath)
+                .Subscribe(_ => _uiDispatcher.Invoke(new Action(Refresh)));
+        }
 
         public void Refresh()
         {

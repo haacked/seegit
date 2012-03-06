@@ -1,10 +1,11 @@
 ﻿using System.Linq;
+using System.Windows.Threading;
 
 namespace SeeGit
 {
     public class DesignTimeMainWindowViewModel : MainWindowViewModel
     {
-        public DesignTimeMainWindowViewModel() : base(new DesignTimeGraphBuilder(), @"c:\dev\git\fake")
+        public DesignTimeMainWindowViewModel() : base(Dispatcher.CurrentDispatcher, _ => new DesignTimeGraphBuilder())
         {
         }
     }

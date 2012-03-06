@@ -1,4 +1,8 @@
-﻿namespace SeeGit
+﻿using System;
+using System.IO;
+using System.Reactive.Linq;
+
+namespace SeeGit
 {
     public static class ModelExtensions
     {
@@ -10,6 +14,46 @@
                 return s;
             }
             return s.Substring(0, characterCount);
+        }
+
+        public static string NormalizeGitRepositoryPath(this string path)
+        {
+            if (path == null) throw new ArgumentNullException("path");
+
+            var folderName = Path.GetDirectoryName(path) ?? "";
+            if (folderName.Equals(".git", StringComparison.OrdinalIgnoreCase))
+            {
+                return path;
+            }
+            return Path.Combine(path, ".git");
+        }
+
+        public static IObservable<FileSystemEventArgs> CreateGitRepositoryCreationObservable(string path)
+        {
+            string expectedGitDirectory = Path.Combine(path, ".git");
+            return new FileSystemWatcher(path)
+                   {
+                       IncludeSubdirectories = false,
+                       EnableRaisingEvents = true,
+                       NotifyFilter =
+                           NotifyFilters.CreationTime
+                   }.ObserveFileSystemChangeEvents()
+                .Where(
+                    e =>
+                    e.ChangeType == WatcherChangeTypes.Created &&
+                    e.FullPath.Equals(expectedGitDirectory, StringComparison.OrdinalIgnoreCase))
+                .Throttle(TimeSpan.FromSeconds(1));
+        }
+
+        public static IObservable<FileSystemEventArgs> CreateGitRepositoryChangesObservable(string path)
+        {
+            return new FileSystemWatcher(path)
+                   {
+                       IncludeSubdirectories = true,
+                       EnableRaisingEvents = true,
+                       NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.LastWrite
+                   }.ObserveFileSystemChangeEvents()
+                .Throttle(TimeSpan.FromSeconds(1));
         }
     }
 }

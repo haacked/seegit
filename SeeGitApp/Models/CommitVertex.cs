@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace SeeGit
 {
     [DebuggerDisplay("{Sha}: {Message}")]
-    public class CommitVertex
+    public class CommitVertex : INotifyPropertyChanged
     {
         public CommitVertex(string sha, string message)
         {
             Sha = sha;
             Message = message;
-            Branches = new List<string>();
+            Branches = new ObservableCollection<string>();
+            Branches.CollectionChanged += (o, e) => NotifyPropertyChanged("HasBranches");
         }
 
         public string Sha { get; private set; }
@@ -28,7 +31,9 @@ namespace SeeGit
             return string.Format("{0}: {1}", ShortSha, Message);
         }
 
-        public bool HasBranches { get { return Branches.Count > 0; }
+        public bool HasBranches
+        {
+            get { return Branches.Count > 0; }
         }
 
         public override bool Equals(object obj)
@@ -57,6 +62,16 @@ namespace SeeGit
             }
         }
 
-        public IList<string> Branches { get; private set; }
+        public ObservableCollection<string> Branches { get; private set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
     }
 }

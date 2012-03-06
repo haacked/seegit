@@ -33,15 +33,9 @@ namespace SeeGit
                 _repository.Commits.QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time});
 
             // The following is an attempt to fix a bug with showing the branch name on too many commits.
-            _graph.Clear();
-            _edges.Clear();
-            _vertices.Clear();
-            _graph = new RepositoryGraph();
-
-            if (!commits.Any())
-            {
-                return _graph;
-            }
+            //_graph.Clear();
+            //_edges.Clear();
+            //_vertices.Clear();
 
             foreach (var vertice in _vertices.Values)
             {
@@ -51,6 +45,7 @@ namespace SeeGit
                 }
             }
 
+            if (!commits.Any()) return _graph;
             AddCommitsToGraph(commits.First(), null);
 
             foreach (var branch in _repository.Branches.Where(branch => branch.Commits.Any()))
