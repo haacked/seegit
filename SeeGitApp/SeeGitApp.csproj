@@ -42,10 +42,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\GraphSharp.dll</HintPath>
     </Reference>
-    <Reference Include="GraphSharp.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\GraphSharp.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="GraphSharp.Controls, Version=1.0.4115.29430, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\GraphSharp.Controls.dll</HintPath>
@@ -103,6 +99,8 @@
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
     <Compile Include="Models\IRepositoryGraphBuilder.cs" />
+    <Compile Include="Models\ReachableHighlightAlgorithm.cs" />
+    <Compile Include="Models\ReachableHighlightAlgorithmFactory.cs" />
     <Compile Include="Models\RepositoryGraphBuilder.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
