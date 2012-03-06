@@ -4,7 +4,7 @@ namespace SeeGit
 {
     public class DesignTimeMainWindowViewModel : MainWindowViewModel
     {
-        public DesignTimeMainWindowViewModel() : base(new DesignTimeGraphBuilder())
+        public DesignTimeMainWindowViewModel() : base(new DesignTimeGraphBuilder(), @"c:\dev\git\fake")
         {
         }
     }

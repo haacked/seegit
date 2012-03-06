@@ -40,27 +40,36 @@
   <ItemGroup>
     <Reference Include="GraphSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\GraphSharp.dll</HintPath>
+      <HintPath>..\Lib\GraphSharp.dll</HintPath>
     </Reference>
     <Reference Include="GraphSharp.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\GraphSharp.Contracts.dll</HintPath>
+      <HintPath>..\Lib\GraphSharp.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="GraphSharp.Controls, Version=1.0.4115.29430, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\GraphSharp.Controls.dll</HintPath>
+      <HintPath>..\Lib\GraphSharp.Controls.dll</HintPath>
     </Reference>
     <Reference Include="LibGit2Sharp">
       <HintPath>..\packages\LibGit2Sharp.0.8\lib\net35\LibGit2Sharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\Microsoft.Contracts.dll</HintPath>
+      <HintPath>..\Lib\Microsoft.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions" />
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\Lib\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\Lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\Lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="QuickGraph, Version=3.2.40122.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\QuickGraph.dll</HintPath>
+      <HintPath>..\Lib\QuickGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -88,6 +97,7 @@
     </ApplicationDefinition>
     <Compile Include="Extensions\CaAdornerBehavior.cs" />
     <Compile Include="Extensions\ModelExtensions.cs" />
+    <Compile Include="Extensions\WindowsExtensions.cs" />
     <Compile Include="Models\IRepositoryGraphBuilder.cs" />
     <Compile Include="Models\RepositoryGraphBuilder.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
@@ -141,14 +151,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Lib\GraphSharp.Contracts.dll" />
-    <Content Include="Lib\GraphSharp.Controls.dll" />
-    <Content Include="Lib\GraphSharp.dll" />
-    <Content Include="Lib\Microsoft.Contracts.dll" />
-    <Content Include="Lib\QuickGraph.dll" />
-    <Content Include="Lib\WPFExtensions.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

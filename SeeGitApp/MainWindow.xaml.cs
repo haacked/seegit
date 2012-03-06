@@ -6,17 +6,52 @@ namespace SeeGit
 {
     public partial class MainWindow : Window
     {
-        private readonly FileSystemWatcher _watcher;
-        private readonly MainWindowViewModel _viewModel;
+        private FileSystemWatcher _watcher;
+        private MainWindowViewModel _viewModel;
+        private string _gitRepositoryPath;
 
         public MainWindow()
         {
-            const string gitRepositoryPath = @"C:\dev\git\Test";
+            InitializeComponent();
+        }
 
-            var graphBuilder = new RepositoryGraphBuilder(gitRepositoryPath);
-            DataContext = _viewModel = new MainWindowViewModel(graphBuilder);
+        private void OnChooseRepository(object sender, RoutedEventArgs args)
+        {
+            DisposeWatcher();
 
-            _watcher = new FileSystemWatcher(Path.Combine(gitRepositoryPath, ".git"))
+            _gitRepositoryPath = WindowsExtensions.BrowseForFolder(@"c:\dev\git");
+
+            SetupGraphBuilder();
+
+            string gitDirectory = Path.Combine(_gitRepositoryPath, ".git");
+            if (Directory.Exists(gitDirectory))
+            {
+                SetupGitRepositoryWatcher(gitDirectory);
+            }
+            else
+            {
+                _watcher = new FileSystemWatcher(_gitRepositoryPath)
+                           {
+                               IncludeSubdirectories = true,
+                               EnableRaisingEvents = true,
+                               NotifyFilter =
+                                   NotifyFilters.CreationTime | NotifyFilters.DirectoryName 
+                                   
+                           };
+
+                _watcher.Changed += (o, e) =>
+                                    {
+                                        if (!Directory.Exists(gitDirectory)) return;
+                                        DisposeWatcher();
+                                        Dispatcher.Invoke(new Action(SetupGraphBuilder));
+                                        SetupGitRepositoryWatcher(gitDirectory);
+                                    };
+            }
+        }
+
+        private void SetupGitRepositoryWatcher(string gitDirectory)
+        {
+            _watcher = new FileSystemWatcher(gitDirectory)
                        {
                            IncludeSubdirectories = true,
                            EnableRaisingEvents = true,
@@ -29,8 +64,21 @@ namespace SeeGit
                                     var vm = _viewModel;
                                     Dispatcher.Invoke(new Action(vm.Refresh), null);
                                 };
+        }
 
-            InitializeComponent();
+        private void SetupGraphBuilder()
+        {
+            var graphBuilder = new RepositoryGraphBuilder(_gitRepositoryPath);
+            DataContext = _viewModel = new MainWindowViewModel(graphBuilder, _gitRepositoryPath);
+        }
+
+        private void DisposeWatcher()
+        {
+            var oldWatcher = _watcher;
+            if (oldWatcher != null)
+            {
+                oldWatcher.Dispose();
+            }
         }
     }
 }

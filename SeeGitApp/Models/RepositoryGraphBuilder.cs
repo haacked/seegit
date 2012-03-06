@@ -13,16 +13,29 @@ namespace SeeGit
         public RepositoryGraphBuilder(string gitRepositoryPath)
         {
             GitRepositoryPath = gitRepositoryPath;
-            _repository = new Repository(GitRepositoryPath);
+            try
+            {
+                _repository = new Repository(GitRepositoryPath);
+            }
+            catch (LibGit2Exception)
+            {
+            }
         }
 
         public string GitRepositoryPath { get; private set; }
 
         public RepositoryGraph Graph()
         {
+            if (_repository == null) return new RepositoryGraph();
+
             var commits =
                 _repository.Commits.QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time});
 
+            if (!commits.Any())
+            {
+                _graph.Clear();
+                return _graph;
+            }
             AddCommitsToGraph(commits.First(), null);
 
             foreach (var branch in _repository.Branches.Where(branch => branch.Commits.Any()))
