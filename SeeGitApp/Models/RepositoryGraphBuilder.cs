@@ -9,6 +9,7 @@ namespace SeeGit
         private readonly RepositoryGraph _graph = new RepositoryGraph();
         private readonly Repository _repository;
         private readonly Dictionary<string, CommitVertex> _vertices = new Dictionary<string, CommitVertex>();
+        private readonly Dictionary<string, CommitEdge> _edges = new Dictionary<string, CommitEdge>();
 
         public RepositoryGraphBuilder(string gitRepositoryPath)
         {
@@ -36,6 +37,15 @@ namespace SeeGit
                 _graph.Clear();
                 return _graph;
             }
+
+            foreach (var vertice in _vertices.Values)
+            {
+                if (vertice.Branches.Any())
+                {
+                    vertice.Branches.Clear();
+                }
+            }
+
             AddCommitsToGraph(commits.First(), null);
 
             foreach (var branch in _repository.Branches.Where(branch => branch.Commits.Any()))
@@ -44,6 +54,10 @@ namespace SeeGit
                 var commit = GetCommitVertex(firstCommit);
                 commit.Branches.Add(branch.Name);
                 AddCommitsToGraph(firstCommit, null);
+            }
+            if (_vertices.Count > 1)
+            {
+                _graph.LayoutAlgorithmType = "EfficientSugiyama";
             }
 
             return _graph;
@@ -55,7 +69,12 @@ namespace SeeGit
             _graph.AddVertex(commitVertex);
             if (childVertex != null)
             {
-                _graph.AddEdge(new CommitEdge(childVertex, commitVertex));
+                var edge = new CommitEdge(childVertex, commitVertex);
+                if (!_edges.ContainsKey(edge.Id))
+                {
+                    _graph.AddEdge(edge);
+                    _edges.Add(edge.Id, edge);
+                }
             }
 
             foreach (var parent in commit.Parents)
@@ -66,7 +85,7 @@ namespace SeeGit
 
         private CommitVertex GetCommitVertex(Commit commit)
         {
-            CommitVertex commitVertex = null;
+            CommitVertex commitVertex;
             if (!_vertices.TryGetValue(commit.Sha, out commitVertex))
             {
                 commitVertex = new CommitVertex(commit.Sha, commit.MessageShort) {Description = commit.Message};

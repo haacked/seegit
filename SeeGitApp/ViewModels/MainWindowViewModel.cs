@@ -7,6 +7,7 @@ namespace SeeGit
     {
         private RepositoryGraph _graph;
         private readonly IRepositoryGraphBuilder _graphBuilder;
+        private string layoutAlgorithmType = "Tree";
 
         public MainWindowViewModel(IRepositoryGraphBuilder graphBuilder, string repositoryPath)
         {
@@ -14,10 +15,18 @@ namespace SeeGit
             RepositoryPath = repositoryPath;
             Graph = _graphBuilder.Graph();
             LayoutAlgorithmType = "Tree";
-                // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
+            // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
         }
 
-        public string LayoutAlgorithmType { get; private set; }
+        public string LayoutAlgorithmType
+        {
+            get { return layoutAlgorithmType; }
+            set
+            {
+                layoutAlgorithmType = value;
+                NotifyPropertyChanged("LayoutAlgorithmType");
+            }
+        }
 
         public RepositoryGraph Graph
         {
@@ -25,11 +34,12 @@ namespace SeeGit
             set
             {
                 _graph = value;
+                LayoutAlgorithmType = _graph.LayoutAlgorithmType;
                 NotifyPropertyChanged("Graph");
             }
         }
 
-        public string RepositoryPath { get; private set;}
+        public string RepositoryPath { get; private set; }
 
         public void Refresh()
         {
