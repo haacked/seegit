@@ -1,14 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.Reactive.Linq;
 using System.Windows;
 
 namespace SeeGit
 {
     public partial class MainWindow : Window
     {
-        private FileSystemWatcher _watcher;
         private MainWindowViewModel _viewModel;
         private string _gitRepositoryPath;
+        private IObservable<object> _fileSystemObservable;
 
         public MainWindow()
         {
@@ -30,40 +31,41 @@ namespace SeeGit
             }
             else
             {
-                _watcher = new FileSystemWatcher(_gitRepositoryPath)
-                           {
-                               IncludeSubdirectories = true,
-                               EnableRaisingEvents = true,
-                               NotifyFilter =
-                                   NotifyFilters.CreationTime | NotifyFilters.DirectoryName 
-                                   
-                           };
+                _fileSystemObservable = new FileSystemWatcher(_gitRepositoryPath)
+                                        {
+                                            IncludeSubdirectories = true,
+                                            EnableRaisingEvents = true,
+                                            NotifyFilter =
+                                                NotifyFilters.CreationTime | NotifyFilters.DirectoryName
+                                        }.ObserveFileSystemEvents().Throttle(TimeSpan.FromSeconds(1));
 
-                _watcher.Changed += (o, e) =>
-                                    {
-                                        if (!Directory.Exists(gitDirectory)) return;
-                                        DisposeWatcher();
-                                        Dispatcher.Invoke(new Action(SetupGraphBuilder));
-                                        SetupGitRepositoryWatcher(gitDirectory);
-                                    };
+                _fileSystemObservable.Subscribe(_ =>
+                                                {
+                                                    if (!Directory.Exists(gitDirectory)) return;
+                                                    DisposeWatcher();
+                                                    Dispatcher.Invoke(new Action(SetupGraphBuilder));
+                                                    SetupGitRepositoryWatcher(gitDirectory);
+                                                });
             }
         }
 
         private void SetupGitRepositoryWatcher(string gitDirectory)
         {
-            _watcher = new FileSystemWatcher(gitDirectory)
-                       {
-                           IncludeSubdirectories = true,
-                           EnableRaisingEvents = true,
-                           NotifyFilter =
-                               NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.FileName |
-                               NotifyFilters.LastWrite
-                       };
-            _watcher.Changed += (o, e) =>
-                                {
-                                    var vm = _viewModel;
-                                    Dispatcher.Invoke(new Action(vm.Refresh), null);
-                                };
+            _fileSystemObservable = new FileSystemWatcher(gitDirectory)
+                                    {
+                                        IncludeSubdirectories = true,
+                                        EnableRaisingEvents = true,
+                                        NotifyFilter =
+                                            NotifyFilters.CreationTime | NotifyFilters.DirectoryName |
+                                            NotifyFilters.FileName |
+                                            NotifyFilters.LastWrite
+                                    }.ObserveFileSystemEvents().Throttle(TimeSpan.FromSeconds(1));
+
+            _fileSystemObservable.Subscribe(_ =>
+                                            {
+                                                var vm = _viewModel;
+                                                Dispatcher.Invoke(new Action(vm.Refresh), null);
+                                            });
         }
 
         private void SetupGraphBuilder()
@@ -74,11 +76,7 @@ namespace SeeGit
 
         private void DisposeWatcher()
         {
-            var oldWatcher = _watcher;
-            if (oldWatcher != null)
-            {
-                oldWatcher.Dispose();
-            }
+            _fileSystemObservable = null;
         }
     }
 }
