@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using LibGit2Sharp;
 
 namespace SeeGit
@@ -6,42 +7,60 @@ namespace SeeGit
     public class RepositoryGraphBuilder : IRepositoryGraphBuilder
     {
         private readonly RepositoryGraph _graph = new RepositoryGraph();
+        private readonly Repository _repository;
+        private readonly Dictionary<string, CommitVertex> _vertices = new Dictionary<string, CommitVertex>();
 
         public RepositoryGraphBuilder(string gitRepositoryPath)
         {
             GitRepositoryPath = gitRepositoryPath;
+            _repository = new Repository(GitRepositoryPath);
         }
 
         public string GitRepositoryPath { get; private set; }
 
         public RepositoryGraph Graph()
         {
-            var repo = new Repository(GitRepositoryPath);
-            var commits = repo.Commits.QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time});
+            var commits =
+                _repository.Commits.QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time});
 
-            AddCommitsToGraph(_graph, commits.First(), null);
+            AddCommitsToGraph(commits.First(), null);
+
+            foreach (var branch in _repository.Branches.Where(branch => branch.Commits.Any()))
+            {
+                var firstCommit = branch.Commits.First();
+                var commit = GetCommitVertex(firstCommit);
+                commit.Branches.Add(branch.Name);
+                AddCommitsToGraph(firstCommit, null);
+            }
 
             return _graph;
         }
 
-        private void AddCommitsToGraph(RepositoryGraph graph, Commit commit, CommitVertex childVertex)
+        private void AddCommitsToGraph(Commit commit, CommitVertex childVertex)
         {
             var commitVertex = GetCommitVertex(commit);
-            graph.AddVertex(commitVertex);
+            _graph.AddVertex(commitVertex);
             if (childVertex != null)
             {
-                graph.AddEdge(new CommitEdge(childVertex, commitVertex));
+                _graph.AddEdge(new CommitEdge(childVertex, commitVertex));
             }
 
             foreach (var parent in commit.Parents)
             {
-                AddCommitsToGraph(graph, parent, commitVertex);
+                AddCommitsToGraph(parent, commitVertex);
             }
         }
 
         private CommitVertex GetCommitVertex(Commit commit)
         {
-            return new CommitVertex(commit.Sha, commit.MessageShort) {Description = commit.Message};
+            CommitVertex commitVertex = null;
+            if (!_vertices.TryGetValue(commit.Sha, out commitVertex))
+            {
+                commitVertex = new CommitVertex(commit.Sha, commit.MessageShort) {Description = commit.Message};
+                _vertices.Add(commit.Sha, commitVertex);
+            }
+
+            return commitVertex;
         }
     }
 }

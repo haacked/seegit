@@ -12,7 +12,8 @@ namespace SeeGit
         {
             _graphBuilder = graphBuilder;
             Graph = _graphBuilder.Graph();
-            LayoutAlgorithmType = "Tree";
+            LayoutAlgorithmType = "EfficientSugiyama";
+                // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
         }
 
         public string LayoutAlgorithmType { get; private set; }

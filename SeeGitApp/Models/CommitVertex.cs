@@ -28,6 +28,9 @@ namespace SeeGit
             return string.Format("{0}: {1}", ShortSha, Message);
         }
 
+        public bool HasBranches { get { return Branches.Count > 0; }
+        }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;

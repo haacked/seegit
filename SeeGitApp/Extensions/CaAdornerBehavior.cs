@@ -128,7 +128,9 @@ namespace SeeGit
                       {
                           if (AdornerTemplate != null)
                           {
-                              AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(AssociatedObject as UIElement);
+                              var associated = AssociatedObject as UIElement;
+                              if (associated == null) return false;
+                              var adornerLayer = AdornerLayer.GetAdornerLayer(associated);
 
                               if (null == adornerLayer)
                                   throw new NullReferenceException(
@@ -147,7 +149,7 @@ namespace SeeGit
                               _adornerControl.Visibility = AdornerVisible;
 
                               // Bind internal dependency to external 
-                              Binding bindingMargin = new Binding("AdornerMargin");
+                              var bindingMargin = new Binding("AdornerMargin");
                               bindingMargin.Source = this;
                               BindingOperations.SetBinding(_caTemplatedAdorner, FrameworkElement.MarginProperty,
                                                            bindingMargin);
@@ -163,7 +165,9 @@ namespace SeeGit
                        {
                            if (null != _caTemplatedAdorner)
                            {
-                               AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(AssociatedObject as UIElement);
+                               var associated = AssociatedObject as UIElement;
+                               if (associated == null) return false;
+                               var adornerLayer = AdornerLayer.GetAdornerLayer(associated);
                                adornerLayer.Remove(_caTemplatedAdorner);
                                BindingOperations.ClearBinding(_caTemplatedAdorner, FrameworkElement.MarginProperty);
                                _caTemplatedAdorner = null;
@@ -208,9 +212,13 @@ namespace SeeGit
             _delayedFactory();
 
             // Set Data context here because default template assigment is  not setting the context
-            var dtContext = (this.AssociatedObject as FrameworkElement).DataContext;
-            if (null == _adornerControl.DataContext)
-                _adornerControl.DataContext = dtContext;
+            var frameworkElement = AssociatedObject as FrameworkElement;
+            if (frameworkElement != null)
+            {
+                var dtContext = frameworkElement.DataContext;
+                if (null == _adornerControl.DataContext)
+                    _adornerControl.DataContext = dtContext;
+            }
 
             _adornerControl.Visibility = Visibility.Visible;
         }
@@ -234,7 +242,6 @@ namespace SeeGit
                 }
             }
         }
-
 
         /// <summary>
         /// ShowAdornerCommand
@@ -326,7 +333,7 @@ namespace SeeGit
                                         {
                                             var adorner = d as CaAdornerBehavior;
                                             if (d == null) return;
-                                            adorner.SetDelayedState((bool)o.NewValue);
+                                            if (adorner != null) adorner.SetDelayedState((bool)o.NewValue);
                                         }));
 
         /// <summary>
