@@ -5,7 +5,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interactivity;
-using System.Windows.Media;
 using Microsoft.Expression.Interactivity.Core;
 
 // Lovingly borrowed from http://www.codeproject.com/Articles/271082/Use-and-DataTemplate-as-an-Adorner
@@ -13,81 +12,14 @@ using Microsoft.Expression.Interactivity.Core;
 namespace SeeGit
 {
     /// <summary>
-    /// Custom Adorner hosting a ContentControl with a ContentTemplate
-    /// </summary>
-    internal class CaTemplatedAdorner : Adorner
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="adornedElement"></param>
-        public CaTemplatedAdorner(UIElement adornedElement, FrameworkElement frameworkElementAdorner)
-            : base(adornedElement)
-        {
-            // Assure we get mouse hits
-            _frameworkElementAdorner = frameworkElementAdorner;
-            AddVisualChild(_frameworkElementAdorner);
-            AddLogicalChild(_frameworkElementAdorner);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected override Visual GetVisualChild(int index)
-        {
-            return _frameworkElementAdorner;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected override int VisualChildrenCount
-        {
-            get { return 1; }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="constraint"></param>
-        /// <returns></returns>
-        protected override Size MeasureOverride(Size constraint)
-        {
-            //_frameworkElementAdorner.Width = constraint.Width;
-            //_frameworkElementAdorner.Height = constraint.Height;
-            _frameworkElementAdorner.Measure(constraint);
-
-            return _frameworkElementAdorner.DesiredSize;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="finalSize"></param>
-        /// <returns></returns>
-        protected override Size ArrangeOverride(Size finalSize)
-        {
-            _frameworkElementAdorner.Arrange(new Rect(new Point(0, 0), finalSize));
-            return finalSize;
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly FrameworkElement _frameworkElementAdorner;
-    }
-
-
-    /// <summary>
     /// Behavior managing an adorner datatemplate
     /// </summary>
-    public class CaAdornerBehavior : Behavior<DependencyObject>
+    public class CommitAdornerBehavior : Behavior<DependencyObject>
     {
         /// <summary>
         /// Custom Adorner class
         /// </summary>
-        private CaTemplatedAdorner _caTemplatedAdorner;
+        private CommitTemplatedAdorner _caTemplatedAdorner;
 
         /// <summary>
         /// Adorner control holder. This object is passed to the Adorner
@@ -114,7 +46,7 @@ namespace SeeGit
         /// <summary>
         /// 
         /// </summary>
-        public CaAdornerBehavior()
+        public CommitAdornerBehavior()
         {
             //
             // create three static Actions to work with delayed, or not, construction
@@ -142,7 +74,7 @@ namespace SeeGit
                               // Add to adorner
                               adornerLayer.Add(
                                   _caTemplatedAdorner =
-                                  new CaTemplatedAdorner(AssociatedObject as UIElement, _adornerControl));
+                                  new CommitTemplatedAdorner(AssociatedObject as UIElement, _adornerControl));
 
                               // set realted bindings
                               _adornerControl.Content = AdornerTemplate.LoadContent();
@@ -262,10 +194,10 @@ namespace SeeGit
         public static readonly DependencyProperty AdornerTemplateProperty = DependencyProperty.Register(
             "AdornerTemplate",
             typeof (DataTemplate),
-            typeof (CaAdornerBehavior), new PropertyMetadata((d, o) =>
+            typeof (CommitAdornerBehavior), new PropertyMetadata((d, o) =>
                                                              {
-                                                                 if (null != ((CaAdornerBehavior)d)._adornerControl)
-                                                                     ((CaAdornerBehavior)d)._adornerControl.
+                                                                 if (null != ((CommitAdornerBehavior)d)._adornerControl)
+                                                                     ((CommitAdornerBehavior)d)._adornerControl.
                                                                          ContentTemplate = (DataTemplate)o.NewValue;
                                                              }));
 
@@ -285,7 +217,7 @@ namespace SeeGit
         public static readonly DependencyProperty AdornerMarginProperty = DependencyProperty.Register(
             "AdornerMargin",
             typeof (Thickness),
-            typeof (CaAdornerBehavior)
+            typeof (CommitAdornerBehavior)
             );
 
         /// <summary>
@@ -304,11 +236,11 @@ namespace SeeGit
         public static readonly DependencyProperty AdornerVisibleProperty = DependencyProperty.Register(
             "AdornerVisible",
             typeof (Visibility),
-            typeof (CaAdornerBehavior),
+            typeof (CommitAdornerBehavior),
             new PropertyMetadata(Visibility.Hidden, (d, o) =>
                                                     {
-                                                        if (null != ((CaAdornerBehavior)d)._adornerControl)
-                                                            ((CaAdornerBehavior)d)._adornerControl.Visibility =
+                                                        if (null != ((CommitAdornerBehavior)d)._adornerControl)
+                                                            ((CommitAdornerBehavior)d)._adornerControl.Visibility =
                                                                 (Visibility)o.NewValue;
                                                     }));
 
@@ -328,10 +260,10 @@ namespace SeeGit
         public static readonly DependencyProperty DelayConstructionProperty = DependencyProperty.Register(
             "DelayConstruction",
             typeof (bool),
-            typeof (CaAdornerBehavior),
+            typeof (CommitAdornerBehavior),
             new PropertyMetadata(false, (d, o) =>
                                         {
-                                            var adorner = d as CaAdornerBehavior;
+                                            var adorner = d as CommitAdornerBehavior;
                                             if (d == null) return;
                                             if (adorner != null) adorner.SetDelayedState((bool)o.NewValue);
                                         }));
@@ -364,12 +296,12 @@ namespace SeeGit
 
         // Using a DependencyProperty as the backing store for DataContext.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DataContextProperty =
-            DependencyProperty.Register("DataContext", typeof (object), typeof (CaAdornerBehavior),
+            DependencyProperty.Register("DataContext", typeof (object), typeof (CommitAdornerBehavior),
                                         new UIPropertyMetadata(OnDataContextChanged));
 
         private static void OnDataContextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var adorner = d as CaAdornerBehavior;
+            var adorner = d as CommitAdornerBehavior;
             if (adorner == null || adorner._adornerControl == null) return;
 
             adorner._adornerControl.DataContext = adorner.DataContext;

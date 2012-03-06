@@ -9,21 +9,47 @@
     <AdornerDecorator>
       <Border BorderBrush="White" Background="Black" BorderThickness="2" CornerRadius="10,10,10,10">
         <i:Interaction.Behaviors>
-          <local:CaAdornerBehavior AdornerVisible="Visible" AdornerMargin="100,10,0,0" DataContext="{Binding}">
-            <local:CaAdornerBehavior.AdornerTemplate>
+          <local:CommitAdornerBehavior AdornerVisible="Visible" AdornerMargin="105,10,0,0" DataContext="{Binding}">
+            <local:CommitAdornerBehavior.AdornerTemplate>
               <DataTemplate>
                 <StackPanel Orientation="Horizontal">
-                  <ListBox Name="listBox" ItemsSource="{Binding Path=Branches, Mode=OneWay}" Foreground="Red"
-                           Background="Yellow" Visibility="{Binding Path=HasBranches, Converter={StaticResource BooleanToVisibilityConverter }}">
-                    <ListBox.RenderTransform>
-                      <TranslateTransform Y="-25" X="-20" />
-                    </ListBox.RenderTransform>
-                  </ListBox>
                   <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" />
                 </StackPanel>
               </DataTemplate>
-            </local:CaAdornerBehavior.AdornerTemplate>
-          </local:CaAdornerBehavior>
+            </local:CommitAdornerBehavior.AdornerTemplate>
+          </local:CommitAdornerBehavior>
+          <local:CommitAdornerBehavior AdornerVisible="Visible" AdornerMargin="90,-15,0,0" DataContext="{Binding}">
+            <local:CommitAdornerBehavior.AdornerTemplate>
+              <DataTemplate>
+                <ListBox Name="listBox" BorderThickness="0" Background="Transparent"
+                         ItemsSource="{Binding Path=Branches, Mode=OneWay}" Margin="0" Padding="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         Visibility="{Binding Path=HasBranches, Converter={StaticResource BooleanToVisibilityConverter }}">
+                  <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                      <Style.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                      </Style.Resources>
+                    </Style>
+                  </ListBox.Resources>
+                  <ListBox.ItemTemplate>
+                    <DataTemplate>
+                      <Border BorderBrush="Black" BorderThickness="1">
+                        <TextBlock Text="{Binding .}" Foreground="Red" Background="Yellow" FontSize="8" Padding="2" />
+                      </Border>
+                    </DataTemplate>
+                  </ListBox.ItemTemplate>
+                  <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <WrapPanel IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                  </ListBox.ItemsPanel>
+                </ListBox>
+              </DataTemplate>
+            </local:CommitAdornerBehavior.AdornerTemplate>
+          </local:CommitAdornerBehavior>
         </i:Interaction.Behaviors>
 
         <Border.Effect>

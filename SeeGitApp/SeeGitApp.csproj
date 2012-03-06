@@ -94,7 +94,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Extensions\CaAdornerBehavior.cs" />
+    <Compile Include="Extensions\CommitTemplatedAdorner.cs" />
+    <Compile Include="Extensions\CommitAdornerBehavior.cs" />
     <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
