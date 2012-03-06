@@ -5,7 +5,8 @@
         xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls" xmlns:local="clr-namespace:SeeGit"
         xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:view="clr-namespace:SeeGit.Views"
-        x:Class="SeeGit.MainWindow" Title="GraphSharpDemo" Height="465" Width="708" mc:Ignorable="d">
+        xmlns:extbehaviour="clr-namespace:WPFExtensions.AttachedBehaviours;assembly=WPFExtensions" x:Class="SeeGit.MainWindow"
+        Title="GraphSharpDemo" Height="465" Width="708" mc:Ignorable="d">
   <Window.Resources>
 
     <DataTemplate x:Key="commitDetailsTemplate" DataType="{x:Type local:CommitVertex}">
@@ -22,6 +23,11 @@
           </ControlTemplate>
         </Setter.Value>
       </Setter>
+      <Setter Property="extbehaviour:DragBehaviour.IsDragEnabled" Value="True" />
+      <Setter Property="extbehaviour:DragBehaviour.X"
+              Value="{Binding RelativeSource={RelativeSource Self},Path=(graphsharp:GraphCanvas.X),Mode=TwoWay}" />
+      <Setter Property="extbehaviour:DragBehaviour.Y"
+              Value="{Binding RelativeSource={RelativeSource Self},Path=(graphsharp:GraphCanvas.Y),Mode=TwoWay}" />
     </Style>
   </Window.Resources>
 
