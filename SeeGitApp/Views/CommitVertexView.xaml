@@ -7,7 +7,6 @@
   <Grid DataContext="{Binding Model, ElementName=View}">
 
     <AdornerDecorator>
-
       <Border BorderBrush="White" Background="Black" BorderThickness="2" CornerRadius="10,10,10,10">
         <i:Interaction.Behaviors>
           <local:CaAdornerBehavior AdornerVisible="Visible" AdornerMargin="100,10,0,0" DataContext="{Binding}">
@@ -15,7 +14,11 @@
               <DataTemplate>
                 <StackPanel Orientation="Horizontal">
                   <ListBox Name="listBox" ItemsSource="{Binding Path=Branches, Mode=OneWay}" Foreground="Red"
-                           Background="Yellow" Visibility="{Binding Path=HasBranches, Converter={StaticResource BooleanToVisibilityConverter }}" />
+                           Background="Yellow" Visibility="{Binding Path=HasBranches, Converter={StaticResource BooleanToVisibilityConverter }}">
+                    <ListBox.RenderTransform>
+                      <TranslateTransform Y="-25" X="-20" />
+                    </ListBox.RenderTransform>
+                  </ListBox>
                   <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" />
                 </StackPanel>
               </DataTemplate>
