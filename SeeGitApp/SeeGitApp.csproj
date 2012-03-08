@@ -96,9 +96,13 @@
     </ApplicationDefinition>
     <Compile Include="Extensions\CommitTemplatedAdorner.cs" />
     <Compile Include="Extensions\CommitAdornerBehavior.cs" />
+    <Compile Include="Extensions\LibGit2Extensions.cs" />
     <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
+    <Compile Include="Models\BranchCollection.cs" />
+    <Compile Include="Models\BranchReference.cs" />
+    <Compile Include="Models\GitObject.cs" />
     <Compile Include="Models\IRepositoryGraphBuilder.cs" />
     <Compile Include="Models\ReachableHighlightAlgorithm.cs" />
     <Compile Include="Models\ReachableHighlightAlgorithmFactory.cs" />

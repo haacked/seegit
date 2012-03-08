@@ -26,8 +26,8 @@ namespace SeeGit
                               {Description = "This is a long form description of the commit"}
                           };
 
-            commits.First().Branches.Add("master");
-            commits.First().Branches.Add("remotes/origin/master");
+            commits.First().Branches.Merge(new BranchReference {Name = "Master"});
+            commits.First().Branches.Merge(new BranchReference {Name = "remotes/origin/master", IsRemote = true});
 
             graph.AddVertexRange(commits);
             graph.AddEdge(new CommitEdge(commits[1], commits[2]));

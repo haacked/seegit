@@ -47,7 +47,7 @@ namespace SeeGit
             {
                 var firstCommit = branch.Commits.First();
                 var commit = GetCommitVertex(firstCommit);
-                commit.Branches.Add(branch.Name);
+                commit.Branches.Merge(branch.ToBranchReference());
                 AddCommitsToGraph(firstCommit, null);
             }
             if (_vertices.Count > 1)
