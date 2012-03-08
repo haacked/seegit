@@ -33,11 +33,33 @@
                         <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
                       </Style.Resources>
                     </Style>
+
                   </ListBox.Resources>
                   <ListBox.ItemTemplate>
                     <DataTemplate>
                       <Border BorderBrush="Black" BorderThickness="1">
-                        <TextBlock Text="{Binding Name}" Foreground="Red" Background="Yellow" FontSize="8" Padding="2" />
+                        <Border.Resources>
+
+                          <Style x:Key="branch" TargetType="TextBlock">
+                            <Style.Triggers>
+
+                              <DataTrigger Binding="{Binding Path=IsHead}" Value="True">
+                                <Setter Property="Background" Value="#00CC00" />
+                                <Setter Property="Foreground" Value="Black" />
+                              </DataTrigger>
+                              <DataTrigger Binding="{Binding Path=IsHead}" Value="False">
+                                <Setter Property="Background" Value="#887765" />
+                                <Setter Property="Foreground" Value="Black" />
+                              </DataTrigger>
+                              <DataTrigger Binding="{Binding Path=IsRemote}" Value="True">
+                                <Setter Property="Background" Value="#BFE5FE" />
+                                <Setter Property="Foreground" Value="Black" />
+
+                              </DataTrigger>
+                            </Style.Triggers>
+                          </Style>
+                        </Border.Resources>
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource branch}" FontSize="8" Padding="2" />
                       </Border>
                     </DataTemplate>
                   </ListBox.ItemTemplate>

@@ -1,6 +1,4 @@
-﻿using SeeGit.Models;
-
-namespace SeeGit
+﻿namespace SeeGit
 {
     public static class LibGit2Extensions
     {
@@ -10,7 +8,6 @@ namespace SeeGit
                    {
                        Name = branch.Name,
                        IsRemote = branch.IsRemote,
-                       IsCurrent = branch.IsRemote,
                        IsHead = branch.IsCurrentRepositoryHead
                    };
         }

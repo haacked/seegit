@@ -94,6 +94,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Extensions\CommitTemplatedAdorner.cs" />
     <Compile Include="Extensions\CommitAdornerBehavior.cs" />
     <Compile Include="Extensions\LibGit2Extensions.cs" />
