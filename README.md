@@ -2,7 +2,7 @@
 
 This is a little experiment in creating a realtime git repository visualizer.
 
-![Screenshot](http://f.cl.ly/items/412h2T1J2C3l3A0O0d0w/SeeGit.png)
+![Screenshot](http://f.cl.ly/items/3t3H0C2L0M1f281T0H0m/SeeGit.png)
 
 __WARNING: This is some haacky code. I plan to rewrite it later. It's a proof of concept__
 
