@@ -35,9 +35,8 @@ namespace SeeGit
                    {
                        IncludeSubdirectories = false,
                        EnableRaisingEvents = true,
-                       NotifyFilter =
-                           NotifyFilters.CreationTime
-                   }.ObserveFileSystemChangeEvents()
+                       NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.DirectoryName
+                   }.ObserveFileSystemCreateEvents()
                 .Where(
                     e =>
                     e.ChangeType == WatcherChangeTypes.Created &&

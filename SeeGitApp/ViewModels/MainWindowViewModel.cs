@@ -45,7 +45,7 @@ namespace SeeGit
 
         public string RepositoryPath { get; private set; }
 
-                public void MonitorRepository(string repositoryWorkingPath)
+        public void MonitorRepository(string repositoryWorkingPath)
         {
             if (repositoryWorkingPath == null) return;
             string gitPath = repositoryWorkingPath.NormalizeGitRepositoryPath();
