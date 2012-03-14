@@ -84,9 +84,8 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFExtensions, Version=1.0.3437.34043, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\WPFExtensions.dll</HintPath>
+    <Reference Include="WPFExtensions">
+      <HintPath>..\Lib\WPFExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
