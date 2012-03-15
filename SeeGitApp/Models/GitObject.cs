@@ -3,7 +3,6 @@
 namespace SeeGit
 {
     public abstract class GitObject<T> : INotifyPropertyChanged
-
     {
         public abstract override int GetHashCode();
 
