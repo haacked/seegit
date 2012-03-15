@@ -13,5 +13,10 @@ I just want something that I can use during presentations on Git. So as I run co
 * Need to allow you to select a repository to point at. It's currently hard coded.
 * I need to add local and remote branch annotations.
 
+# Development
+If you would like to contribute, I would love to have your contributions! All I ask is try to follow the existing conventions. There's a team ReSharper file with the current conventions.
+
+If you're wondering why the unit tests are structured as they are, read my blog post about [structuring unit tests](http://haacked.com/archive/2012/01/01/structuring-unit-tests.aspx).
+
 # License
 MIT License
