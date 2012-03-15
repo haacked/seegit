@@ -1,10 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using SeeGit.Models;
 
 namespace SeeGit
 {
     [DebuggerDisplay("{Sha}: {Message}")]
-    public class CommitVertex : GitObject<CommitVertex>
+    public class CommitVertex : GitObject<CommitVertex>, IEquatable<CommitVertex>
     {
         public CommitVertex(string sha, string message)
         {
@@ -52,6 +53,17 @@ namespace SeeGit
                 result = (result*397) ^ (Description != null ? Description.GetHashCode() : 0);
                 return result;
             }
+        }
+
+        public static bool operator ==(CommitVertex commit, CommitVertex other)
+        {
+            if (ReferenceEquals(commit, null)) return false;
+            return commit.Equals(other);
+        }
+
+        public static bool operator !=(CommitVertex commit, CommitVertex other)
+        {
+            return !(commit == other);
         }
     }
 }

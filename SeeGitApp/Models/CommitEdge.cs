@@ -1,10 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using QuickGraph;
 
 namespace SeeGit
 {
     [DebuggerDisplay("{Source.Sha}..{Target.Sha}")]
-    public class CommitEdge : Edge<CommitVertex>
+    public class CommitEdge : Edge<CommitVertex>, IEquatable<CommitEdge>
     {
         private string _id;
 
@@ -45,7 +46,7 @@ namespace SeeGit
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.Source, other.Target);
+            return Source == other.Source && Target == other.Target;
         }
 
         public override int GetHashCode()
@@ -56,6 +57,17 @@ namespace SeeGit
                 result = (result*397) ^ (Source != null ? Source.GetHashCode() : 0);
                 return result;
             }
+        }
+
+        public static bool operator ==(CommitEdge edge, CommitEdge other)
+        {
+            if (ReferenceEquals(edge, null)) return false;
+            return edge.Equals(other);
+        }
+
+        public static bool operator !=(CommitEdge edge, CommitEdge other)
+        {
+            return !(edge == other);
         }
     }
 }
