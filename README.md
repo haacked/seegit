@@ -23,9 +23,10 @@ If you're wondering why the unit tests are structured as they are, read my blog 
 
 # Credits
 
-* [LibGit2Sharp](https://github.com/libgit2/libgit2sharp) - [License: MIT](https://github.com/libgit2/libgit2sharp/blob/master/LICENSE.md)
-* [WPFExtensions](http://wpfextensions.codeplex.com/) - [License: Ms-PL](http://wpfextensions.codeplex.com/license)
-* [QuickGraph](http://quickgraph.codeplex.com/) - [License: Ms-PL](http://quickgraph.codeplex.com/license) A graphing library
-* [GraphSharp](http://graphsharp.codeplex.com/) - [License: Ms-PL](http://graphsharp.codeplex.com/) Provides a set of WPF controls for displaying and manipulating graphs.
-* [Reactive Extensions](http://msdn.microsoft.com/en-us/data/gg577609) - [License: EULA](http://msdn.microsoft.com/en-us/devlabs/ff394099.aspx)
-* [Windows API CodePack](http://archive.msdn.microsoft.com/WindowsAPICodePack) - [License: EULA](http://archive.msdn.microsoft.com/WindowsAPICodePack/Project/License.aspx)
+* [LibGit2Sharp](https://github.com/libgit2/libgit2sharp) - [License: MIT](https://github.com/libgit2/libgit2sharp/blob/master/LICENSE.md) LibGit2Sharp is an thin .Net layer (well.. we try to keep it as thin as possible :-) ) wrapping the libgit2 linkable C Git library.
+
+* [QuickGraph](http://quickgraph.codeplex.com/) - [License: Ms-PL](http://quickgraph.codeplex.com/license) QuickGraph provides generic directed/undirected graph datastructures and algorithms for .NET. 
+* [GraphSharp](http://graphsharp.codeplex.com/) - [License: Ms-PL](http://graphsharp.codeplex.com/) Graph# is a graph layout framework. It contains some layout algorithms and a GraphLayout control for WPF applications
+* [Reactive Extensions](http://msdn.microsoft.com/en-us/data/gg577609) - [License: EULA](http://msdn.microsoft.com/en-us/devlabs/ff394099.aspx) The Reactive Extensions (Rx) is a library for composing asynchronous and event-based programs using observable sequences and LINQ-style query operators. 
+* [WPFExtensions](http://wpfextensions.codeplex.com/) - [License: Ms-PL](http://wpfextensions.codeplex.com/license) Some extensions for the WPF framework. Controls, attached behaviours, helper classes, etc.
+* [Windows® API Code Pack for Microsoft® .NET Framework](http://archive.msdn.microsoft.com/WindowsAPICodePack) - [License: EULA](http://archive.msdn.microsoft.com/WindowsAPICodePack/Project/License.aspx) provides a source code library that can be used to access some features of Windows 7 and Windows Vista from managed code.
