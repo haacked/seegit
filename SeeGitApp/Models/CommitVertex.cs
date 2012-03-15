@@ -57,6 +57,7 @@ namespace SeeGit
 
         public static bool operator ==(CommitVertex commit, CommitVertex other)
         {
+            if (ReferenceEquals(commit, other)) return true;
             if (ReferenceEquals(commit, null)) return false;
             return commit.Equals(other);
         }

@@ -61,6 +61,7 @@ namespace SeeGit
 
         public static bool operator ==(CommitEdge edge, CommitEdge other)
         {
+            if (ReferenceEquals(edge, other)) return true;
             if (ReferenceEquals(edge, null)) return false;
             return edge.Equals(other);
         }
