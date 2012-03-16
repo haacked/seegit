@@ -44,6 +44,11 @@ namespace SeeGit
             return string.Format("{0}: {1}", ShortSha, Message);
         }
 
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as CommitVertex);
+        }
+
         public override int GetHashCode()
         {
             unchecked
