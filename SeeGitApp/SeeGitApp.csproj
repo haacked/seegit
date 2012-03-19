@@ -93,6 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bases\NotifyPropertyChanged.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Extensions\CommitTemplatedAdorner.cs" />
     <Compile Include="Extensions\CommitAdornerBehavior.cs" />
