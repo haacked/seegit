@@ -20,11 +20,12 @@ namespace SeeGit
         {
             if (path == null) throw new ArgumentNullException("path");
 
-            var folderName = Path.GetDirectoryName(path) ?? "";
-            if (folderName.Equals(".git", StringComparison.OrdinalIgnoreCase))
+            //If we are passed a .git directory, just return it straightaway
+            if (path.EndsWith(".git", StringComparison.OrdinalIgnoreCase))
             {
                 return path;
             }
+
             return Path.Combine(path, ".git");
         }
 

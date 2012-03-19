@@ -8,7 +8,7 @@ namespace SeeGit
         {
             var cfd = new CommonOpenFileDialog
                       {
-                          DefaultFileName = startingPath,
+                          InitialDirectory = startingPath,
                           IsFolderPicker = true,
                       };
 
