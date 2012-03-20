@@ -15,6 +15,7 @@ namespace SeeGit
         private string _layoutAlgorithmType = "Tree";
         private readonly Dispatcher _uiDispatcher;
         private readonly Func<string, IRepositoryGraphBuilder> _graphBuilderThunk;
+        private IDisposable _repositoryCreationWatcher;
 
         public MainWindowViewModel(Dispatcher uiDispatcher, Func<string, IRepositoryGraphBuilder> graphBuilderThunk)
         {
@@ -48,6 +49,13 @@ namespace SeeGit
         public void MonitorRepository(string repositoryWorkingPath)
         {
             if (repositoryWorkingPath == null) return;
+
+            if(_repositoryCreationWatcher != null)
+            {
+                _repositoryCreationWatcher.Dispose();
+                _repositoryCreationWatcher = null;
+            }
+
             string gitPath = repositoryWorkingPath.NormalizeGitRepositoryPath();
             if (!Directory.Exists(gitPath))
             {
@@ -64,7 +72,7 @@ namespace SeeGit
 
         private void MonitorForRepositoryCreation(string repositoryWorkingPath)
         {
-            ModelExtensions.CreateGitRepositoryCreationObservable(repositoryWorkingPath)
+            _repositoryCreationWatcher = ModelExtensions.CreateGitRepositoryCreationObservable(repositoryWorkingPath)
                 .Subscribe(_ => _uiDispatcher.Invoke(new Action(() => MonitorRepository(repositoryWorkingPath))));
         }
 
