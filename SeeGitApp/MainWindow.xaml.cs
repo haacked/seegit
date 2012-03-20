@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace SeeGit
 {
@@ -14,7 +15,7 @@ namespace SeeGit
 
         private void OnChooseRepository(object sender, RoutedEventArgs args)
         {
-            _viewModel.MonitorRepository(WindowsExtensions.BrowseForFolder(@"c:\dev\exp\empty"));
+            _viewModel.MonitorRepository(WindowsExtensions.BrowseForFolder(Environment.GetFolderPath(Environment.SpecialFolder.Personal)));
         }
     }
 }
