@@ -76,6 +76,17 @@ namespace UnitTests.Models
                 Assert.False(edge == null);
                 Assert.True(edge != null);
             }
+
+			[Fact]
+			public void ReturnsFalseWhenNullAndComparedToNonNull()
+			{
+				CommitEdge edge = null;
+				var other = new CommitEdge(new CommitVertex("sha-child", "child commit"),
+										  new CommitVertex("sha-parent", "parent commit"));
+
+				Assert.False(edge == other);
+				Assert.True(edge != other);
+			}
         }
     }
 }

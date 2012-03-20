@@ -18,14 +18,14 @@ namespace SeeGit
         {
             get
             {
-                if (_id == null)
+                if(_id == null)
                 {
-                    if (Source != null)
+                    if(Source != null)
                     {
                         _id = Source.Sha;
                     }
                     _id += "..";
-                    if (Target != null)
+                    if(Target != null)
                     {
                         _id += Target.Sha;
                     }
@@ -41,8 +41,10 @@ namespace SeeGit
 
         public bool Equals(CommitEdge other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if(ReferenceEquals(null, other))
+                return false;
+            if(ReferenceEquals(this, other))
+                return true;
             return Source == other.Source && Target == other.Target;
         }
 
@@ -51,13 +53,15 @@ namespace SeeGit
             unchecked
             {
                 int result = (Target != null ? Target.GetHashCode() : 0);
-                result = (result*397) ^ (Source != null ? Source.GetHashCode() : 0);
+                result = (result * 397) ^ (Source != null ? Source.GetHashCode() : 0);
                 return result;
             }
         }
 
         public static bool operator ==(CommitEdge edge, CommitEdge other)
         {
+            if(ReferenceEquals(edge, null)) return ReferenceEquals(other, null);
+
             return edge.Equals(other);
         }
 

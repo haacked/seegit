@@ -15,27 +15,51 @@ namespace SeeGit
             Branches.CollectionChanged += (o, e) => RaisePropertyChanged(() => HasBranches);
         }
 
-        public string Sha { get; private set; }
+        public string Sha
+        {
+            get;
+            private set;
+        }
 
         public string ShortSha
         {
-            get { return Sha.AtMost(8); }
+            get
+            {
+                return Sha.AtMost(8);
+            }
         }
 
-        public string Message { get; private set; }
-        public string Description { get; set; }
+        public string Message
+        {
+            get;
+            private set;
+        }
+        public string Description
+        {
+            get;
+            set;
+        }
 
-        public BranchCollection Branches { get; private set; }
+        public BranchCollection Branches
+        {
+            get;
+            private set;
+        }
 
         public bool HasBranches
         {
-            get { return Branches.Count > 0; }
+            get
+            {
+                return Branches.Count > 0;
+            }
         }
 
         public override bool Equals(CommitVertex other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if(ReferenceEquals(null, other))
+                return false;
+            if(ReferenceEquals(this, other))
+                return true;
             return Equals(other.Sha, Sha);
         }
 
@@ -49,20 +73,22 @@ namespace SeeGit
             unchecked
             {
                 int result = (Sha != null ? Sha.GetHashCode() : 0);
-                result = (result*397) ^ (Message != null ? Message.GetHashCode() : 0);
-                result = (result*397) ^ (Description != null ? Description.GetHashCode() : 0);
+                result = (result * 397) ^ (Message != null ? Message.GetHashCode() : 0);
+                result = (result * 397) ^ (Description != null ? Description.GetHashCode() : 0);
                 return result;
             }
         }
 
         public static bool operator ==(CommitVertex commit, CommitVertex other)
         {
+            if(ReferenceEquals(commit, null)) return ReferenceEquals(other, null);
+
             return commit.Equals(other);
         }
 
         public static bool operator !=(CommitVertex commit, CommitVertex other)
         {
-            return !commit.Equals(other);
+            return !(commit == other);
         }
     }
 }

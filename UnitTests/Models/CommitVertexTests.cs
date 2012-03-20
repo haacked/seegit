@@ -78,6 +78,13 @@ namespace UnitTests.Models
                 Assert.False(new CommitVertex("sha", "message") == null);
                 Assert.True(new CommitVertex("sha", "message") != null);
             }
+
+            [Fact]
+            public void ReturnsFalseWhenNullComparedToNonNull()
+            {
+                Assert.False(null == new CommitVertex("sha", "message"));
+                Assert.True(null != new CommitVertex("sha", "message"));
+            }
         }
     }
 }
