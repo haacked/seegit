@@ -27,6 +27,7 @@ namespace UnitTests.Models
                 var other = new CommitVertex("sha", "doesn't matter");
 
                 Assert.True(commit.Equals(other));
+                Assert.True(object.Equals(commit, other));
             }
 
             [Fact]
@@ -36,12 +37,17 @@ namespace UnitTests.Models
                 var other = new CommitVertex("sha2", "doesn't matter");
 
                 Assert.False(commit.Equals(other));
+                Assert.False(object.Equals(commit, other));
             }
 
             [Fact]
             public void ReturnsFalseWhenComparedToNull()
             {
-                Assert.False(new CommitVertex("sha", "message").Equals(null));
+                var commit = new CommitVertex("sha", "message");
+                CommitVertex other = null;
+
+                Assert.False(commit.Equals(other));
+                Assert.False(object.Equals(commit, other));
             }
         }
 

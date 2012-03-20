@@ -44,11 +44,6 @@ namespace SeeGit
             return string.Format("{0}: {1}", ShortSha, Message);
         }
 
-        public override bool Equals(object obj)
-        {
-            return this.Equals(obj as CommitVertex);
-        }
-
         public override int GetHashCode()
         {
             unchecked
@@ -62,14 +57,12 @@ namespace SeeGit
 
         public static bool operator ==(CommitVertex commit, CommitVertex other)
         {
-            if (ReferenceEquals(commit, other)) return true;
-            if (ReferenceEquals(commit, null)) return false;
             return commit.Equals(other);
         }
 
         public static bool operator !=(CommitVertex commit, CommitVertex other)
         {
-            return !(commit == other);
+            return !commit.Equals(other);
         }
     }
 }

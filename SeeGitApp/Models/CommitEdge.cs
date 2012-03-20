@@ -36,10 +36,7 @@ namespace SeeGit
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (CommitEdge)) return false;
-            return Equals((CommitEdge)obj);
+            return this.Equals(obj as CommitEdge);
         }
 
         public bool Equals(CommitEdge other)
@@ -61,8 +58,6 @@ namespace SeeGit
 
         public static bool operator ==(CommitEdge edge, CommitEdge other)
         {
-            if (ReferenceEquals(edge, other)) return true;
-            if (ReferenceEquals(edge, null)) return false;
             return edge.Equals(other);
         }
 

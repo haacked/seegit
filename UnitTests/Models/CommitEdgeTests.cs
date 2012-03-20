@@ -16,6 +16,7 @@ namespace UnitTests.Models
                                            new CommitVertex("sha-parent", "another parent commit"));
 
                 Assert.True(edge.Equals(other));
+                Assert.True(object.Equals(edge, other));
             }
 
             [Fact]
@@ -27,6 +28,7 @@ namespace UnitTests.Models
                                            new CommitVertex("sha-parent", "another parent commit"));
 
                 Assert.False(edge.Equals(other));
+                Assert.False(object.Equals(edge, other));
             }
 
             [Fact]
@@ -36,6 +38,7 @@ namespace UnitTests.Models
                                           new CommitVertex("sha-parent", "parent commit"));
 
                 Assert.False(edge.Equals(null));
+                Assert.False(object.Equals(edge, null));
             }
         }
 
