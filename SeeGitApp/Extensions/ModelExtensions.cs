@@ -21,7 +21,8 @@ namespace SeeGit
             if (path == null) throw new ArgumentNullException("path");
 
             //If we are passed a .git directory, just return it straightaway
-            if (path.EndsWith(".git", StringComparison.OrdinalIgnoreCase))
+            var directoryInfo = new DirectoryInfo(path);
+            if (directoryInfo.Name == ".git")
             {
                 return path;
             }
