@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using System.Windows.Threading;
 
 namespace SeeGit
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : NotifyPropertyChanged
     {
         private RepositoryGraph _graph;
 
@@ -28,7 +27,7 @@ namespace SeeGit
             set
             {
                 _layoutAlgorithmType = value;
-                NotifyPropertyChanged("LayoutAlgorithmType");
+                RaisePropertyChanged(() => LayoutAlgorithmType);
             }
         }
 
@@ -39,7 +38,7 @@ namespace SeeGit
             {
                 _graph = value;
                 LayoutAlgorithmType = _graph.LayoutAlgorithmType;
-                NotifyPropertyChanged("Graph");
+                RaisePropertyChanged(() => Graph);
             }
         }
 
@@ -77,16 +76,6 @@ namespace SeeGit
         public void Refresh()
         {
             Graph = _graphBuilder.Graph();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(String info)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
         }
     }
 }

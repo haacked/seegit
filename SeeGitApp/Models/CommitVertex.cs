@@ -12,7 +12,7 @@ namespace SeeGit
             Sha = sha;
             Message = message;
             Branches = new BranchCollection();
-            Branches.CollectionChanged += (o, e) => NotifyPropertyChanged("HasBranches");
+            Branches.CollectionChanged += (o, e) => RaisePropertyChanged(() => HasBranches);
         }
 
         public string Sha { get; private set; }

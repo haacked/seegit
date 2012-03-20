@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 
 namespace SeeGit
 {
-    public abstract class GitObject<T> : INotifyPropertyChanged
+    public abstract class GitObject<T> : NotifyPropertyChanged
     {
         public abstract override int GetHashCode();
 
@@ -14,15 +13,5 @@ namespace SeeGit
         }
 
         public abstract bool Equals(T other);
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void NotifyPropertyChanged(string info)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
     }
 }
