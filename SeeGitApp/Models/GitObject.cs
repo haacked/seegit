@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 
 namespace SeeGit
 {
@@ -8,9 +9,7 @@ namespace SeeGit
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (T)) return false;
+            if (!(obj is T)) return false;
             return Equals((T)obj);
         }
 
