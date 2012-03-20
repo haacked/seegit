@@ -50,6 +50,7 @@ namespace SeeGit
         {
             if (repositoryWorkingPath == null) return;
 
+            // If the user has previously selected a directory for monitoring lets cancel that subscription
             if(_repositoryCreationWatcher != null)
             {
                 _repositoryCreationWatcher.Dispose();
