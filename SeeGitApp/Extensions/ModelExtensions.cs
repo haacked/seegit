@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Reactive.Linq;
 
@@ -6,6 +7,11 @@ namespace SeeGit
 {
     public static class ModelExtensions
     {
+        private const string GitDirectoryName = ".git";
+
+        private readonly static string GitDirectoryNameWithSeparator = string.Concat(GitDirectoryName,
+                                                                                    Path.DirectorySeparatorChar);
+
         public static string AtMost(this string s, int characterCount)
         {
             if (s == null) return null;
@@ -21,17 +27,25 @@ namespace SeeGit
             if (path == null) throw new ArgumentNullException("path");
 
             //If we are passed a .git directory, just return it straightaway
-            if (path.EndsWith(".git", StringComparison.OrdinalIgnoreCase))
-            {
+            if (path.EnsureTrailingDirectorySeperator().EndsWith(GitDirectoryNameWithSeparator))
                 return path;
-            }
 
-            return Path.Combine(path, ".git");
+            return Path.Combine(path, GitDirectoryName);
+        }
+
+        /// <summary>
+        /// Appends the <see cref="Path.DirectorySeparatorChar"/> to the string.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>Returns <paramref name="path"/> with the <see cref="Path.DirectorySeparatorChar"/> appended if it is not already present.</returns>
+        private static string EnsureTrailingDirectorySeperator(this string path)
+        {
+            return path.EndsWith(Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture)) ? path : string.Concat(path,Path.DirectorySeparatorChar);
         }
 
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryCreationObservable(string path)
         {
-            string expectedGitDirectory = Path.Combine(path, ".git");
+            string expectedGitDirectory = Path.Combine(path, GitDirectoryName);
             return new FileSystemWatcher(path)
                    {
                        IncludeSubdirectories = false,
