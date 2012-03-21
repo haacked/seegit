@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunXUnitTests>true</RunXUnitTests>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -74,7 +75,14 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <ItemGroup>
+    <PathToXUnit Include="..\packages\xunit*\lib\xunit.runner.msbuild.dll">
+      <InProject>false</InProject>
+    </PathToXUnit>
+  </ItemGroup>
+  <UsingTask AssemblyFile="@(PathToXUnit)" TaskName="Xunit.Runner.MSBuild.xunit" />
+  <Target Name="AfterBuild">
+    <xunit Assembly="$(OutDir)$(TargetName)$(TargetExt)" Condition="$(RunXUnitTests)==true" />
+  </Target>
 </Project>

@@ -15,27 +15,51 @@ namespace SeeGit
             Branches.CollectionChanged += (o, e) => RaisePropertyChanged(() => HasBranches);
         }
 
-        public string Sha { get; private set; }
+        public string Sha
+        {
+            get;
+            private set;
+        }
 
         public string ShortSha
         {
-            get { return Sha.AtMost(8); }
+            get
+            {
+                return Sha.AtMost(8);
+            }
         }
 
-        public string Message { get; private set; }
-        public string Description { get; set; }
+        public string Message
+        {
+            get;
+            private set;
+        }
+        public string Description
+        {
+            get;
+            set;
+        }
 
-        public BranchCollection Branches { get; private set; }
+        public BranchCollection Branches
+        {
+            get;
+            private set;
+        }
 
         public bool HasBranches
         {
-            get { return Branches.Count > 0; }
+            get
+            {
+                return Branches.Count > 0;
+            }
         }
 
         public override bool Equals(CommitVertex other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if(ReferenceEquals(null, other))
+                return false;
+            if(ReferenceEquals(this, other))
+                return true;
             return Equals(other.Sha, Sha);
         }
 
@@ -44,26 +68,21 @@ namespace SeeGit
             return string.Format("{0}: {1}", ShortSha, Message);
         }
 
-        public override bool Equals(object obj)
-        {
-            return this.Equals(obj as CommitVertex);
-        }
-
         public override int GetHashCode()
         {
             unchecked
             {
                 int result = (Sha != null ? Sha.GetHashCode() : 0);
-                result = (result*397) ^ (Message != null ? Message.GetHashCode() : 0);
-                result = (result*397) ^ (Description != null ? Description.GetHashCode() : 0);
+                result = (result * 397) ^ (Message != null ? Message.GetHashCode() : 0);
+                result = (result * 397) ^ (Description != null ? Description.GetHashCode() : 0);
                 return result;
             }
         }
 
         public static bool operator ==(CommitVertex commit, CommitVertex other)
         {
-            if (ReferenceEquals(commit, other)) return true;
-            if (ReferenceEquals(commit, null)) return false;
+            if(ReferenceEquals(commit, null)) return ReferenceEquals(other, null);
+
             return commit.Equals(other);
         }
 
