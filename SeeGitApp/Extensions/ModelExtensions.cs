@@ -16,9 +16,13 @@ namespace SeeGit
             return s.Substring(0, characterCount);
         }
 
-        public static string NormalizeGitRepositoryPath(this string path)
+        public static string GetGitRepositoryPath(string path)
         {
             if (path == null) throw new ArgumentNullException("path");
+
+            // This is not good, it relies on the rest of the code being ok
+            // with getting a path that doesn't exist
+            if (!Directory.Exists(path)) return path;
 
             //If we are passed a .git directory, just return it straightaway
             if (path.EndsWith(".git", StringComparison.OrdinalIgnoreCase))
@@ -26,7 +30,26 @@ namespace SeeGit
                 return path;
             }
 
-            return Path.Combine(path, ".git");
+            string subfolderToFind = ".git";
+
+            DirectoryInfo checkIn = new DirectoryInfo(path);
+
+            while (checkIn != null)
+            {
+                string pathToTest = Path.Combine(checkIn.FullName, subfolderToFind);
+                if (Directory.Exists(pathToTest))
+                {
+                    return pathToTest;
+                }
+                else
+                {
+                    checkIn = checkIn.Parent;
+                }
+            }
+
+            // This is not good, it relies on the rest of the code being ok
+            // with getting a non-git repo dir
+            return path;
         }
 
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryCreationObservable(string path)

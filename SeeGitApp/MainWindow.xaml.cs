@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.IO;
 
 namespace SeeGit
 {
@@ -11,6 +12,8 @@ namespace SeeGit
         {
             InitializeComponent();
             DataContext = _viewModel = new MainWindowViewModel(Dispatcher, path => new RepositoryGraphBuilder(path));
+
+            _viewModel.MonitorRepository(Directory.GetCurrentDirectory());
         }
 
         private void OnChooseRepository(object sender, RoutedEventArgs args)
