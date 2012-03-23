@@ -47,7 +47,7 @@ namespace SeeGit
         public void MonitorRepository(string repositoryWorkingPath)
         {
             if (repositoryWorkingPath == null) return;
-            string gitPath = repositoryWorkingPath.NormalizeGitRepositoryPath();
+            string gitPath = ModelExtensions.GetGitRepositoryPath(repositoryWorkingPath);
             if (!Directory.Exists(gitPath))
             {
                 MonitorForRepositoryCreation(repositoryWorkingPath);
