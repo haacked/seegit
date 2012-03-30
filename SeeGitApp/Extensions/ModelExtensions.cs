@@ -20,23 +20,19 @@ namespace SeeGit
         {
             if (path == null) throw new ArgumentNullException("path");
 
-            // This is not good, it relies on the rest of the code being ok
-            // with getting a path that doesn't exist
-            if (!Directory.Exists(path)) return path;
-
             //If we are passed a .git directory, just return it straightaway
             if (path.EndsWith(".git", StringComparison.OrdinalIgnoreCase))
             {
                 return path;
             }
 
-            string subfolderToFind = ".git";
+            if (!Directory.Exists(path)) return Path.Combine(path, ".git");
 
             DirectoryInfo checkIn = new DirectoryInfo(path);
 
             while (checkIn != null)
             {
-                string pathToTest = Path.Combine(checkIn.FullName, subfolderToFind);
+                string pathToTest = Path.Combine(checkIn.FullName, ".git");
                 if (Directory.Exists(pathToTest))
                 {
                     return pathToTest;
@@ -49,7 +45,7 @@ namespace SeeGit
 
             // This is not good, it relies on the rest of the code being ok
             // with getting a non-git repo dir
-            return path;
+            return Path.Combine(path, ".git");
         }
 
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryCreationObservable(string path)
