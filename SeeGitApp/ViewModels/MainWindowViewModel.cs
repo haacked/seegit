@@ -58,6 +58,8 @@ namespace SeeGit
             Graph = _graphBuilder.Graph();
             LayoutAlgorithmType = "Tree";
 
+            Refresh();
+
             MonitorForRepositoryChanges(gitPath);
         }
 
