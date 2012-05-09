@@ -54,6 +54,11 @@ namespace SeeGit
             }
         }
 
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as CommitVertex);
+        }
+
         public override bool Equals(CommitVertex other)
         {
             if(ReferenceEquals(null, other))
