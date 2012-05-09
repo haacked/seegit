@@ -43,6 +43,19 @@ namespace SeeGit
             if (!commits.Any()) return _graph;
             AddCommitsToGraph(commits.First(), null);
 
+            AddBranchReferences();
+            AddHeadReference();
+
+            if (_vertices.Count > 1)
+            {
+                _graph.LayoutAlgorithmType = "EfficientSugiyama";
+            }
+
+            return _graph;
+        }
+
+        void AddBranchReferences()
+        {
             foreach (var branch in _repository.Branches.Where(branch => branch.Commits.Any()))
             {
                 var firstCommit = branch.Commits.First();
@@ -50,12 +63,22 @@ namespace SeeGit
                 commit.Branches.Merge(branch.ToBranchReference());
                 AddCommitsToGraph(firstCommit, null);
             }
-            if (_vertices.Count > 1)
-            {
-                _graph.LayoutAlgorithmType = "EfficientSugiyama";
-            }
+        }
 
-            return _graph;
+        void AddHeadReference()
+        {
+            var head = _repository.Head;
+            var headCommit = head.Commits.First();
+            var headCommitVertex = GetCommitVertex(headCommit);
+            var headBranceReference = new BranchReference
+            {
+                Name = "HEAD",
+                IsRemote = false,
+                IsHead = true
+            };
+
+            headCommitVertex.Branches.Merge(headBranceReference);
+            AddCommitsToGraph(headCommit, null);
         }
 
         private void AddCommitsToGraph(Commit commit, CommitVertex childVertex)
