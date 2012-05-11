@@ -93,6 +93,10 @@ namespace SeeGit
                     _graph.AddEdge(edge);
                     _edges.Add(edge.Id, edge);
                 }
+                else
+                {
+                    return;
+                }
             }
 
             foreach (var parent in commit.Parents)
