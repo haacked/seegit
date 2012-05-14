@@ -88,15 +88,9 @@ namespace SeeGit
             if (childVertex != null)
             {
                 var edge = new CommitEdge(childVertex, commitVertex);
-                if (!_edges.ContainsKey(edge.Id))
-                {
-                    _graph.AddEdge(edge);
-                    _edges.Add(edge.Id, edge);
-                }
-                else
-                {
-                    return;
-                }
+                if (_edges.ContainsKey(edge.Id)) return;
+                _graph.AddEdge(edge);
+                _edges.Add(edge.Id, edge);
             }
 
             foreach (var parent in commit.Parents)
@@ -110,7 +104,7 @@ namespace SeeGit
             CommitVertex commitVertex;
             if (!_vertices.TryGetValue(commit.Sha, out commitVertex))
             {
-                commitVertex = new CommitVertex(commit.Sha, commit.MessageShort) {Description = commit.Message};
+                commitVertex = new CommitVertex(commit.Sha, commit.MessageShort) { Description = commit.Message };
                 _vertices.Add(commit.Sha, commitVertex);
             }
 
