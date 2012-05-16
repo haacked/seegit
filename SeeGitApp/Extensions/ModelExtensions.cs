@@ -6,6 +6,8 @@ namespace SeeGit
 {
     public static class ModelExtensions
     {
+        private const string GitDirectoryName = ".git";
+
         public static string AtMost(this string s, int characterCount)
         {
             if (s == null) return null;
@@ -21,14 +23,15 @@ namespace SeeGit
             if (path == null) throw new ArgumentNullException("path");
 
             //If we are passed a .git directory, just return it straightaway
-            if (path.EndsWith(".git", StringComparison.OrdinalIgnoreCase))
+            DirectoryInfo pathDirectoryInfo = new DirectoryInfo(path);
+            if (pathDirectoryInfo.Name == ".git")
             {
                 return path;
             }
 
-            if (!Directory.Exists(path)) return Path.Combine(path, ".git");
+            if (!pathDirectoryInfo.Exists) return Path.Combine(path, ".git");
 
-            DirectoryInfo checkIn = new DirectoryInfo(path);
+            DirectoryInfo checkIn = pathDirectoryInfo;
 
             while (checkIn != null)
             {
