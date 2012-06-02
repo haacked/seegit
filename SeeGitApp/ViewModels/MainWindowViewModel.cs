@@ -7,6 +7,7 @@ namespace SeeGit
     public class MainWindowViewModel : NotifyPropertyChanged
     {
         private RepositoryGraph _graph;
+        private string _repositoryPath;
 
         private IRepositoryGraphBuilder _graphBuilder;
         // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
@@ -24,7 +25,7 @@ namespace SeeGit
         public string LayoutAlgorithmType
         {
             get { return _layoutAlgorithmType; }
-            set
+            private set
             {
                 _layoutAlgorithmType = value;
                 RaisePropertyChanged(() => LayoutAlgorithmType);
@@ -42,7 +43,15 @@ namespace SeeGit
             }
         }
 
-        public string RepositoryPath { get; private set; }
+        public string RepositoryPath
+        {
+            get { return _repositoryPath; }
+            private set
+            {
+                _repositoryPath = value;
+                RaisePropertyChanged(() => RepositoryPath);
+            }
+        }
 
         public void MonitorRepository(string repositoryWorkingPath)
         {
@@ -56,6 +65,7 @@ namespace SeeGit
 
             _graphBuilder = _graphBuilderThunk(gitPath);
             Graph = _graphBuilder.Graph();
+            RepositoryPath = Directory.GetParent(gitPath).FullName;
             LayoutAlgorithmType = "Tree";
 
             Refresh();
