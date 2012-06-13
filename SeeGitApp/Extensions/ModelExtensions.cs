@@ -18,37 +18,24 @@ namespace SeeGit
             return s.Substring(0, characterCount);
         }
 
-        public static string GetGitRepositoryPath(string path)
+        public static string GetGitRepositoryPath(DirectoryInfo pathInfo)
         {
-            if (path == null) throw new ArgumentNullException("path");
+            if (pathInfo == null) 
+                throw new ArgumentNullException("pathInfo");
 
-            //If we are passed a .git directory, just return it straightaway
-            DirectoryInfo pathDirectoryInfo = new DirectoryInfo(path);
-            if (pathDirectoryInfo.Name == ".git")
-            {
-                return path;
-            }
+            // given direct .git path (e.g. C:\myrepo\.git) so throw right-away if not found
+            if (pathInfo.Name == GitDirectoryName && !pathInfo.Exists) 
+                throw new DirectoryNotFoundException(GitDirectoryName);
 
-            if (!pathDirectoryInfo.Exists) return Path.Combine(path, ".git");
+            var potentialGitDirectoryPath = Path.Combine(pathInfo.FullName, GitDirectoryName);
 
-            DirectoryInfo checkIn = pathDirectoryInfo;
+            if (Directory.Exists(potentialGitDirectoryPath))
+                return potentialGitDirectoryPath;
 
-            while (checkIn != null)
-            {
-                string pathToTest = Path.Combine(checkIn.FullName, ".git");
-                if (Directory.Exists(pathToTest))
-                {
-                    return pathToTest;
-                }
-                else
-                {
-                    checkIn = checkIn.Parent;
-                }
-            }
+            if (pathInfo.Parent == null)
+                throw new DirectoryNotFoundException(GitDirectoryName);
 
-            // This is not good, it relies on the rest of the code being ok
-            // with getting a non-git repo dir
-            return Path.Combine(path, ".git");
+            return GetGitRepositoryPath(pathInfo.Parent);
         }
 
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryCreationObservable(string path)
