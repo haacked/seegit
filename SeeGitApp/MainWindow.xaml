@@ -6,7 +6,7 @@
         xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:view="clr-namespace:SeeGit.Views"
         xmlns:extbehaviour="clr-namespace:WPFExtensions.AttachedBehaviours;assembly=WPFExtensions" x:Class="SeeGit.MainWindow"
-        Title="GraphSharpDemo" Height="465" Width="708" mc:Ignorable="d">
+        Title="SeeGit" Height="465" Width="708" mc:Ignorable="d">
   <Window.Resources>
 
     <DataTemplate x:Key="commitDetailsTemplate" DataType="{x:Type local:CommitVertex}">

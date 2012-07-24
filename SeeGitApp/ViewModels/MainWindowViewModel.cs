@@ -7,6 +7,7 @@ namespace SeeGit
     public class MainWindowViewModel : NotifyPropertyChanged
     {
         private RepositoryGraph _graph;
+        private string _repositoryPath;
 
         private IRepositoryGraphBuilder _graphBuilder;
         // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
@@ -42,17 +43,28 @@ namespace SeeGit
             }
         }
 
-        public string RepositoryPath { get; private set; }
+        public string RepositoryPath
+        {
+            get { return _repositoryPath; }
+            private set
+            {
+                _repositoryPath = value;
+                RaisePropertyChanged(() => RepositoryPath);
+            }
+        }
 
         public void MonitorRepository(string repositoryWorkingPath)
         {
             if (repositoryWorkingPath == null) return;
+            
             string gitPath = ModelExtensions.GetGitRepositoryPath(repositoryWorkingPath);
             if (!Directory.Exists(gitPath))
             {
                 MonitorForRepositoryCreation(repositoryWorkingPath);
                 return;
             }
+
+            RepositoryPath = repositoryWorkingPath;
 
             _graphBuilder = _graphBuilderThunk(gitPath);
             Graph = _graphBuilder.Graph();
