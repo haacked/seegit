@@ -38,6 +38,7 @@ namespace SeeGit
                 {
                     vertice.Branches.Clear();
                 }
+                vertice.OnCurrentBranch = false;
             }
 
             if (!commits.Any()) return _graph;
@@ -79,6 +80,18 @@ namespace SeeGit
 
             headCommitVertex.Branches.Merge(headBranceReference);
             AddCommitsToGraph(headCommit, null);
+            HighlightCommitsOnCurrentBranch(headCommit, headCommitVertex);
+        }
+
+        private void HighlightCommitsOnCurrentBranch(Commit commit, CommitVertex commitVertex)
+        {
+            if (commitVertex.OnCurrentBranch) return;
+            commitVertex.OnCurrentBranch = true;
+
+            foreach (var parent in commit.Parents)
+            {
+                HighlightCommitsOnCurrentBranch(parent, GetCommitVertex(parent));
+            }
         }
 
         private void AddCommitsToGraph(Commit commit, CommitVertex childVertex)
