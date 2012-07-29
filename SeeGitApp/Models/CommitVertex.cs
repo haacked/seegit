@@ -54,6 +54,21 @@ namespace SeeGit
             }
         }
 
+        private bool _onCurrentBranch;
+
+        public bool OnCurrentBranch
+        {
+            get
+            {
+                return _onCurrentBranch;
+            }
+            set
+            {
+                _onCurrentBranch = value;
+                RaisePropertyChanged(() => OnCurrentBranch);
+            }
+        }
+
         public override bool Equals(object obj)
         {
             return this.Equals(obj as CommitVertex);
