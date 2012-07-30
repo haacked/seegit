@@ -67,6 +67,7 @@ namespace SeeGit
             RepositoryPath = repositoryWorkingPath;
 
             _graphBuilder = _graphBuilderThunk(gitPath);
+            Graph = _graphBuilder.Graph();
             LayoutAlgorithmType = "Tree";
 
             Refresh();
