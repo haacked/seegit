@@ -25,7 +25,7 @@ namespace SeeGit
         public string LayoutAlgorithmType
         {
             get { return _layoutAlgorithmType; }
-            set
+            private set
             {
                 _layoutAlgorithmType = value;
                 RaisePropertyChanged(() => LayoutAlgorithmType);
@@ -68,6 +68,7 @@ namespace SeeGit
 
             _graphBuilder = _graphBuilderThunk(gitPath);
             Graph = _graphBuilder.Graph();
+            RepositoryPath = Directory.GetParent(gitPath).FullName;
             LayoutAlgorithmType = "Tree";
 
             Refresh();
