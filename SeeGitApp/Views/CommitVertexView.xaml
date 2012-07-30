@@ -7,7 +7,19 @@
   <Grid DataContext="{Binding Model, ElementName=View}">
 
     <AdornerDecorator>
-      <Border BorderBrush="White" Background="Black" BorderThickness="2" CornerRadius="10,10,10,10">
+      <Border Background="Black" BorderThickness="2" CornerRadius="10,10,10,10">
+          <Border.Style>
+              <Style TargetType="Border">
+                  <Style.Triggers>
+                      <DataTrigger Binding="{Binding OnCurrentBranch}" Value="true">
+                          <Setter Property="BorderBrush" Value="#00CC00" />
+                      </DataTrigger>
+                      <DataTrigger Binding="{Binding OnCurrentBranch}" Value="false">
+                          <Setter Property="BorderBrush" Value="White" />
+                      </DataTrigger>
+                  </Style.Triggers>
+              </Style>
+          </Border.Style>
         <i:Interaction.Behaviors>
           <local:CommitAdornerBehavior AdornerVisible="Visible" AdornerMargin="105,10,0,0" DataContext="{Binding}">
             <local:CommitAdornerBehavior.AdornerTemplate>
