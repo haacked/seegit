@@ -31,6 +31,16 @@
     </Style>
   </Window.Resources>
 
+  <Window.CommandBindings>
+    <CommandBinding Command="Refresh"
+                    Executed="OnRefresh" />
+  </Window.CommandBindings>
+
+  <Window.InputBindings>
+    <KeyBinding Key="F5"
+                Command="Refresh" />
+  </Window.InputBindings>
+  
   <Grid d:DataContext="{ d:DesignInstance {x:Type local:DesignTimeMainWindowViewModel}, IsDesignTimeCreatable=True}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -46,6 +56,10 @@
         <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
                 Click="OnChooseRepository">
           Browse For a Repository...
+        </Button>
+        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
+                Command="Refresh">
+          Refresh
         </Button>
       </StackPanel>
     </StackPanel>
