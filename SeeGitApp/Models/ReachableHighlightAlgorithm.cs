@@ -77,7 +77,7 @@ namespace SeeGit.Models
             foreach (var outEdge in Controller.Graph.OutEdges(vertex))
             {
                 Controller.SemiHighlightEdge(outEdge, "OutEdge");
-                if (Controller.IsHighlightedVertex(outEdge.Target)) continue;
+                if (Controller.IsSemiHighlightedVertex(outEdge.Target)) continue;
                 Controller.SemiHighlightVertex(outEdge.Target, "Target");
                 HighlightChildren(outEdge.Target);
             }
