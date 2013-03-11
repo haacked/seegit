@@ -100,7 +100,7 @@
           </Expander.Style>
           <StackPanel Orientation="Vertical">
             <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="100" />
-            <TextBlock Text="Other info goes here" Foreground="White" TextWrapping="Wrap" />
+<!--        <TextBlock Text="Other info goes here" Foreground="White" TextWrapping="Wrap" /> -->
           </StackPanel>
         </Expander>
       </Border>
