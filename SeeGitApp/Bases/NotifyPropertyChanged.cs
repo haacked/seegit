@@ -13,8 +13,8 @@ namespace SeeGit
         {
             var handler = PropertyChanged;
 
-            if(handler != null)
-                handler(this,new PropertyChangedEventArgs(propertyNane));
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyNane));
         }
 
         protected void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpresssion)
