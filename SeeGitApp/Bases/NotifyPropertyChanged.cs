@@ -9,37 +9,37 @@ namespace SeeGit
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void RaisePropertyChanged(string propertyNane)
+        protected void RaisePropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
 
             if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyNane));
+                handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpresssion)
+        protected void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
         {
-            var propertyName = ExtractPropertyName(propertyExpresssion);
+            var propertyName = ExtractPropertyName(propertyExpression);
             RaisePropertyChanged(propertyName);
         }
 
-        private string ExtractPropertyName<T>(Expression<Func<T>> propertyExpresssion)
+        private string ExtractPropertyName<T>(Expression<Func<T>> propertyExpression)
         {
-            if (propertyExpresssion == null)
+            if (propertyExpression == null)
             {
-                throw new ArgumentNullException("propertyExpresssion");
+                throw new ArgumentNullException("propertyExpression");
             }
 
-            var memberExpression = propertyExpresssion.Body as MemberExpression;
+            var memberExpression = propertyExpression.Body as MemberExpression;
             if (memberExpression == null)
             {
-                throw new ArgumentException("propertyExpresssion");
+                throw new ArgumentException("propertyExpression");
             }
 
             var property = memberExpression.Member as PropertyInfo;
             if (property == null)
             {
-                throw new ArgumentException("propertyExpresssion");
+                throw new ArgumentException("propertyExpression");
             }
 
             return memberExpression.Member.Name;
