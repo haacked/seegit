@@ -53,7 +53,7 @@
                FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="Repository Path:" />
         <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
                FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="{Binding RepositoryPath}" />
-        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
+        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3" Focusable="False"
                 Click="OnChooseRepository">
           Browse For a Repository...
         </Button>
