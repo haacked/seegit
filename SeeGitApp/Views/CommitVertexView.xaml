@@ -25,6 +25,7 @@
             <local:CommitAdornerBehavior.AdornerTemplate>
               <DataTemplate>
                 <StackPanel Orientation="Horizontal">
+                  <!-- Modify this to be hidden in expanded view -->
                   <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" />
                 </StackPanel>
               </DataTemplate>
