@@ -41,7 +41,7 @@
                 Command="Refresh" />
   </Window.InputBindings>
   
-  <Grid d:DataContext="{ d:DesignInstance {x:Type local:DesignTimeMainWindowViewModel}, IsDesignTimeCreatable=True}">
+  <Grid d:DataContext="{d:DesignInstance {x:Type local:DesignTimeMainWindowViewModel}, IsDesignTimeCreatable=True}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
@@ -57,7 +57,7 @@
                 Click="OnChooseRepository">
           Browse For a Repository...
         </Button>
-        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
+        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3" Focusable="False"
                 Command="Refresh">
           Refresh
         </Button>
