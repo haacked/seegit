@@ -21,12 +21,12 @@
               </Style>
           </Border.Style>
         <i:Interaction.Behaviors>
-          <local:CommitAdornerBehavior AdornerVisible="Visible" AdornerMargin="105,10,0,0" DataContext="{Binding}">
+          <local:CommitAdornerBehavior AdornerVisible="Visible" AdornerMargin="105,10,0,0" DataContext="{Binding}" >
             <local:CommitAdornerBehavior.AdornerTemplate>
               <DataTemplate>
                 <StackPanel Orientation="Horizontal">
-                  <!-- Modify this to be hidden in expanded view -->
-                  <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" />
+                  <!-- Not hiding the whole Adorner, as future options will modify behaviour of elements -->
+                  <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" Visibility="{Binding Path=Expanded, Converter={StaticResource InverseBooleanToVisibilityConverter}}" />
                 </StackPanel>
               </DataTemplate>
             </local:CommitAdornerBehavior.AdornerTemplate>
@@ -37,7 +37,7 @@
                 <ListBox Name="listBox" BorderThickness="0" Background="Transparent"
                          ItemsSource="{Binding Path=Branches, Mode=OneWay}" Margin="0" Padding="0"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                         Visibility="{Binding Path=HasBranches, Converter={StaticResource BooleanToVisibilityConverter }}">
+                         Visibility="{Binding Path=HasBranches, Converter={StaticResource BooleanToVisibilityConverter}}">
                   <ListBox.Resources>
                     <Style TargetType="ListBoxItem">
                       <Style.Resources>
@@ -92,7 +92,7 @@
         </Border.Effect>
 
         <Expander IsExpanded="False" Header="{Binding ShortSha, Mode=OneWay}" Padding="5"
-                  ToolTip="{Binding Message, Mode=OneWay}">
+                  ToolTip="{Binding Message, Mode=OneWay}" Expanded="Expander_Expanded" Collapsed="Expander_Collapsed">
           <Expander.Style>
             <Style TargetType="{x:Type Expander}">
               <Setter Property="Foreground" Value="White" />
@@ -101,7 +101,7 @@
           </Expander.Style>
           <StackPanel Orientation="Vertical">
             <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="100" />
-<!--        <TextBlock Text="Other info goes here" Foreground="White" TextWrapping="Wrap" /> -->
+<!--        <TextBlock Text="{Binding Description}" Foreground="White" TextWrapping="Wrap" /> -->
           </StackPanel>
         </Expander>
       </Border>

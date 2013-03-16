@@ -76,7 +76,7 @@ namespace SeeGit
                                   _caTemplatedAdorner =
                                   new CommitTemplatedAdorner(AssociatedObject as UIElement, _adornerControl));
 
-                              // set realted bindings
+                              // Set related bindings
                               _adornerControl.Content = AdornerTemplate.LoadContent();
                               _adornerControl.Visibility = AdornerVisible;
 

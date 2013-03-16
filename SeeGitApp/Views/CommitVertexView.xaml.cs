@@ -34,6 +34,14 @@ namespace SeeGit.Views
         public static readonly DependencyProperty ModelProperty =
             DependencyProperty.Register("Model", typeof(CommitVertex), typeof(CommitVertexView), new UIPropertyMetadata(null));
 
-        
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            ((CommitVertex) Model).Expanded = true;
+        }
+
+        private void Expander_Collapsed(object sender, RoutedEventArgs e)
+        {
+            ((CommitVertex) Model).Expanded = false;
+        }
     }
 }
