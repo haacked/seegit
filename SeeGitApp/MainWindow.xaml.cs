@@ -70,7 +70,7 @@ namespace SeeGit
             {
                 string val;
                 if (element.Key is CheckBox)
-                    val = (bool)((CheckBox)element.Key).IsChecked ? "true" : "false";
+                    val = (bool)((CheckBox)element.Key).IsChecked ? "True" : "False";
                 else // if (element.Key is ComboBox)
                     val = ((ComboBox)element.Key).Text;
 

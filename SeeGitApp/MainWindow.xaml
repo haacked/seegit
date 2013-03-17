@@ -61,7 +61,8 @@
                 Command="Refresh">
           Refresh
         </Button>
-      </StackPanel>
+        <CheckBox Content="CheckBox" Height="16" Name="checkBox1" Background="Gray" Foreground="White" />
+        </StackPanel>
     </StackPanel>
 
     <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
