@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SeeGit.Models;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Windows.Controls;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -10,7 +13,8 @@ namespace SeeGit
     public partial class MainWindow : Window
     {
         private readonly MainWindowViewModel _viewModel;
-        private readonly Configuration _config;
+        private readonly Settings _configuration;
+        private Dictionary<Control, Tuple<string, dynamic>> _defaultSettings;
 
         public MainWindow()
         {
@@ -19,12 +23,61 @@ namespace SeeGit
 
             _viewModel.MonitorRepository(Directory.GetCurrentDirectory());
 
-            var fileMap = new ExeConfigurationFileMap();
-            fileMap.ExeConfigFilename = @"SeeGit.exe.config";
-            _config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+            _defaultSettings = new Dictionary<Control, Tuple<string, dynamic>>
+            {
+                {checkBox1, new Tuple<string, dynamic>("Filters", string.Empty)},
+            };
 
-            if (!_config.HasFile)
-                throw new ConfigurationErrorsException("Config file not found.");
+            try
+            {
+                _configuration = new Settings();
+            }
+            catch (ConfigurationErrorsException)
+            {
+            }
+
+            LoadSettings();
+        }
+
+        /// <summary>
+        /// Updates the UI elements states to stored values.
+        /// </summary>
+        private void LoadSettings()
+        {
+            foreach (var element in _defaultSettings)
+            {
+                try
+                {
+                    var val = _configuration.GetSetting(element.Value.Item1, element.Value.Item2);
+
+                    if (element.Key is CheckBox) // special case for checkboxes, changing "Text" is not correct
+                        ((CheckBox)element.Key).IsChecked = Convert.ToBoolean(val);
+                    else // if (element.Key is ComboBox)
+                        ((ComboBox)element.Key).Text = val.ToString();
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        /// <summary>
+        /// Saves the UI elements states.
+        /// </summary>
+        private void SaveSettings()
+        {
+            foreach (var element in _defaultSettings)
+            {
+                string val;
+                if (element.Key is CheckBox)
+                    val = (bool)((CheckBox)element.Key).IsChecked ? "true" : "false";
+                else // if (element.Key is ComboBox)
+                    val = ((ComboBox)element.Key).Text;
+
+                _configuration.SetSetting(element.Value.Item1, val);
+            }
+
+            _configuration.Save();
         }
 
         private void OnChooseRepository(object sender, RoutedEventArgs args)
@@ -35,60 +88,6 @@ namespace SeeGit
         private void OnRefresh(object sender, ExecutedRoutedEventArgs e)
         {
             _viewModel.MonitorRepository(_viewModel.RepositoryPath);
-        }
-
-        /// <summary>
-        /// Changes configuration modifications to file
-        /// </summary>
-        public void Save()
-        {
-            _config.Save(ConfigurationSaveMode.Full);
-        }
-
-        /// <summary>
-        /// Returns the value associated with the given key or
-        /// returns the passed value if key does not exist.
-        /// </summary>
-        /// <typeparam name="T">Type of default value and return type</typeparam>
-        /// <param name="key">Key</param>
-        /// <param name="defaultVal">Return value if key does not exist</param>
-        /// <param name="createVal">If the key does not exist, add the key-default value pair to configuration</param>
-        /// <returns></returns>
-        public T GetSetting<T>(string key, T defaultVal, bool createVal = false)
-        {
-            var pair = _config.AppSettings.Settings[key];
-            if (pair == null)
-            {
-                if (createVal)
-                    _config.AppSettings.Settings.Add(new KeyValueConfigurationElement(key, defaultVal.ToString()));
-
-                return defaultVal;
-            }
-
-            return (T)Convert.ChangeType(pair.Value, typeof(T));
-        }
-
-        /// <summary>
-        /// Modifies the value of an existing key or creates a new one.
-        /// </summary>
-        /// <param name="key">Key</param>
-        /// <param name="value">Value</param>
-        public void SetSetting(string key, string value)
-        {
-            if (_config.AppSettings.Settings.AllKeys.Contains(key))
-                _config.AppSettings.Settings[key].Value = value;
-            else
-                _config.AppSettings.Settings.Add(new KeyValueConfigurationElement(key, value));
-        }
-
-        /// <summary>
-        /// Removes a setting from the configuration.
-        /// Does nothing if key does not exist.
-        /// </summary>
-        /// <param name="key">Key</param>
-        public void RemoveSetting(string key)
-        {
-            _config.AppSettings.Settings.Remove(key);
         }
     }
 }

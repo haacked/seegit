@@ -64,6 +64,7 @@
     <Compile Include="Models\BranchCollectionTests.cs" />
     <Compile Include="Models\CommitEdgeTests.cs" />
     <Compile Include="Models\CommitVertexTests.cs" />
+    <Compile Include="Models\SettingsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
