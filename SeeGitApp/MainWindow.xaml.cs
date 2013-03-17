@@ -65,9 +65,6 @@ namespace SeeGit
                 return defaultVal;
             }
 
-            if (typeof(T).BaseType == typeof(Enum))
-                return (T)Enum.Parse(typeof(T), pair.Value, true);
-
             return (T)Convert.ChangeType(pair.Value, typeof(T));
         }
 
