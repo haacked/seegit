@@ -13,6 +13,7 @@ namespace SeeGit
             Message = message;
             Branches = new BranchCollection();
             Branches.CollectionChanged += (o, e) => RaisePropertyChanged(() => HasBranches);
+            Expanded = false;
         }
 
         public string Sha
@@ -34,6 +35,7 @@ namespace SeeGit
             get;
             private set;
         }
+
         public string Description
         {
             get;
@@ -66,6 +68,21 @@ namespace SeeGit
             {
                 _onCurrentBranch = value;
                 RaisePropertyChanged(() => OnCurrentBranch);
+            }
+        }
+
+        private bool _expanded;
+
+        public bool Expanded
+        {
+            get
+            {
+                return _expanded;
+            }
+            set
+            {
+                _expanded = value;
+                RaisePropertyChanged(() => Expanded);
             }
         }
 
