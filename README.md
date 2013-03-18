@@ -12,8 +12,6 @@ I just want something that I can use during presentations on Git. So as I run
 commands, it'll show the git graph in a beautiful manner.
 
 # Next steps
-* Need to allow you to select a repository to point at. It's currently hard
-coded.
 * I need to add local and remote branch annotations.
 
 # Development
@@ -27,7 +25,7 @@ post about [structuring unit tests](http://haacked.com/archive/2012/01/01/struct
 
 # Credits
 
-* [LibGit2Sharp](https://github.com/libgit2/libgit2sharp) - [License: MIT](https://github.com/libgit2/libgit2sharp/blob/master/LICENSE.md) LibGit2Sharp is an thin .Net layer (well.. we try to keep it as thin as possible :-) ) wrapping the libgit2 linkable C Git library.
+* [LibGit2Sharp](https://github.com/libgit2/libgit2sharp) - [License: MIT](https://github.com/libgit2/libgit2sharp/blob/master/LICENSE.md) LibGit2Sharp is a thin .Net layer (well... we try to keep it as thin as possible :-) ) wrapping the libgit2 linkable C Git library.
 
 * [QuickGraph](http://quickgraph.codeplex.com/) - [License: Ms-PL](http://quickgraph.codeplex.com/license) QuickGraph provides generic directed/undirected graph datastructures and algorithms for .NET. 
 * [GraphSharp](http://graphsharp.codeplex.com/) - [License: Ms-PL](http://graphsharp.codeplex.com/) Graph# is a graph layout framework. It contains some layout algorithms and a GraphLayout control for WPF applications

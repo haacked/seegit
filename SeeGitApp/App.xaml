@@ -4,5 +4,6 @@
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <SeeGit:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    <SeeGit:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
   </Application.Resources>
 </Application>

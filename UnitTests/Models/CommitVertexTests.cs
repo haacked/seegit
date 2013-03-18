@@ -15,6 +15,7 @@ namespace UnitTests.Models
                 Assert.Equal("shasha", commit.Sha);
                 Assert.Equal("commit message", commit.Message);
                 Assert.NotNull(commit.Branches);
+                Assert.Equal(false, commit.Expanded);
             }
         }
 
