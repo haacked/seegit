@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace SeeGit
 {
-    [ValueConversion(typeof (bool), typeof (Visibility))]
+    [ValueConversion(typeof(bool), typeof(Visibility))]
     public class InverseBooleanToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

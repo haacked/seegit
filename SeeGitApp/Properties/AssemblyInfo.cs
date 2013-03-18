@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SeeGit Visualizer")]
-[assembly: AssemblyCopyright("Copyright © Phil Haack 2012-2013")]
+[assembly: AssemblyCopyright("Copyright © 2012-2013 Phil Haack")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

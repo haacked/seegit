@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace SeeGit
 {
-    [ValueConversion(typeof (bool), typeof (bool))]
+    [ValueConversion(typeof(bool), typeof(bool))]
     public class InverseBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
