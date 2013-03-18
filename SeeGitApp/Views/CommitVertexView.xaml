@@ -21,7 +21,7 @@
               </Style>
           </Border.Style>
         <i:Interaction.Behaviors>
-          <local:CommitAdornerBehavior AdornerVisible="Visible" AdornerMargin="105,10,0,0" DataContext="{Binding}" >
+          <local:CommitAdornerBehavior AdornerVisible="Visible" AdornerMargin="105,10,0,0" DataContext="{Binding}">
             <local:CommitAdornerBehavior.AdornerTemplate>
               <DataTemplate>
                 <StackPanel Orientation="Horizontal">

@@ -36,12 +36,12 @@ namespace SeeGit.Views
 
         private void Expander_Expanded(object sender, RoutedEventArgs e)
         {
-            ((CommitVertex) Model).Expanded = true;
+            ((CommitVertex)Model).Expanded = true;
         }
 
         private void Expander_Collapsed(object sender, RoutedEventArgs e)
         {
-            ((CommitVertex) Model).Expanded = false;
+            ((CommitVertex)Model).Expanded = false;
         }
     }
 }
