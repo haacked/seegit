@@ -19,7 +19,7 @@ run the following command in a git shell.
 git clone git@github.com:haacked/SeeGit.git
 ```
 * To build the project you will need to have the [Expression Blend SDK](http://www.microsoft.com/en-gb/download/details.aspx?id=10801) installed
-* To run the build script you will need to have Windows PowerShell installed (Download for Win 7 [here](http://www.microsoft.com/en-us/download/details.aspx?id=34595) and WinXP [here])(http://www.microsoft.com/en-us/download/details.aspx?id=16818)
+* To run the build script you will need to have Windows PowerShell installed (Download for Win 7 [here](http://www.microsoft.com/en-us/download/details.aspx?id=34595) and WinXP [here](http://www.microsoft.com/en-us/download/details.aspx?id=16818)
 * Make sure the project builds and all tests pass on your machine by running 
 the `build.cmd` script (this calls a PowerShell script, `Build-Solution.ps1`).
 
