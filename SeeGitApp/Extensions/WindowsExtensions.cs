@@ -9,18 +9,36 @@ namespace SeeGit
 
         public static string BrowseForFolder(string startingPath)
         {
-            var cfd = new CommonOpenFileDialog
-                      {
-                          InitialDirectory = _lastDirectory ?? startingPath,
-                          IsFolderPicker = true,
-                      };
+            string initialDirectory = _lastDirectory ?? startingPath;
+            string ret = null;
 
-            if (cfd.ShowDialog() == CommonFileDialogResult.Ok)
-                _lastDirectory = Path.GetDirectoryName(cfd.FileName);
-            else
-                return null;
+            try
+            {
+                var cfd = new CommonOpenFileDialog
+                {
+                    InitialDirectory = initialDirectory,
+                    IsFolderPicker = true,
+                };
+                
+                if (cfd.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    ret = cfd.FileName;
+                }
+            }
+            catch (System.PlatformNotSupportedException)
+            {
+                var fd = new System.Windows.Forms.FolderBrowserDialog
+                {
+                    SelectedPath = initialDirectory,
+                };
 
-            var ret = cfd.FileName;
+                if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    ret = fd.SelectedPath;
+                }
+            }
+
+            _lastDirectory = ret;
             return ret;
         }
     }
