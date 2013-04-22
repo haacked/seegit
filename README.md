@@ -15,6 +15,9 @@ commands, it'll show the git graph in a beautiful manner.
 * I need to add local and remote branch annotations.
 
 # Development
+To build the project you will need [Expression Blend SDK](http://www.microsoft.com/en-gb/download/details.aspx?id=10801).
+Additionally, to run the build script you will need Windows PowerShell (Win 7 [here](http://www.microsoft.com/en-us/download/details.aspx?id=34595) and WinXP [here](http://www.microsoft.com/en-us/download/details.aspx?id=16818)).
+
 If you would like to contribute, check out the [CONTRIBUTING guidelines](https://github.com/Haacked/SeeGit/blob/master/CONTRIBUTING.md).
 
 If you're wondering why the unit tests are structured as they are, read my blog
