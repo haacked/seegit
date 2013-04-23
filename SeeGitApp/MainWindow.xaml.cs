@@ -25,7 +25,6 @@ namespace SeeGit
 
             _defaultSettings = new Dictionary<Control, Tuple<string, dynamic>>
             {
-                {checkBox1, new Tuple<string, dynamic>("Filters", string.Empty)},
             };
 
             try

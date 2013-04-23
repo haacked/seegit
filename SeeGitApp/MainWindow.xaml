@@ -48,7 +48,7 @@
     </Grid.RowDefinitions>
 
     <StackPanel Orientation="Vertical" Grid.Row="0">
-      <StackPanel Orientation="Horizontal" Background="Black" HorizontalAlignment="Stretch" Margin="0">
+      <StackPanel Orientation="Horizontal" Background="Black" HorizontalAlignment="Stretch" Margin="0" FlowDirection="LeftToRight">
         <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
                FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="Repository Path:" />
         <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
@@ -61,8 +61,10 @@
                 Command="Refresh">
           Refresh
         </Button>
-        <CheckBox Content="CheckBox" Height="16" Name="checkBox1" Background="Gray" Foreground="White" />
-        </StackPanel>
+        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3" Focusable="False">
+          Settings
+        </Button>
+      </StackPanel>
     </StackPanel>
 
     <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">

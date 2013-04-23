@@ -14,36 +14,25 @@ namespace UnitTests.Models
             {
                 var settings = new Settings();
 
-                // Initial Setting
-                settings.SetSetting("TrueSetting", "True");
-                settings.SetSetting("FalseSetting", "False");
+                // Get From File Test
+                Assert.Equal(true, Convert.ToBoolean(settings.GetSetting("TrueSetting", String.Empty)));
 
-                // Setting and Removing
-                settings.SetSetting("ToBeRemovedSetting", "nan");
+                // Default Setting Test
+                Assert.Equal("default", settings.GetSetting("asdf", "default", true));
+
+                // Check Create method
+                Assert.Equal("default", settings.GetSetting("asdf", String.Empty));
+
+                // Set Setting Test
+                settings.SetSetting("mySetting", "False");
+                Assert.Equal("False", settings.GetSetting("mySetting", String.Empty));
+
+                // Remove Setting
+                string fileValue = settings.GetSetting("ToBeRemovedSetting", "xmlvalue");
                 settings.RemoveSetting("ToBeRemovedSetting");
-
-                // Setting and Updating
-                settings.SetSetting("UpdatedSetting", "mySetting");
-                settings.SetSetting("UpdatedSetting", "notMySetting");
-
-                Assert.Equal(true, Convert.ToBoolean(settings.GetSetting("TrueSetting", string.Empty)));
-                Assert.Equal(false, Convert.ToBoolean(settings.GetSetting("FalseSetting", string.Empty)));
-                Assert.Equal(1, settings.GetSetting("ToBeRemovedSetting", 1));
-                Assert.Equal("notMySetting", settings.GetSetting("UpdatedSetting", string.Empty));
+                Assert.NotEqual(fileValue, settings.GetSetting("ToBeRemovedSetting", "notthexml"));
+                settings.Save();
             }
         }
-
-/*        public class GetSetRemoveMethod
-        {
-            [Fact]
-            public void ReturnsTrueIfShasAreSame()
-            {
-                var commit = new CommitVertex("sha", "whatever");
-                var other = new CommitVertex("sha", "doesn't matter");
-
-                Assert.True(commit.Equals(other));
-                Assert.True(object.Equals(commit, other));
-            }
-        }*/
     }
 }
