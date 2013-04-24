@@ -66,6 +66,11 @@
           Settings
         </ToggleButton>
       </StackPanel>
+      <StackPanel Visibility="{Binding IsChecked, ElementName=settingsToggle, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <view:SettingsView>
+          
+        </view:SettingsView>
+      </StackPanel>
     </StackPanel>
 
     <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
