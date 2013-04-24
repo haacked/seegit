@@ -3,10 +3,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:local="clr-namespace:SeeGit"
-             mc:Ignorable="d" x:Name="Settings" d:DesignHeight="250" d:DesignWidth="200">
+             mc:Ignorable="d" x:Name="Settings" d:DesignHeight="105" d:DesignWidth="200" Visibility="{Binding IsChecked, ElementName=toggleButton, Converter={StaticResource BooleanToVisibilityConverter}}">
   <AdornerDecorator>
     <Border Background="Black" BorderThickness="2" CornerRadius="10,10,10,10">
-      
+      <StackPanel Orientation="Vertical" Height="100">
+        <TextBlock Text="Adorner Commit Message Visibility" Foreground="White" Padding="4" />
+        <ComboBox HorizontalAlignment="Center" Width="196" Padding="4" Foreground="Black" Background="White" ></ComboBox>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Commit Description Visibility" Foreground="White" Padding="4" />
+          <CheckBox VerticalAlignment="Center" Margin="10 2 0 0" Background="White" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="SHA Length" Foreground="White" Padding="4" />
+          <TextBox Width="60" Margin="40 3 0 0"/>
+        </StackPanel>
+      </StackPanel>
     </Border>
   </AdornerDecorator>
 </UserControl>

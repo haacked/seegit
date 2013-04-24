@@ -40,7 +40,7 @@
     <KeyBinding Key="F5"
                 Command="Refresh" />
   </Window.InputBindings>
-  
+
   <Grid d:DataContext="{d:DesignInstance {x:Type local:DesignTimeMainWindowViewModel}, IsDesignTimeCreatable=True}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -61,9 +61,10 @@
                 Command="Refresh">
           Refresh
         </Button>
-        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3" Focusable="False">
+        <ToggleButton Name="settingsToggle" Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3" Focusable="False"
+                Click="OnToggleSettings">
           Settings
-        </Button>
+        </ToggleButton>
       </StackPanel>
     </StackPanel>
 

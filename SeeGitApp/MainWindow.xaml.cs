@@ -88,5 +88,10 @@ namespace SeeGit
         {
             _viewModel.MonitorRepository(_viewModel.RepositoryPath);
         }
+
+        private void OnToggleSettings(object sender, RoutedEventArgs args)
+        {
+            _viewModel.ToggleSettings();
+        }
     }
 }
