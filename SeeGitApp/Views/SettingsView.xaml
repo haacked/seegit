@@ -8,16 +8,19 @@
     <Border Background="Black">
       <StackPanel Orientation="Horizontal" Width="700" Height="50">
         <StackPanel Orientation="Vertical">
-          <TextBlock Text="Adorner Commit Message Visibility" Foreground="White" Padding="4" />
+          <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
+               FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="Show Commit Adorner Message" />
           <ComboBox HorizontalAlignment="Center" Width="196" Padding="4" Foreground="Black" Background="White" ></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Vertical">
-          <TextBlock Text="Commit Description Visibility" Foreground="White" Padding="4" />
+          <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
+               FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="Show Commit Description" />
           <CheckBox HorizontalAlignment="Center" Margin="10 2 0 0" Background="White" />
         </StackPanel>
 
         <StackPanel Orientation="Vertical">
-          <TextBlock Text="SHA Length" Foreground="White" Padding="4" />
+          <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
+               FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="SHA Length" />
           <TextBox Width="60" HorizontalAlignment="Center"/>
         </StackPanel>
       </StackPanel>
