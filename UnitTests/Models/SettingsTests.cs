@@ -15,7 +15,7 @@ namespace UnitTests.Models
                 var settings = new Settings();
 
                 // Get From File Test
-                Assert.Equal(true, Convert.ToBoolean(settings.GetSetting("TrueSetting", String.Empty)));
+                Assert.Equal(true, settings.GetSetting<bool>("TrueSetting", false));
 
                 // Default Setting Test
                 Assert.Equal("default", settings.GetSetting("asdf", "default", true));

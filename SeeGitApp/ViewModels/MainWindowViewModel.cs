@@ -94,9 +94,10 @@ namespace SeeGit
             Graph = _graphBuilder.Graph();
         }
 
-        public void ToggleSettings()
+        public bool ToggleSettings()
         {
             _settingsVisible = !_settingsVisible;
+            return _settingsVisible;
         }
     }
 }

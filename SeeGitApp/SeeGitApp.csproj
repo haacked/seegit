@@ -114,6 +114,7 @@
     <Compile Include="Models\RepositoryGraphBuilder.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\CommitVertexView.xaml.cs">
