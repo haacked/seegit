@@ -64,6 +64,7 @@
     <Compile Include="Models\BranchCollectionTests.cs" />
     <Compile Include="Models\CommitEdgeTests.cs" />
     <Compile Include="Models\CommitVertexTests.cs" />
+    <Compile Include="Models\SettingsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +74,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="SeeGit.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

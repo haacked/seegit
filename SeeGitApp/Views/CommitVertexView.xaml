@@ -25,7 +25,7 @@
             <local:CommitAdornerBehavior.AdornerTemplate>
               <DataTemplate>
                 <StackPanel Orientation="Horizontal">
-                  <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" Visibility="{Binding Path=Expanded, Converter={StaticResource InverseBooleanToVisibilityConverter}}" />
+                  <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" Visibility="{Binding Path=AdornerMessageVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </StackPanel>
               </DataTemplate>
             </local:CommitAdornerBehavior.AdornerTemplate>
@@ -100,7 +100,7 @@
           </Expander.Style>
           <StackPanel Orientation="Vertical">
             <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="100" />
-<!--        <TextBlock Text="{Binding Description}" Foreground="White" TextWrapping="Wrap" /> -->
+            <TextBlock Text="{Binding Description}" Foreground="White" TextWrapping="Wrap" Visibility="{Binding DescriptionShown, Converter={StaticResource BooleanToVisibilityConverter}}" />
           </StackPanel>
         </Expander>
       </Border>
