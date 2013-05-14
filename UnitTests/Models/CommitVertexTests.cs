@@ -15,7 +15,9 @@ namespace UnitTests.Models
                 Assert.Equal("shasha", commit.Sha);
                 Assert.Equal("commit message", commit.Message);
                 Assert.NotNull(commit.Branches);
-
+                Assert.Equal(8, commit.ShaLength);
+                Assert.Equal(true, commit.AdornerMessageVisibility);    // expanded is false -> true
+                Assert.Equal(false, commit.DescriptionShown);
             }
         }
 
