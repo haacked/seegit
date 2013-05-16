@@ -70,6 +70,7 @@
       <HintPath>..\Lib\QuickGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Reactive">
       <HintPath>..\packages\Rx_Experimental-Main.1.1.11111\lib\Net4\System.Reactive.dll</HintPath>
@@ -114,10 +115,15 @@
     <Compile Include="Models\ReachableHighlightAlgorithmFactory.cs" />
     <Compile Include="Models\RepositoryGraphBuilder.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\CommitVertexView.xaml.cs">
       <DependentUpon>CommitVertexView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +141,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CommitVertexView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,6 +168,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

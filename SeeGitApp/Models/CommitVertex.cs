@@ -13,7 +13,59 @@ namespace SeeGit
             Message = message;
             Branches = new BranchCollection();
             Branches.CollectionChanged += (o, e) => RaisePropertyChanged(() => HasBranches);
+            ShaLength = MainWindow.Configuration.GetSetting<int>("SHALength", 8);
+            DescriptionShown = MainWindow.Configuration.GetSetting<bool>("DescriptionInExpander", false);
+            AdornerMessageVisibilityType = MainWindow.Configuration.GetSetting<string>("AdornerCommitMessageVisibility", "ExpandedHidden");
             Expanded = false;
+        }
+
+        // Settings
+        int _shaLength;
+        public int ShaLength
+        {
+            get
+            {
+                return _shaLength;
+            }
+            set
+            {
+                _shaLength = value;
+                RaisePropertyChanged(() => ShortSha);
+            }
+        }
+
+        bool _descriptionShown;
+        public bool DescriptionShown
+        {
+            get
+            {
+                return _descriptionShown;
+            }
+            set
+            {
+                _descriptionShown = value;
+                RaisePropertyChanged(() => DescriptionShown);
+            }
+        }
+
+        public bool AdornerMessageVisibility
+        {
+            get;
+            set;
+        }
+
+        private string _adornerMessageVisibilityType;
+        public string AdornerMessageVisibilityType
+        {
+            set
+            {
+                if (value.Equals("Visible"))
+                    AdornerMessageVisibility = true;
+                else if (value.Equals("Hidden"))
+                    AdornerMessageVisibility = false;
+                _adornerMessageVisibilityType = value;
+                RaisePropertyChanged(() => AdornerMessageVisibility);
+            }
         }
 
         public string Sha
@@ -26,7 +78,7 @@ namespace SeeGit
         {
             get
             {
-                return Sha.AtMost(8);
+                return Sha.AtMost(ShaLength);
             }
         }
 
@@ -71,18 +123,15 @@ namespace SeeGit
             }
         }
 
-        private bool _expanded;
-
         public bool Expanded
         {
-            get
-            {
-                return _expanded;
-            }
             set
             {
-                _expanded = value;
-                RaisePropertyChanged(() => Expanded);
+                if (_adornerMessageVisibilityType.Equals("ExpandedHidden"))
+                {
+                    AdornerMessageVisibility = !value;
+                    RaisePropertyChanged(() => AdornerMessageVisibility);
+                }
             }
         }
 

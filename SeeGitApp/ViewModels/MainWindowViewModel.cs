@@ -15,6 +15,7 @@ namespace SeeGit
         private string _layoutAlgorithmType = "Tree";
         private readonly Dispatcher _uiDispatcher;
         private readonly Func<string, IRepositoryGraphBuilder> _graphBuilderThunk;
+        private bool _settingsVisible;
 
         public MainWindowViewModel(Dispatcher uiDispatcher, Func<string, IRepositoryGraphBuilder> graphBuilderThunk)
         {
@@ -91,6 +92,12 @@ namespace SeeGit
         public void Refresh()
         {
             Graph = _graphBuilder.Graph();
+        }
+
+        public bool ToggleSettings()
+        {
+            _settingsVisible = !_settingsVisible;
+            return _settingsVisible;
         }
     }
 }
