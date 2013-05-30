@@ -99,8 +99,8 @@
             </Style>
           </Expander.Style>
           <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="100" />
-            <TextBlock Text="{Binding Description}" Foreground="White" TextWrapping="Wrap" Visibility="{Binding DescriptionShown, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="150" Visibility="{Binding DescriptionShown, Converter={StaticResource InverseBooleanToVisibilityConverter}}" />
+            <TextBlock Text="{Binding Description}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" Visibility="{Binding DescriptionShown, Converter={StaticResource BooleanToVisibilityConverter}}" />
           </StackPanel>
         </Expander>
       </Border>
