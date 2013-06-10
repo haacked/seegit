@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>GraphSharp</id>
+    <version>1.1.0.0</version>
+    <title>GraphSharp</title>
+    <authors>palesz</authors>
+    <owners>palesz</owners>
+    <licenseUrl>http://graphsharp.codeplex.com/license</licenseUrl>
+    <projectUrl>http://graphsharp.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Graph# is a graph layout framework. It contains some layout algorithms and a GraphLayout control for WPF applications. This is a unofficial release of the library.</description>
+    <releaseNotes>WE ARE NOT THE MAINTAINER OF GRAPH SHARP!
+      Updated to .NET 4.0.</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <language />
+    <tags>WPF QuickGraph</tags>
+    <dependencies>
+      <dependency id="QuickGraph" version="3.6.61119.7" />
+      <dependency id="WPFExtensions" />
+    </dependencies>
+  </metadata>
+</package>
