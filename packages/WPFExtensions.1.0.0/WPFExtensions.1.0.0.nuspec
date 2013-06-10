@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>WPFExtensions</id>
+    <version>1.0.0</version>
+    <title />
+    <authors>palesz, badang</authors>
+    <owners>palesz, badang</owners>
+    <licenseUrl>http://wpfextensions.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wpfextensions.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Some extensions for the WPF framework.
+Controls, attached behaviours, helper classes, etc.</description>
+  </metadata>
+</package>

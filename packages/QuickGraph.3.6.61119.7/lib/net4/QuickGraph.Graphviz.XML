@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QuickGraph.Graphviz</name>
+    </assembly>
+    <members>
+        <member name="P:QuickGraph.Graphviz.FormatEdgeEventArgs`2.EdgeFormatter">
+            <summary>
+            Edge formatter
+            </summary>
+        </member>
+        <member name="T:QuickGraph.Graphviz.GraphvizAlgorithm`2">
+            <summary>
+            An algorithm that renders a graph to the Graphviz DOT format.
+            </summary>
+            <typeparam name="TVertex">type of the vertices</typeparam>
+            <typeparam name="TEdge">type of the edges</typeparam>
+        </member>
+        <member name="P:QuickGraph.Graphviz.GraphvizAlgorithm`2.Output">
+            <summary>
+            Dot output stream.
+            </summary>
+        </member>
+        <member name="P:QuickGraph.Graphviz.GraphvizAlgorithm`2.ImageType">
+            <summary>
+            Current image output type
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Cmap">
+            <summary>
+            Client-side imagemaps
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Hpgl">
+            <summary>
+            HP-GL/2 format
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Imap">
+            <summary>
+            Server-side imagemaps
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Mif">
+            <summary>
+            FrameMaker MIF format
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Mp">
+            <summary>
+            MetaPost
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Pcl">
+            <summary>
+            PCL format
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Pic">
+            <summary>
+            PIC format
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.PlainText">
+            <summary>
+            plain text format
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Png">
+            <summary>
+            Portable Network Graphics format
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Ps">
+            <summary>
+            Postscript
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Ps2">
+            <summary>
+            PostScript for PDF
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Svg">
+            <summary>
+            Scalable Vector Graphics
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Svgz">
+            <summary>
+            Scalable Vector Graphics, gzipped
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Vrml">
+            <summary>
+            VRML
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Vtx">
+            <summary>
+            Visual Thought format
+            </summary>
+        </member>
+        <member name="F:QuickGraph.Graphviz.Dot.GraphvizImageType.Wbmp">
+            <summary>
+            Wireless BitMap format
+            </summary>
+        </member>
+        <member name="T:QuickGraph.Graphviz.GraphvizExtensions">
+            <summary>
+            Helper extensions to render graphs to graphviz
+            </summary>
+        </member>
+        <member name="M:QuickGraph.Graphviz.GraphvizExtensions.ToGraphviz``2(QuickGraph.IEdgeListGraph{``0,``1})">
+            <summary>
+            Renders a graph to the Graphviz DOT format.
+            </summary>
+            <typeparam name="TVertex"></typeparam>
+            <typeparam name="TEdge"></typeparam>
+            <param name="graph"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickGraph.Graphviz.GraphvizExtensions.ToGraphviz``2(QuickGraph.IEdgeListGraph{``0,``1},System.Action{QuickGraph.Graphviz.GraphvizAlgorithm{``0,``1}})">
+            <summary>
+            Renders a graph to the Graphviz DOT format.
+            </summary>
+            <typeparam name="TVertex"></typeparam>
+            <typeparam name="TEdge"></typeparam>
+            <param name="graph"></param>
+            <param name="initialization">delegate that initializes the algorithm</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
