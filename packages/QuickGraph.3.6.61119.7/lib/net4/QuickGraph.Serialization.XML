@@ -1,0 +1,1284 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QuickGraph.Serialization</name>
+    </assembly>
+    <members>
+        <member name="T:QuickGraph.Serialization.XmlSerializableGraph`3">
+            <summary>
+            A base class that creates a proxy to a graph that is xml serializable
+            </summary>
+            <typeparam name="TVertex">type of the vertices</typeparam>
+            <typeparam name="TEdge">type of the edges</typeparam>
+            <typeparam name="TGraph"></typeparam>
+        </member>
+        <member name="M:QuickGraph.Serialization.SerializationExtensions.DeserializeFromXml``3(System.Xml.XPath.IXPathNavigable,System.String,System.String,System.String,System.Func{System.Xml.XPath.XPathNavigator,``2},System.Func{System.Xml.XPath.XPathNavigator,``0},System.Func{System.Xml.XPath.XPathNavigator,``1})">
+            <summary>
+            Deserializes a graph from a generic xml stream, using an <see cref="T:System.Xml.XPath.XPathDocument"/>.
+            </summary>
+            <typeparam name="TVertex">type of the vertices</typeparam>
+            <typeparam name="TEdge">type of the edges</typeparam>
+            <typeparam name="TGraph"></typeparam>
+            <param name="doc">input xml document</param>
+            <param name="graphXPath">xpath expression to the graph node. The first node is considered</param>
+            <param name="verticesXPath">xpath expression from the graph node to the vertex nodes.</param>
+            <param name="edgesXPath">xpath expression from the graph node to the edge nodes.</param>
+            <param name="graphFactory">delegate that instantiate the empty graph instance, given the graph node</param>
+            <param name="vertexFactory">delegate that instantiate a vertex instance, given the vertex node</param>
+            <param name="edgeFactory">delegate that instantiate an edge instance, given the edge node</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickGraph.Serialization.SerializationExtensions.DeserializeFromXml``3(System.Xml.XmlReader,System.Predicate{System.Xml.XmlReader},System.Predicate{System.Xml.XmlReader},System.Predicate{System.Xml.XmlReader},System.Func{System.Xml.XmlReader,``2},System.Func{System.Xml.XmlReader,``0},System.Func{System.Xml.XmlReader,``1})">
+            <summary>
+            Deserializes a graph from a generic xml stream, using an <see cref="T:System.Xml.XmlReader"/>.
+            </summary>
+            <typeparam name="TVertex">type of the vertices</typeparam>
+            <typeparam name="TEdge">type of the edges</typeparam>
+            <typeparam name="TGraph"></typeparam>
+            <param name="reader">input xml document</param>
+            <param name="graphPredicate">predicate that returns a value indicating if the current xml node is a graph. The first match is considered</param>
+            <param name="vertexPredicate">predicate that returns a value indicating if the current xml node is a vertex.</param>
+            <param name="edgePredicate">predicate that returns a value indicating if the current xml node is an edge.</param>
+            <param name="graphFactory">delegate that instantiate the empty graph instance, given the graph node</param>
+            <param name="vertexFactory">delegate that instantiate a vertex instance, given the vertex node</param>
+            <param name="edgeFactory">delegate that instantiate an edge instance, given the edge node</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickGraph.Serialization.SerializationExtensions.DeserializeFromXml``3(System.Xml.XmlReader,System.String,System.String,System.String,System.String,System.Func{System.Xml.XmlReader,``2},System.Func{System.Xml.XmlReader,``0},System.Func{System.Xml.XmlReader,``1})">
+            <summary>
+            Deserializes a graph from a generic xml stream, using an <see cref="T:System.Xml.XPath.XPathDocument"/>.
+            </summary>
+            <typeparam name="TVertex">type of the vertices</typeparam>
+            <typeparam name="TEdge">type of the edges</typeparam>
+            <typeparam name="TGraph"></typeparam>
+            <param name="reader">input xml document</param>
+            <param name="namespaceUri">xml namespace</param>
+            <param name="graphElementName">name of the xml node holding graph information. The first node is considered</param>
+            <param name="vertexElementName">name of the xml node holding vertex information</param>
+            <param name="edgeElementName">name of the xml node holding edge information</param>
+            <param name="graphFactory">delegate that instantiate the empty graph instance, given the graph node</param>
+            <param name="vertexFactory">delegate that instantiate a vertex instance, given the vertex node</param>
+            <param name="edgeFactory">delegate that instantiate an edge instance, given the edge node</param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickGraph.Serialization.SerializationExtensions.SerializeToXml``3(``2,System.Xml.XmlWriter,QuickGraph.VertexIdentity{``0},QuickGraph.EdgeIdentity{``0,``1},System.String,System.String,System.String,System.String)">
+            <summary>
+            Serializes a graph to a generic xml stream, using an <see cref="T:System.Xml.XmlWriter"/>.
+            </summary>
+            <typeparam name="TVertex">The type of the vertex.</typeparam>
+            <typeparam name="TEdge">The type of the edge.</typeparam>
+            <typeparam name="TGraph">The type of the graph.</typeparam>
+            <param name="graph">The graph.</param>
+            <param name="writer">The writer.</param>
+            <param name="vertexIdentity">The vertex identity.</param>
+            <param name="edgeIdentity">The edge identity.</param>
+            <param name="graphElementName">Name of the graph element.</param>
+            <param name="vertexElementName">Name of the vertex element.</param>
+            <param name="edgeElementName">Name of the edge element.</param>
+            <param name="namespaceUri">The namespace URI.</param>
+        </member>
+        <member name="M:QuickGraph.Serialization.SerializationExtensions.SerializeToXml``3(``2,System.Xml.XmlWriter,QuickGraph.VertexIdentity{``0},QuickGraph.EdgeIdentity{``0,``1},System.String,System.String,System.String,System.String,System.Action{System.Xml.XmlWriter,``2},System.Action{System.Xml.XmlWriter,``0},System.Action{System.Xml.XmlWriter,``1})">
+            <summary>
+            Serializes a graph to a generic xml stream, using an <see cref="T:System.Xml.XmlWriter"/>.
+            </summary>
+            <typeparam name="TVertex">The type of the vertex.</typeparam>
+            <typeparam name="TEdge">The type of the edge.</typeparam>
+            <typeparam name="TGraph">The type of the graph.</typeparam>
+            <param name="writer">The writer.</param>
+            <param name="graph">The graph.</param>
+            <param name="vertexIdentity">The vertex identity.</param>
+            <param name="edgeIdentity">The edge identity.</param>
+            <param name="graphElementName">Name of the graph element.</param>
+            <param name="vertexElementName">Name of the vertex element.</param>
+            <param name="edgeElementName">Name of the edge element.</param>
+            <param name="namespaceUri">The namespace URI (optional).</param>
+            <param name="writeGraphAttributes">The write graph attributes (optional).</param>
+            <param name="writeVertexAttributes">The write vertex attributes (optional).</param>
+            <param name="writeEdgeAttributes">The write edge attributes (optional).</param>
+        </member>
+        <member name="T:QuickGraph.Serialization.GraphMLDeserializer`3">
+            <summary>
+            A GraphML ( http://graphml.graphdrawing.org/ ) format deserializer.
+            </summary>
+            <typeparam name="TVertex">type of a vertex</typeparam>
+            <typeparam name="TEdge">type of an edge</typeparam>
+            <typeparam name="TGraph">type of the graph</typeparam>
+            <remarks>
+            <para>
+            Custom vertex, edge and graph attributes can be specified by 
+            using the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute"/>
+            attribute on properties (field not suppored).
+            </para>
+            <para>
+            The serializer uses LCG (lightweight code generation) to generate the 
+            methods that writes the attributes to avoid paying the price of 
+            Reflection on each vertex/edge. Since nothing is for free, the first
+            time you will use the serializer *on a particular pair of types*, it
+            will have to bake that method.
+            </para>
+            <para>
+            Hyperedge, nodes, nested graphs not supported.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:QuickGraph.Serialization.GraphMLXmlResolver">
+            <summary>
+            A resolver that loads graphml DTD and XSD schemas 
+            from embedded resources.
+            </summary>
+        </member>
+        <member name="T:QuickGraph.Serialization.GraphMLSerializer`3">
+            <summary>
+            A GraphML ( http://graphml.graphdrawing.org/ ) format serializer.
+            </summary>
+            <typeparam name="TVertex">type of a vertex</typeparam>
+            <typeparam name="TEdge">type of an edge</typeparam>
+            <typeparam name="TGraph">type of the graph</typeparam>
+            <remarks>
+            <para>
+            Custom vertex, edge and graph attributes can be specified by 
+            using the <see cref="T:System.Xml.Serialization.XmlAttributeAttribute"/>
+            attribute on properties (field not suppored).
+            </para>
+            <para>
+            The serializer uses LCG (lightweight code generation) to generate the 
+            methods that writes the attributes to avoid paying the price of 
+            Reflection on each vertex/edge. Since nothing is for free, the first
+            time you will use the serializer *on a particular pair of types*, it
+            will have to bake that method.
+            </para>
+            <para>
+            Hyperedge, nodes, nested graphs not supported.
+            </para>
+            </remarks>
+        </member>
+        <member name="E:QuickGraph.Serialization.DirectedGraphMLAlgorithm`2.FormatGraph">
+            <summary>
+            Raised when the graph is about to be returned
+            </summary>
+        </member>
+        <member name="E:QuickGraph.Serialization.DirectedGraphMLAlgorithm`2.FormatEdge">
+            <summary>
+            Raised when a new link is added to the graph
+            </summary>
+        </member>
+        <member name="E:QuickGraph.Serialization.DirectedGraphMLAlgorithm`2.FormatNode">
+            <summary>
+            Raised when a new node is added to the graph
+            </summary>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphMLExtensions">
+            <summary>
+            Directed Graph Markup Language extensions
+            </summary>
+        </member>
+        <member name="M:QuickGraph.Serialization.DirectedGraphMLExtensions.WriteXml(QuickGraph.Serialization.DirectedGraphML.DirectedGraph,System.String)">
+            <summary>
+            Writes the dgml data structure to the xml writer
+            </summary>
+            <param name="fileName"/>
+            <param name="graph"></param>
+        </member>
+        <member name="M:QuickGraph.Serialization.DirectedGraphMLExtensions.WriteXml(QuickGraph.Serialization.DirectedGraphML.DirectedGraph,System.Xml.XmlWriter)">
+            <summary>
+            Writes the dgml data structure to the xml writer
+            </summary>
+            <param name="graph"></param>
+            <param name="writer"></param>
+        </member>
+        <member name="M:QuickGraph.Serialization.DirectedGraphMLExtensions.WriteXml(QuickGraph.Serialization.DirectedGraphML.DirectedGraph,System.IO.Stream)">
+            <summary>
+            Writes the dgml data structure to the xml writer
+            </summary>
+            <param name="graph"></param>
+            <param name="stream"></param>
+        </member>
+        <member name="M:QuickGraph.Serialization.DirectedGraphMLExtensions.WriteXml(QuickGraph.Serialization.DirectedGraphML.DirectedGraph,System.IO.TextWriter)">
+            <summary>
+            Writes the dgml data structure to the xml writer
+            </summary>
+            <param name="graph"></param>
+            <param name="writer"></param>
+        </member>
+        <member name="M:QuickGraph.Serialization.DirectedGraphMLExtensions.ToDirectedGraphML``2(QuickGraph.IVertexAndEdgeListGraph{``0,``1})">
+            <summary>
+            Populates a DGML graph from a graph
+            </summary>
+            <typeparam name="TVertex"></typeparam>
+            <typeparam name="TEdge"></typeparam>
+            <param name="visitedGraph"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickGraph.Serialization.DirectedGraphMLExtensions.ToDirectedGraphML``2(QuickGraph.IVertexAndEdgeListGraph{``0,``1},System.Func{``0,QuickGraph.GraphColor})">
+            <summary>
+            Populates a DGML graph from a graph
+            </summary>
+            <typeparam name="TVertex"></typeparam>
+            <typeparam name="TEdge"></typeparam>
+            <param name="visitedGraph"></param>
+            <param name="vertexColors"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickGraph.Serialization.DirectedGraphMLExtensions.ToDirectedGraphML``2(QuickGraph.IVertexAndEdgeListGraph{``0,``1},QuickGraph.VertexIdentity{``0},QuickGraph.EdgeIdentity{``0,``1})">
+            <summary>
+            Populates a DGML graph from a graph
+            </summary>
+            <typeparam name="TVertex"></typeparam>
+            <typeparam name="TEdge"></typeparam>
+            <param name="visitedGraph"></param>
+            <param name="vertexIdentities"></param>
+            <param name="edgeIdentities"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickGraph.Serialization.DirectedGraphMLExtensions.ToDirectedGraphML``2(QuickGraph.IVertexAndEdgeListGraph{``0,``1},QuickGraph.VertexIdentity{``0},QuickGraph.EdgeIdentity{``0,``1},System.Action{``0,QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode},System.Action{``1,QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink})">
+            <summary>
+            Populates a DGML graph from a graph
+            </summary>
+            <typeparam name="TVertex"></typeparam>
+            <typeparam name="TEdge"></typeparam>
+            <param name="visitedGraph"></param>
+            <param name="vertexIdentities"></param>
+            <param name="edgeIdentities"></param>
+            <param name="_formatNode"></param>
+            <param name="_formatEdge"></param>
+            <returns></returns>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphMLExtensions.DirectedGraphSerializer">
+            <summary>
+            Gets the DirectedGraph xml serializer
+            </summary>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraph">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.Nodes">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.Links">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.Categories">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.Properties">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.QualifiedNames">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.IdentifierAliases">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.Styles">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.Paths">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.Title">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.Background">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.BackgroundImage">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.GraphDirection">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.GraphDirectionSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.Layout">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.LayoutSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.ButterflyMode">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.ButterflyModeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.NeighborhoodDistance">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraph.ZoomLevel">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Category">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Id">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Category1">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Icon">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Shape">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Style">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.HorizontalAlignment">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.HorizontalAlignmentSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.VerticalAlignment">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.VerticalAlignmentSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Description">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Group">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.GroupSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsVertical">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsVerticalSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Reference">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Label">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Visibility">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.VisibilitySpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Background">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.FontSize">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.FontSizeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.FontFamily">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.FontStyle">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.FontStyleSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.FontWeight">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.FontWeightSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Access">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Assembly">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.FilePath">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.FunctionTypeFlags">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsAbstract">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsAbstractSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsCodeType">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsCodeTypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsHub">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsHubSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsOverloaded">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsOverloadedSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsOverridable">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsOverridableSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Language">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Location">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.LinesOfCode">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.LinesOfCodeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.Namespace">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.MustImplement">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.TypeName">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsDocumentation">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.IsDocumentationSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeGenSourceName">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeGenTargetName">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeGenIncoming">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeGenIncomingSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_CallSequenceNumber">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_CallSequenceNumberSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_DisableEnabledErrorHandler">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_DisableEnabledErrorHandlerSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_DisableEnabledException">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_DisableEnabledExceptionSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_EndColumn">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_EndColumnSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_EndLine">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_EndLineSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_FrameDepth">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_FrameDepthSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_FrameKind">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_FrameKindSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_Icon">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_InstanceTrackingInformation">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsAbstract">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsAbstractSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsAnonymous">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsAnonymousSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsArray">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsArraySpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsByReference">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsByReferenceSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsCallToThis">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsCallToThisSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsConstructor">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsConstructorSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsDo">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsDoSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsFinal">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsFinalSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsFor">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsForSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsForEach">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsForEachSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsGeneric">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsGenericSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsGenericInstance">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsGenericInstanceSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsInternal">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsInternalSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsHideBySignature">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsHideBySignatureSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsOperator">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsOperatorSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsOut">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsOutSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsParameterArray">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsParameterArraySpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPrivate">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPrivateSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsProtected">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsProtectedSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsProtectedOrInternal">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsProtectedOrInternalSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPropertyGet">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPropertyGetSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPropertySet">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPropertySetSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPrototype">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPrototypeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPublic">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsPublicSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsSpecialName">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsSpecialNameSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsStatic">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsStaticSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsUntilLoop">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsUntilLoopSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsVirtual">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsVirtualSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsWhile">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_IsWhileSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_PreserveData">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_PreserveDataSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_SingleInstanceSourceLink">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_SingleInstanceSourceLinkSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_SingleInstanceTargetLink">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_SingleInstanceTargetLinkSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_SourceText">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_StartColumn">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_StartColumnSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_StartLine">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_StartLineSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_StatementKind">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_StatementNumber">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_StatementNumberSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNode.CodeSchemaProperty_StatementType">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNodeCategory">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphNodeCategory.Ref">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.HorizontalAlignmentEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.HorizontalAlignmentEnum.Left">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.HorizontalAlignmentEnum.Center">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.HorizontalAlignmentEnum.Right">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.VerticalAlignmentEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.VerticalAlignmentEnum.Top">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.VerticalAlignmentEnum.Center">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.VerticalAlignmentEnum.Bottom">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.GroupEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.GroupEnum.Expanded">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.GroupEnum.Collapsed">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.ClrBoolean">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.ClrBoolean.True">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.ClrBoolean.False">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.ClrBoolean.true">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.ClrBoolean.false">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.VisibilityEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.VisibilityEnum.Visible">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.VisibilityEnum.Hidden">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.VisibilityEnum.Collapsed">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.FontStyleEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontStyleEnum.Normal">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontStyleEnum.Italic">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontStyleEnum.Oblique">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.Black">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.Bold">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.DemiBold">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.ExtraBlack">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.ExtraBold">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.ExtraLight">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.Heavy">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.Light">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.Medium">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.Normal">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.Regular">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.Semibold">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.Thin">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.UltraBlack">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.UltraBold">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FontWeightEnum.UltraLight">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.FrameKindEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FrameKindEnum.Conditional">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FrameKindEnum.Clause">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FrameKindEnum.Loop">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.FrameKindEnum.Call">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.Category">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.Label">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.Visibility">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.VisibilitySpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.Background">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.FontSize">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.FontSizeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.FontFamily">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.FontStyle">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.FontStyleSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.FontWeight">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.FontWeightSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.Source">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.Target">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.Category1">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.Stroke">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.StrokeDashArray">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.Seeder">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.SeederSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.AttractConsumers">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLink.AttractConsumersSpecified">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLinkCategory">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphLinkCategory.Ref">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.Id">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.BasedOn">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.Label">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.Visibility">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.VisibilitySpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.Background">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.FontSize">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.FontSizeSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.FontFamily">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.FontStyle">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.FontStyleSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.FontWeight">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.FontWeightSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.Icon">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.Shape">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.Style">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.HorizontalAlignment">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.HorizontalAlignmentSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.VerticalAlignment">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.VerticalAlignmentSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.Stroke">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.StrokeDashArray">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.CanLinkedNodesBeDataDriven">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.CanBeDataDriven">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.DefaultAction">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.IncomingActionLabel">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.IsProviderRoot">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.IsProviderRootSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.IsContainment">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.IsContainmentSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.IsTag">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.IsTagSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.NavigationActionLabel">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.OutgoingActionLabel">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.SourceCategory">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.TargetCategory">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.Details">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.InboundName">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphCategory.OutboundName">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphProperty">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphProperty.Id">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphProperty.IsReference">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphProperty.IsReferenceSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphProperty.Label">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphProperty.DataType">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphProperty.Description">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphProperty.Group">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphProperty.ReferenceTemplate">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphName">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphName.Id">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphName.Label">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphName.ValueType">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphName.Formatter">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphAlias">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphAlias.n">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphAlias.Uri">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphAlias.Id">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyle">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyle.Condition">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyle.Setter">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyle.TargetType">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyle.IsEnabled">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyle.IsEnabledSpecified">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyle.GroupLabel">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyle.ValueLabel">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyle.ToolTip">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyleCondition">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyleCondition.Expression">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyleSetter">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyleSetter.Property">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyleSetter.Value">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphStyleSetter.Expression">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.PropertyType">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.ArrowHeadSize">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.ArrowHeadWidth">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.Background">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.FontFamily">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.FontSize">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.FontStyle">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.FontWeight">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.Foreground">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.HorizontalAlignment">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.Icon">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.Image">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.SelectedStroke">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.ShadowDepth">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.Shape">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.Stroke">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.StrokeDashArray">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.StrokeThickness">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.PropertyType.Style">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.TargetTypeEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.TargetTypeEnum.Node">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.TargetTypeEnum.Link">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.DirectedGraphPath">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphPath.Id">
+            <remarks/>
+        </member>
+        <member name="P:QuickGraph.Serialization.DirectedGraphML.DirectedGraphPath.Value">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.GraphDirectionEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.GraphDirectionEnum.TopToBottom">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.GraphDirectionEnum.BottomToTop">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.GraphDirectionEnum.LeftToRight">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.GraphDirectionEnum.RightToLeft">
+            <remarks/>
+        </member>
+        <member name="T:QuickGraph.Serialization.DirectedGraphML.LayoutEnum">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.LayoutEnum.None">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.LayoutEnum.Sugiyama">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.LayoutEnum.ForceDirected">
+            <remarks/>
+        </member>
+        <member name="F:QuickGraph.Serialization.DirectedGraphML.LayoutEnum.DependencyMatrix">
+            <remarks/>
+        </member>
+    </members>
+</doc>

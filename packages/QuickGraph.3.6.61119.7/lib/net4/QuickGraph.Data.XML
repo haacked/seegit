@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QuickGraph.Data</name>
+    </assembly>
+    <members>
+        <member name="T:QuickGraph.Data.DataSetGraphvizAlgorithm">
+            <summary>
+            An algorithm that renders a DataSet graph to the Graphviz DOT format.
+            </summary>
+        </member>
+    </members>
+</doc>

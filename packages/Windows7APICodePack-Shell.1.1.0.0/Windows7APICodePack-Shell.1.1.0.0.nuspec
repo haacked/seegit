@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Windows7APICodePack-Shell</id>
+    <version>1.1.0.0</version>
+    <title>Windows 7 API Code Pack - Shell</title>
+    <authors>Chandrakanth Tati</authors>
+    <owners>Chandrakanth Tati</owners>
+    <licenseUrl>http://code.msdn.microsoft.com/WindowsAPICodePack/Project/License.aspx</licenseUrl>
+    <projectUrl>http://code.msdn.microsoft.com/WindowsAPICodePack/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Shell library for Windows 7 API Code Pack</description>
+    <summary>Windows API Code Pack for Microsoft. NET Framework provides a source code library that can be used to access some features of Windows 7 and Windows Vista from managed code.</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>WindowsAPICodePack</tags>
+    <dependencies>
+      <dependency id="Windows7APICodePack-Core" version="1.1.0.0" />
+    </dependencies>
+  </metadata>
+</package>

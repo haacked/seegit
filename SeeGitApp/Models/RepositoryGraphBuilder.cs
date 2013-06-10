@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LibGit2Sharp;
 
@@ -18,7 +19,7 @@ namespace SeeGit
             {
                 _repository = new Repository(GitRepositoryPath);
             }
-            catch (LibGit2Exception)
+            catch (LibGit2SharpException)
             {
             }
         }

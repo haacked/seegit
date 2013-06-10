@@ -36,17 +36,29 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GraphSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Lib\GraphSharp.dll</HintPath>
+    <Reference Include="GraphSharp, Version=1.0.2.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.dll</HintPath>
     </Reference>
-    <Reference Include="GraphSharp.Controls, Version=1.0.4115.29430, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\Lib\GraphSharp.Controls.dll</HintPath>
+    <Reference Include="GraphSharp.Controls, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="QuickGraph, Version=3.2.40122.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
-      <HintPath>..\Lib\QuickGraph.dll</HintPath>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Data">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +67,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WPFExtensions">
+      <HintPath>..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="xunit, Version=1.9.1.1600, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.dll</HintPath>

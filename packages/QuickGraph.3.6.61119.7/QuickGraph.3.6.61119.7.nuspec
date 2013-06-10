@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>QuickGraph</id>
+    <version>3.6.61119.7</version>
+    <title>Generic graph data structures and algorithms for .NET</title>
+    <authors>Jonathan Peli de Halleux</authors>
+    <owners>Jonathan Peli de Halleux</owners>
+    <licenseUrl>http://quickgraph.codeplex.com/license</licenseUrl>
+    <projectUrl>http://quickgraph.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>QuickGraph provides generic directed/undirected graph datastructures and algorithms for .Net, Silverlight, Windows Phone and Win 8. 
+      QuickGraph comes with algorithms such as depth first seach, breath first search, A* search, shortest path, 
+      k-shortest path, maximum flow, minimum spanning tree, least common ancestors, etc...</description>
+    <summary>Generic graph data structures and algorithms for .NET</summary>
+    <tags>algorithms graph directed undirected dfs bfs graphviz graphml data structure</tags>
+    <references>
+      <reference file="QuickGraph.dll" />
+      <reference file="QuickGraph.Serialization.dll" />
+      <reference file="QuickGraph.Data.dll" />
+      <reference file="QuickGraph.Graphviz.dll" />
+    </references>
+  </metadata>
+</package>
