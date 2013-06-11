@@ -70,7 +70,6 @@ namespace SeeGit
             _graphBuilder = _graphBuilderThunk(gitPath);
             RepositoryPath = Directory.GetParent(gitPath).FullName;
             Graph = _graphBuilder.Graph();
-            LayoutAlgorithmType = "EfficientSugiyama";
 
             MonitorForRepositoryChanges(gitPath);
         }

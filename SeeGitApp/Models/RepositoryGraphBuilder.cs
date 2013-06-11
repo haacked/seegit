@@ -50,6 +50,7 @@ namespace SeeGit
             AddBranchReferences();
             AddHeadReference();
 
+            _graph.LayoutAlgorithmType = "EfficientSugiyama";
             return _graph;
         }
 
