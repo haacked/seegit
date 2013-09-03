@@ -5,6 +5,8 @@ using LibGit2Sharp;
 
 namespace SeeGit
 {
+    using CommitWithChildVertex = KeyValuePair<Commit, CommitVertex>;
+
     public class RepositoryGraphBuilder : IRepositoryGraphBuilder
     {
         private readonly RepositoryGraph _graph = new RepositoryGraph();
@@ -48,11 +50,7 @@ namespace SeeGit
             AddBranchReferences();
             AddHeadReference();
 
-            if (_vertices.Count > 1)
-            {
-                _graph.LayoutAlgorithmType = "EfficientSugiyama";
-            }
-
+            _graph.LayoutAlgorithmType = "EfficientSugiyama";
             return _graph;
         }
 
@@ -84,32 +82,68 @@ namespace SeeGit
             HighlightCommitsOnCurrentBranch(headCommit, headCommitVertex);
         }
 
+        private bool HighlightCommit(Commit commit)
+        {
+            CommitVertex commitVertex = GetCommitVertex(commit);
+            if (commitVertex.OnCurrentBranch)
+                return false;
+
+            commitVertex.OnCurrentBranch = true;
+            return true;
+        }
+
         private void HighlightCommitsOnCurrentBranch(Commit commit, CommitVertex commitVertex)
         {
-            if (commitVertex.OnCurrentBranch) return;
-            commitVertex.OnCurrentBranch = true;
+            Queue<Commit> queue = new Queue<Commit>();
+            queue.Enqueue(commit);
 
-            foreach (var parent in commit.Parents)
+            while (queue.Count != 0)
             {
-                HighlightCommitsOnCurrentBranch(parent, GetCommitVertex(parent));
+                commit = queue.Dequeue();
+                if (!HighlightCommit(commit))
+                    return;
+
+                foreach (var parent in commit.Parents)
+                {
+                    queue.Enqueue(parent);
+                }
             }
         }
 
-        private void AddCommitsToGraph(Commit commit, CommitVertex childVertex)
+        private bool AddCommitToGraph(Commit commit, CommitVertex childVertex)
         {
             var commitVertex = GetCommitVertex(commit);
             _graph.AddVertex(commitVertex);
             if (childVertex != null)
             {
                 var edge = new CommitEdge(childVertex, commitVertex);
-                if (_edges.ContainsKey(edge.Id)) return;
+                if (_edges.ContainsKey(edge.Id))
+                    return false;
+
                 _graph.AddEdge(edge);
                 _edges.Add(edge.Id, edge);
             }
+            return true;
+        }
 
-            foreach (var parent in commit.Parents)
+        private void AddCommitsToGraph(Commit commit, CommitVertex childVertex)
+        {
+            // KeyValuePair is faster than a Tuple in this case.
+            // We create as many instances as we pass to the AddCommitToGraph.
+            Queue<CommitWithChildVertex> queue = new Queue<CommitWithChildVertex>();
+            CommitWithChildVertex commitIter;
+            queue.Enqueue(new CommitWithChildVertex(commit, childVertex));
+
+            while (queue.Count != 0)
             {
-                AddCommitsToGraph(parent, commitVertex);
+                commitIter = queue.Dequeue();
+                if (!AddCommitToGraph(commitIter.Key, commitIter.Value))
+                    continue;
+
+                foreach (var parent in commitIter.Key.Parents)
+                {
+                    queue.Enqueue(new CommitWithChildVertex(parent, GetCommitVertex(commitIter.Key)));
+                }
             }
         }
 
