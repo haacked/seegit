@@ -9,9 +9,7 @@ namespace SeeGit.Models
         private readonly Configuration _config;
         public Settings()
         {
-            var fileMap = new ExeConfigurationFileMap();
-            fileMap.ExeConfigFilename = @"SeeGit.exe.config";
-            _config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+            _config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             if (!_config.HasFile)
                 throw new ConfigurationErrorsException("Config file not found.");
