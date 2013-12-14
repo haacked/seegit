@@ -12,13 +12,8 @@ namespace SeeGit
         protected void RaisePropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
-            try
-            {
-                if (handler != null)
-                    handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-            catch (IndexOutOfRangeException)
-            { }
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
         protected void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
