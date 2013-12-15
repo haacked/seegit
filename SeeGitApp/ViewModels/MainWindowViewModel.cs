@@ -71,6 +71,10 @@ namespace SeeGit
             RepositoryPath = Directory.GetParent(gitPath).FullName;
             Graph = _graphBuilder.Graph();
 
+            if (_graph.VertexCount > 1)
+                _graph.LayoutAlgorithmType = "EfficientSugiyama";
+            Graph = Graph;
+
             MonitorForRepositoryChanges(gitPath);
         }
 

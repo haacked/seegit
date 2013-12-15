@@ -50,7 +50,7 @@ namespace SeeGit
             AddBranchReferences();
             AddHeadReference();
 
-            _graph.LayoutAlgorithmType = "EfficientSugiyama";
+            _graph.LayoutAlgorithmType = "CompoundFDP";
             return _graph;
         }
 
