@@ -47,8 +47,8 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <StackPanel Orientation="Vertical" Grid.Row="0">
-      <StackPanel Orientation="Horizontal" Background="Black" HorizontalAlignment="Stretch" Margin="0" FlowDirection="LeftToRight">
+    <StackPanel Orientation="Vertical" Grid.Row="0" Background="Black" >
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="6" FlowDirection="LeftToRight">
         <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
                FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="Repository Path:" />
         <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
