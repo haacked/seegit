@@ -2,8 +2,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:SeeGit="clr-namespace:SeeGit" StartupUri="MainWindow.xaml">
   <Application.Resources>
 
-    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    <SeeGit:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-    <SeeGit:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+    <ResourceDictionary>
+
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="Styles\ZoomControl.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <SeeGit:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        <SeeGit:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+
+    </ResourceDictionary>
+
   </Application.Resources>
 </Application>

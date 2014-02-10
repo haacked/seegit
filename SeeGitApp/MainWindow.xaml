@@ -32,13 +32,11 @@
   </Window.Resources>
 
   <Window.CommandBindings>
-    <CommandBinding Command="Refresh"
-                    Executed="OnRefresh" />
+    <CommandBinding Command="Refresh" Executed="OnRefresh" />
   </Window.CommandBindings>
 
   <Window.InputBindings>
-    <KeyBinding Key="F5"
-                Command="Refresh" />
+    <KeyBinding Key="F5" Command="Refresh" />
   </Window.InputBindings>
 
   <Grid d:DataContext="{d:DesignInstance {x:Type local:DesignTimeMainWindowViewModel}, IsDesignTimeCreatable=True}">
@@ -47,33 +45,40 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <StackPanel Orientation="Vertical" Grid.Row="0">
-      <StackPanel Orientation="Horizontal" Background="Black" HorizontalAlignment="Stretch" Margin="0" FlowDirection="LeftToRight">
-        <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
-               FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="Repository Path:" />
-        <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
-               FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="{Binding RepositoryPath}" />
-        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3" Focusable="False"
-                Click="OnChooseRepository">
-          Browse For a Repository...
-        </Button>
-        <Button Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3" Focusable="False"
-                Command="Refresh">
-          Refresh
-        </Button>
-        <ToggleButton Name="settingsToggle" Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3" Focusable="False"
-                Click="OnToggleSettings">
-          Settings
-        </ToggleButton>
+    <StackPanel Orientation="Vertical" Grid.Row="0" Background="Black" >
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="6" FlowDirection="LeftToRight">
+          
+        <StackPanel.Resources>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+            <Style TargetType="{x:Type ButtonBase}" x:Key="buttonStyle">
+                <Setter Property="Background" Value="Gray" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,2,6,2" />
+                <Setter Property="Padding" Value="3" />
+            </Style>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource buttonStyle}" />
+            <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource buttonStyle}" />
+        </StackPanel.Resources>
+          
+        <Label Margin="0,0,2,0" Content="Repository:" />
+        <Label Margin="0,0,6,0" Content="{Binding RepositoryPath}" />
+        <Button Click="OnChooseRepository" Content="Browse…" />
+        <Button Command="Refresh" Content="Refresh" />
+        <ToggleButton Name="settingsToggle" Click="OnToggleSettings" Content="Settings" />
       </StackPanel>
       <StackPanel Visibility="{Binding IsChecked, ElementName=settingsToggle, Converter={StaticResource BooleanToVisibilityConverter}}">
-        <view:SettingsView>
-          
-        </view:SettingsView>
+        <view:SettingsView />
       </StackPanel>
     </StackPanel>
 
-    <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
+    <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565" Style="{StaticResource SeeGitZoomControl}">
       <local:RepositoryGraphLayout x:Name="graphLayout" Margin="10" Graph="{Binding Graph}"
                                    LayoutAlgorithmType="{Binding LayoutAlgorithmType, Mode=OneWay}" OverlapRemovalAlgorithmType="FSA"
                                    FlowDirection="LeftToRight" />
