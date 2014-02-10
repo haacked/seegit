@@ -73,7 +73,7 @@
       </StackPanel>
     </StackPanel>
 
-    <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
+    <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565" Style="{StaticResource SeeGitZoomControl}">
       <local:RepositoryGraphLayout x:Name="graphLayout" Margin="10" Graph="{Binding Graph}"
                                    LayoutAlgorithmType="{Binding LayoutAlgorithmType, Mode=OneWay}" OverlapRemovalAlgorithmType="FSA"
                                    FlowDirection="LeftToRight" />

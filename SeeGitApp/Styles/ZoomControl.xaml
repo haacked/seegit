@@ -1,0 +1,85 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
+                    xmlns:Converters="clr-namespace:WPFExtensions.Converters;assembly=WPFExtensions">
+
+    <Converters:DoubleToLog10Converter x:Key="log10Converter" />
+    <Converters:EqualityToBooleanConverter x:Key="equalityConverter" />
+
+    <Style TargetType="{x:Type Controls:ZoomControl}" x:Key="SeeGitZoomControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Controls:ZoomControl}">
+                    <Grid>
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                ClipToBounds="{TemplateBinding ClipToBounds}">
+                            <Controls:ZoomContentPresenter x:Name="PART_Presenter" ClipToBounds="False" />
+                        </Border>
+                        <Border Grid.Row="1" Background="Black">
+                            <StackPanel Orientation="Horizontal" Margin="6">
+
+                                <Slider Width="150"
+                                        Minimum="{TemplateBinding MinZoom,Converter={StaticResource log10Converter}}"
+                                        Maximum="{TemplateBinding MaxZoom,Converter={StaticResource log10Converter}}"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Zoom,Mode=TwoWay,Converter={StaticResource log10Converter}}"
+                                        HorizontalAlignment="Center"
+                                        Ticks="0.1, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2"
+                                        AutoToolTipPlacement="BottomRight"
+                                        AutoToolTipPrecision="1"
+                                        TickPlacement="BottomRight"
+                                        TickFrequency="1"
+                                        LargeChange="1"
+                                        SmallChange="0.1"
+                                        Orientation="Horizontal"
+                                        Margin="0,0,6,0" />
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Zoom,StringFormat='{}{0:F2}x'}"
+                                           FontWeight="Bold"
+                                           Foreground="White" 
+                                           Margin="0,0,6,0" />
+                                <RadioButton Content="1:1"
+                                           GroupName="rbgZoomMode"
+                                           IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Mode,Converter={StaticResource equalityConverter},ConverterParameter={x:Static Controls:ZoomControlModes.Original}}" 
+                                           Foreground="White"
+                                           Margin="0,0,6,0" />
+                                <RadioButton Content="Fill"
+                                           GroupName="rbgZoomMode"
+                                           IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Mode,Converter={StaticResource equalityConverter},ConverterParameter={x:Static Controls:ZoomControlModes.Fill}}"
+                                           Foreground="White"
+                                            Margin="0,0,6,0" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="White" />
+        <Setter Property="ZoomBoxBackground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.0, 0.0" EndPoint="1.0, 1.0">
+                    <GradientStop Color="Silver" Offset="0.0" />
+                    <GradientStop Color="DarkGray" Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ZoomBoxBorderBrush" Value="Black" />
+        <Setter Property="ZoomBoxBorderThickness" Value="1" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="ModifierMode" Value="Pan">
+                <Setter Property="Cursor" Value="SizeAll" />
+            </Trigger>
+            <Trigger Property="ModifierMode" Value="ZoomBox">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>
