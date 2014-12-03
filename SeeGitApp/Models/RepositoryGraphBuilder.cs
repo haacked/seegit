@@ -33,7 +33,7 @@ namespace SeeGit
             if (_repository == null) return new RepositoryGraph();
 
             var commits =
-                _repository.Commits.QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time});
+                _repository.Commits.QueryBy(new CommitFilter { SortBy = CommitSortStrategies.Topological | CommitSortStrategies.Time });
 
             foreach (var vertice in _vertices.Values)
             {
