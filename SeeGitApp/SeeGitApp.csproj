@@ -51,14 +51,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\LibGit2Sharp.0.12.0.0\lib\net35\LibGit2Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Microsoft.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Expression.Interactions" />
-    <Reference Include="Microsoft.Windows.Shell">
-      <HintPath>..\Lib\Microsoft.Windows.Shell.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Windows7APICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
