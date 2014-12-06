@@ -14,6 +14,13 @@ commands, it'll show the git graph in a beautiful manner.
 # Next steps
 * I need to add local and remote branch annotations.
 
+# Quick start
+* Visit our [Release Page](https://github.com/Haacked/SeeGit/releases) to download the latest stable release.
+* Unzip files into a directory of your choice.
+* Click on SeeGit.Exe.
+* Point SeeGit to the root of a git repository.
+** for larger repositories it may take a bit to load. Be patient.
+
 # Development
 To build the project you will need [Expression Blend SDK](http://www.microsoft.com/en-gb/download/details.aspx?id=10801).
 Additionally, to run the build script you will need Windows PowerShell (Win 7 [here](http://www.microsoft.com/en-us/download/details.aspx?id=34595) and WinXP [here](http://www.microsoft.com/en-us/download/details.aspx?id=16818)).
