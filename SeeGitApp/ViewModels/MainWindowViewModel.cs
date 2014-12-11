@@ -57,25 +57,21 @@ namespace SeeGit
         public void MonitorRepository(string repositoryWorkingPath)
         {
             if (repositoryWorkingPath == null) return;
-            
-            string gitPath = ModelExtensions.GetGitRepositoryPath(repositoryWorkingPath);
-            if (!Directory.Exists(gitPath))
-            {
-                MonitorForRepositoryCreation(repositoryWorkingPath);
-                return;
-            }
 
-            RepositoryPath = repositoryWorkingPath;
+            string gitPath = ModelExtensions.GetGitRepositoryPath(repositoryWorkingPath);
 
             _graphBuilder = _graphBuilderThunk(gitPath);
             RepositoryPath = Directory.GetParent(gitPath).FullName;
-            Graph = _graphBuilder.Graph();
+            var graph = _graphBuilder.Graph();
 
-            if (_graph.VertexCount > 1)
-                _graph.LayoutAlgorithmType = "EfficientSugiyama";
-            Graph = Graph;
+            if (graph.VertexCount > 1)
+                graph.LayoutAlgorithmType = "EfficientSugiyama";
+            Graph = graph;
 
-            MonitorForRepositoryChanges(gitPath);
+            if (!Directory.Exists(gitPath))
+                MonitorForRepositoryCreation(RepositoryPath);
+            else
+                MonitorForRepositoryChanges(gitPath);
         }
 
         private void MonitorForRepositoryCreation(string repositoryWorkingPath)
@@ -92,7 +88,11 @@ namespace SeeGit
 
         public void Refresh()
         {
-            Graph = _graphBuilder.Graph();
+            string gitPath = ModelExtensions.GetGitRepositoryPath(RepositoryPath);
+            if (!Directory.Exists(gitPath))
+                MonitorRepository(RepositoryPath);
+            else
+                Graph = _graphBuilder.Graph();
         }
 
         public bool ToggleSettings()
