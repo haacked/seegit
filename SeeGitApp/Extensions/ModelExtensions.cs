@@ -64,7 +64,7 @@ namespace SeeGit
                     e =>
                     e.ChangeType == WatcherChangeTypes.Created &&
                     e.FullPath.Equals(expectedGitDirectory, StringComparison.OrdinalIgnoreCase))
-                .Throttle(TimeSpan.FromSeconds(1));
+                .Take(1);
         }
 
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryChangesObservable(string path)
