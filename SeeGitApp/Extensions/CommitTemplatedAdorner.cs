@@ -13,6 +13,7 @@ namespace SeeGit
         /// 
         /// </summary>
         /// <param name="adornedElement"></param>
+        /// <param name="frameworkElementAdorner"></param>
         public CommitTemplatedAdorner(UIElement adornedElement, FrameworkElement frameworkElementAdorner)
             : base(adornedElement)
         {
@@ -33,10 +34,7 @@ namespace SeeGit
         /// <summary>
         /// 
         /// </summary>
-        protected override int VisualChildrenCount
-        {
-            get { return 1; }
-        }
+        protected override int VisualChildrenCount => 1;
 
         /// <summary>
         /// 

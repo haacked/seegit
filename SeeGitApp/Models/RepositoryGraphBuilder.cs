@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using LibGit2Sharp;
 
@@ -50,7 +49,7 @@ namespace SeeGit
             AddBranchReferences();
             AddHeadReference();
 
-            _graph.LayoutAlgorithmType = "CompoundFDP";
+            _graph.LayoutAlgorithmType = App.LayoutAlgorithm;
             return _graph;
         }
 

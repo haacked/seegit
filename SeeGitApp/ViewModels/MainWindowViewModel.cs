@@ -65,7 +65,7 @@ namespace SeeGit
             var graph = _graphBuilder.Graph();
 
             if (graph.VertexCount > 1)
-                graph.LayoutAlgorithmType = "EfficientSugiyama";
+                graph.LayoutAlgorithmType = App.LayoutAlgorithm;
             Graph = graph;
 
             if (!Directory.Exists(gitPath))
@@ -77,13 +77,13 @@ namespace SeeGit
         private void MonitorForRepositoryCreation(string repositoryWorkingPath)
         {
             ModelExtensions.CreateGitRepositoryCreationObservable(repositoryWorkingPath)
-                .Subscribe(_ => _uiDispatcher.Invoke(new Action(() => MonitorRepository(repositoryWorkingPath))));
+                .Subscribe(_ => _uiDispatcher.Invoke(() => MonitorRepository(repositoryWorkingPath)));
         }
 
         private void MonitorForRepositoryChanges(string gitRepositoryPath)
         {
             ModelExtensions.CreateGitRepositoryChangesObservable(gitRepositoryPath)
-                .Subscribe(_ => _uiDispatcher.Invoke(new Action(Refresh)));
+                .Subscribe(_ => _uiDispatcher.Invoke(Refresh));
         }
 
         public void Refresh()

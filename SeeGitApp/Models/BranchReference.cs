@@ -18,7 +18,7 @@
         {
             unchecked
             {
-                int result = (Name != null ? Name.GetHashCode() : 0);
+                int result = Name?.GetHashCode() ?? 0;
                 result = (result*397) ^ IsRemote.GetHashCode();
                 result = (result*397) ^ IsCurrent.GetHashCode();
                 return result;

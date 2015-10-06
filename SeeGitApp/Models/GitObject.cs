@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace SeeGit
+﻿namespace SeeGit
 {
     public abstract class GitObject<T> : NotifyPropertyChanged
     {

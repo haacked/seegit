@@ -13,8 +13,7 @@ namespace SeeGit
         {
             var handler = PropertyChanged;
 
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         protected void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
@@ -27,19 +26,19 @@ namespace SeeGit
         {
             if (propertyExpression == null)
             {
-                throw new ArgumentNullException("propertyExpression");
+                throw new ArgumentNullException(nameof(propertyExpression));
             }
 
             var memberExpression = propertyExpression.Body as MemberExpression;
             if (memberExpression == null)
             {
-                throw new ArgumentException("propertyExpression");
+                throw new ArgumentException(nameof(propertyExpression));
             }
 
             var property = memberExpression.Member as PropertyInfo;
             if (property == null)
             {
-                throw new ArgumentException("propertyExpression");
+                throw new ArgumentException(nameof(propertyExpression));
             }
 
             return memberExpression.Member.Name;

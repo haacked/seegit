@@ -1,19 +1,14 @@
-﻿using SeeGit.Models;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Windows.Controls;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using SeeGit.Models;
 
 namespace SeeGit
 {
     public partial class MainWindow : Window
     {
         private readonly MainWindowViewModel _viewModel;
-        private static readonly Settings _configuration = new Settings();
 
         public MainWindow()
         {
@@ -26,10 +21,7 @@ namespace SeeGit
         /// <summary>
         /// A reference to the configuration.
         /// </summary>
-        public static Settings Configuration
-        {
-            get { return _configuration; }
-        }
+        public static Settings Configuration { get; } = new Settings();
 
         private void OnChooseRepository(object sender, RoutedEventArgs args)
         {
@@ -45,13 +37,13 @@ namespace SeeGit
         {
             if (!_viewModel.ToggleSettings())
             {
-                foreach (CommitVertex vertex in _viewModel.Graph.Vertices)
+                foreach (var vertex in _viewModel.Graph.Vertices)
                 {
-                    vertex.AdornerMessageVisibilityType = _configuration.GetSetting("AdornerCommitMessageVisibility", "ExpandedHidden");
-                    vertex.DescriptionShown = _configuration.GetSetting<bool>("DescriptionInExpander", false);
-                    vertex.ShaLength = _configuration.GetSetting<int>("SHALength", 8);
+                    vertex.AdornerMessageVisibilityType = Configuration.GetSetting("AdornerCommitMessageVisibility", "ExpandedHidden");
+                    vertex.DescriptionShown = Configuration.GetSetting("DescriptionInExpander", false);
+                    vertex.ShaLength = Configuration.GetSetting("SHALength", 8);
                 }
-                _configuration.Save();
+                Configuration.Save();
                 _viewModel.Refresh();
             }
         }
