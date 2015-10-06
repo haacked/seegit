@@ -70,22 +70,13 @@ namespace SeeGit
 
         public string Sha
         {
-            get;
-            private set;
-        }
+            get; }
 
-        public string ShortSha
-        {
-            get
-            {
-                return Sha.AtMost(ShaLength);
-            }
-        }
+        public string ShortSha => Sha.AtMost(ShaLength);
 
         public string Message
         {
             get;
-            private set;
         }
 
         public string Description
@@ -97,16 +88,9 @@ namespace SeeGit
         public BranchCollection Branches
         {
             get;
-            private set;
         }
 
-        public bool HasBranches
-        {
-            get
-            {
-                return Branches.Count > 0;
-            }
-        }
+        public bool HasBranches => Branches.Count > 0;
 
         private bool _onCurrentBranch;
 
@@ -158,9 +142,9 @@ namespace SeeGit
         {
             unchecked
             {
-                int result = (Sha != null ? Sha.GetHashCode() : 0);
-                result = (result * 397) ^ (Message != null ? Message.GetHashCode() : 0);
-                result = (result * 397) ^ (Description != null ? Description.GetHashCode() : 0);
+                int result = Sha?.GetHashCode() ?? 0;
+                result = (result * 397) ^ (Message?.GetHashCode() ?? 0);
+                result = (result * 397) ^ (Description?.GetHashCode() ?? 0);
                 return result;
             }
         }

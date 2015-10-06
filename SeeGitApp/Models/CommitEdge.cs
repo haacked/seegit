@@ -52,8 +52,8 @@ namespace SeeGit
         {
             unchecked
             {
-                int result = (Target != null ? Target.GetHashCode() : 0);
-                result = (result * 397) ^ (Source != null ? Source.GetHashCode() : 0);
+                int result = Target?.GetHashCode() ?? 0;
+                result = (result * 397) ^ (Source?.GetHashCode() ?? 0);
                 return result;
             }
         }

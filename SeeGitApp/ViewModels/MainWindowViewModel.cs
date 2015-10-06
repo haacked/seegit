@@ -77,13 +77,13 @@ namespace SeeGit
         private void MonitorForRepositoryCreation(string repositoryWorkingPath)
         {
             ModelExtensions.CreateGitRepositoryCreationObservable(repositoryWorkingPath)
-                .Subscribe(_ => _uiDispatcher.Invoke(new Action(() => MonitorRepository(repositoryWorkingPath))));
+                .Subscribe(_ => _uiDispatcher.Invoke(() => MonitorRepository(repositoryWorkingPath)));
         }
 
         private void MonitorForRepositoryChanges(string gitRepositoryPath)
         {
             ModelExtensions.CreateGitRepositoryChangesObservable(gitRepositoryPath)
-                .Subscribe(_ => _uiDispatcher.Invoke(new Action(Refresh)));
+                .Subscribe(_ => _uiDispatcher.Invoke(Refresh));
         }
 
         public void Refresh()
