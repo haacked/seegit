@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace SeeGit
 {
@@ -17,7 +16,7 @@ namespace SeeGit
                 var cfd = new CommonOpenFileDialog
                 {
                     InitialDirectory = initialDirectory,
-                    IsFolderPicker = true,
+                    IsFolderPicker = true
                 };
                 
                 if (cfd.ShowDialog() == CommonFileDialogResult.Ok)
@@ -29,7 +28,7 @@ namespace SeeGit
             {
                 var fd = new System.Windows.Forms.FolderBrowserDialog
                 {
-                    SelectedPath = initialDirectory,
+                    SelectedPath = initialDirectory
                 };
 
                 if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)

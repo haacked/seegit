@@ -9,9 +9,7 @@
 
         public override bool Equals(BranchReference other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Equals(other.Name, Name);
+            return !ReferenceEquals(null, other) && (ReferenceEquals(this, other) || Equals(other.Name, Name));
         }
 
         public override int GetHashCode()

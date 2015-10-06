@@ -18,13 +18,13 @@ namespace SeeGit.Models
         private void ClearAllHighlights()
         {
             ClearSemiHighlights();
-            foreach (TVertex local in Controller.HighlightedVertices)
+            foreach (var vertex in Controller.HighlightedVertices)
             {
-                Controller.RemoveHighlightFromVertex(local);
+                Controller.RemoveHighlightFromVertex(vertex);
             }
-            foreach (TEdge local2 in Controller.HighlightedEdges)
+            foreach (var edge in Controller.HighlightedEdges)
             {
-                Controller.RemoveHighlightFromEdge(local2);
+                Controller.RemoveHighlightFromEdge(edge);
             }
         }
 
@@ -42,8 +42,8 @@ namespace SeeGit.Models
 
         public override bool OnEdgeHighlighting(TEdge edge)
         {
-            this.ClearAllHighlights();
-            if (!(!object.Equals(edge, default(TEdge)) && base.Controller.Graph.ContainsEdge(edge)))
+            ClearAllHighlights();
+            if (!(!Equals(edge, default(TEdge)) && Controller.Graph.ContainsEdge(edge)))
             {
                 return false;
             }
