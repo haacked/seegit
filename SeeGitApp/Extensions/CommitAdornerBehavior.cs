@@ -167,14 +167,19 @@ namespace SeeGit
             {
                 if (_adornerControl.IsMouseOver)
                 {
-                    _adornerControl.MouseLeave -= (s, e) => _adornerControl.Visibility = AdornerVisible;
-                    _adornerControl.MouseLeave += (s, e) => _adornerControl.Visibility = AdornerVisible;
+                    _adornerControl.MouseLeave -= SetVisibility;
+                    _adornerControl.MouseLeave += SetVisibility;
                 }
                 else
                 {
                     _adornerControl.Visibility = AdornerVisible;
                 }
             }
+        }
+
+        private void SetVisibility(object source, MouseEventArgs e)
+        {
+            _adornerControl.Visibility = AdornerVisible;
         }
 
         /// <summary>
