@@ -65,7 +65,7 @@ namespace SeeGit
             var graph = _graphBuilder.Graph();
 
             if (graph.VertexCount > 1)
-                graph.LayoutAlgorithmType = "EfficientSugiyama";
+                graph.LayoutAlgorithmType = App.LayoutAlgorithm;
             Graph = graph;
 
             if (!Directory.Exists(gitPath))

@@ -33,7 +33,7 @@ namespace SeeGit
             graph.AddEdge(new CommitEdge(commits[1], commits[2]));
             graph.AddEdge(new CommitEdge(commits[0], commits[1]));
             graph.AddEdge(new CommitEdge(commits[3], commits[2]));
-            graph.LayoutAlgorithmType = "EfficientSugiyama";
+            graph.LayoutAlgorithmType = App.LayoutAlgorithm;
             return graph;
         }
     }

@@ -37,7 +37,7 @@ namespace SeeGit
         {
             if (!_viewModel.ToggleSettings())
             {
-                foreach (CommitVertex vertex in _viewModel.Graph.Vertices)
+                foreach (var vertex in _viewModel.Graph.Vertices)
                 {
                     vertex.AdornerMessageVisibilityType = Configuration.GetSetting("AdornerCommitMessageVisibility", "ExpandedHidden");
                     vertex.DescriptionShown = Configuration.GetSetting("DescriptionInExpander", false);

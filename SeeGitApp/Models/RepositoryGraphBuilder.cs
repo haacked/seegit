@@ -49,7 +49,7 @@ namespace SeeGit
             AddBranchReferences();
             AddHeadReference();
 
-            _graph.LayoutAlgorithmType = "CompoundFDP";
+            _graph.LayoutAlgorithmType = App.LayoutAlgorithm;
             return _graph;
         }
 
