@@ -25,7 +25,7 @@ namespace SeeGit
             }
         }
 
-        public string GitRepositoryPath { get; private set; }
+        public string GitRepositoryPath { get; }
 
         public RepositoryGraph Graph()
         {
@@ -84,12 +84,12 @@ namespace SeeGit
 
             headCommitVertex.Branches.Merge(headBranceReference);
             AddCommitsToGraph(headCommit, null);
-            HighlightCommitsOnCurrentBranch(headCommit, headCommitVertex);
+            HighlightCommitsOnCurrentBranch(headCommit);
         }
 
         private bool HighlightCommit(Commit commit)
         {
-            CommitVertex commitVertex = GetCommitVertex(commit);
+            var commitVertex = GetCommitVertex(commit);
             if (commitVertex.OnCurrentBranch)
                 return false;
 
@@ -97,9 +97,9 @@ namespace SeeGit
             return true;
         }
 
-        private void HighlightCommitsOnCurrentBranch(Commit commit, CommitVertex commitVertex)
+        private void HighlightCommitsOnCurrentBranch(Commit commit)
         {
-            Queue<Commit> queue = new Queue<Commit>();
+            var queue = new Queue<Commit>();
             queue.Enqueue(commit);
 
             while (queue.Count != 0)
@@ -135,7 +135,7 @@ namespace SeeGit
         {
             // KeyValuePair is faster than a Tuple in this case.
             // We create as many instances as we pass to the AddCommitToGraph.
-            Queue<CommitWithChildVertex> queue = new Queue<CommitWithChildVertex>();
+            var queue = new Queue<CommitWithChildVertex>();
             queue.Enqueue(new CommitWithChildVertex(commit, childVertex));
 
             while (queue.Count != 0)

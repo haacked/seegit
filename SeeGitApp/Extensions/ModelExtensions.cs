@@ -10,12 +10,7 @@ namespace SeeGit
 
         public static string AtMost(this string s, int characterCount)
         {
-            if (s == null) return null;
-            if (s.Length <= characterCount)
-            {
-                return s;
-            }
-            return s.Substring(0, characterCount);
+            return s == null ? null : (s.Length <= characterCount ? s : s.Substring(0, characterCount));
         }
 
         public static string GetGitRepositoryPath(string path)
@@ -40,10 +35,7 @@ namespace SeeGit
                 {
                     return pathToTest;
                 }
-                else
-                {
-                    checkIn = checkIn.Parent;
-                }
+                checkIn = checkIn.Parent;
             }
 
             // This is not good, it relies on the rest of the code being ok
@@ -55,16 +47,16 @@ namespace SeeGit
         {
             string expectedGitDirectory = Path.Combine(path, GitDirectoryName);
             return new FileSystemWatcher(path)
-                   {
-                       IncludeSubdirectories = false,
-                       EnableRaisingEvents = true,
-                       NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.DirectoryName
-                   }.ObserveFileSystemCreateEvents()
-                .Where(
-                    e =>
-                    e.ChangeType == WatcherChangeTypes.Created &&
-                    e.FullPath.Equals(expectedGitDirectory, StringComparison.OrdinalIgnoreCase))
-                .Take(1);
+            {
+                IncludeSubdirectories = false,
+                EnableRaisingEvents = true,
+                NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.DirectoryName
+            }.ObserveFileSystemCreateEvents()
+            .Where(
+                e =>
+                e.ChangeType == WatcherChangeTypes.Created &&
+                e.FullPath.Equals(expectedGitDirectory, StringComparison.OrdinalIgnoreCase))
+            .Take(1);
         }
 
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryChangesObservable(string path)

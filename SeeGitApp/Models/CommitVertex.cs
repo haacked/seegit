@@ -13,9 +13,9 @@ namespace SeeGit
             Message = message;
             Branches = new BranchCollection();
             Branches.CollectionChanged += (o, e) => RaisePropertyChanged(() => HasBranches);
-            ShaLength = MainWindow.Configuration.GetSetting<int>("SHALength", 8);
-            DescriptionShown = MainWindow.Configuration.GetSetting<bool>("DescriptionInExpander", false);
-            AdornerMessageVisibilityType = MainWindow.Configuration.GetSetting<string>("AdornerCommitMessageVisibility", "ExpandedHidden");
+            ShaLength = MainWindow.Configuration.GetSetting("SHALength", 8);
+            DescriptionShown = MainWindow.Configuration.GetSetting("DescriptionInExpander", false);
+            AdornerMessageVisibilityType = MainWindow.Configuration.GetSetting("AdornerCommitMessageVisibility", "ExpandedHidden");
             Expanded = false;
         }
 
@@ -121,21 +121,17 @@ namespace SeeGit
 
         public override bool Equals(object obj)
         {
-            return this.Equals(obj as CommitVertex);
+            return Equals(obj as CommitVertex);
         }
 
         public override bool Equals(CommitVertex other)
         {
-            if(ReferenceEquals(null, other))
-                return false;
-            if(ReferenceEquals(this, other))
-                return true;
-            return Equals(other.Sha, Sha);
+            return !ReferenceEquals(null, other) && (ReferenceEquals(this, other) || Equals(other.Sha, Sha));
         }
 
         public override string ToString()
         {
-            return string.Format("{0}: {1}", ShortSha, Message);
+            return $"{ShortSha}: {Message}";
         }
 
         public override int GetHashCode()
@@ -151,9 +147,7 @@ namespace SeeGit
 
         public static bool operator ==(CommitVertex commit, CommitVertex other)
         {
-            if(ReferenceEquals(commit, null)) return ReferenceEquals(other, null);
-
-            return commit.Equals(other);
+            return ReferenceEquals(commit, null) ? ReferenceEquals(other, null) : commit.Equals(other);
         }
 
         public static bool operator !=(CommitVertex commit, CommitVertex other)

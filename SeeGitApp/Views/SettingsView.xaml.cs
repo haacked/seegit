@@ -1,17 +1,6 @@
-﻿using SeeGit.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SeeGit.Models;
 
 namespace SeeGit.Views
 {
@@ -29,7 +18,7 @@ namespace SeeGit.Views
 
         public class SettingsDataContext
         {
-            private static List<string> commitAdornerComboList = new List<string>();
+            private static readonly List<string> commitAdornerComboList = new List<string>();
             private static Settings _config;
 
             public SettingsDataContext()
@@ -38,12 +27,12 @@ namespace SeeGit.Views
 
                 SetComboItems();
 
-                CommitAdornerSelectedItem = _config.GetSetting<string>("AdornerCommitMessageVisibility", "ExpandedHidden");
-                SHALengthInput = _config.GetSetting<string>("SHALength", "8");
-                CommitDescriptionShown = _config.GetSetting<bool>("DescriptionInExpander", false);
+                CommitAdornerSelectedItem = _config.GetSetting("AdornerCommitMessageVisibility", "ExpandedHidden");
+                SHALengthInput = _config.GetSetting("SHALength", "8");
+                CommitDescriptionShown = _config.GetSetting("DescriptionInExpander", false);
             }
 
-            private void SetComboItems()
+            private static void SetComboItems()
             {
                 commitAdornerComboList.Add("ExpandedHidden");
                 commitAdornerComboList.Add("Visible");
@@ -51,16 +40,13 @@ namespace SeeGit.Views
             }
 
             // Data bindings
-            public List<string> CommitAdornerComboItems
-            {
-                get { return commitAdornerComboList; }
-            }
+            public List<string> CommitAdornerComboItems => commitAdornerComboList;
 
             public string CommitAdornerSelectedItem
             {
                 get
                 {
-                    return _config.GetSetting<string>("AdornerCommitMessageVisibility", commitAdornerComboList[0]);
+                    return _config.GetSetting("AdornerCommitMessageVisibility", commitAdornerComboList[0]);
                 }
                 set
                 {
@@ -72,7 +58,7 @@ namespace SeeGit.Views
             {
                 get
                 {
-                    return _config.GetSetting<string>("SHALength", "8");
+                    return _config.GetSetting("SHALength", "8");
                 }
                 set
                 {
@@ -84,7 +70,7 @@ namespace SeeGit.Views
             {
                 get
                 {
-                    return _config.GetSetting<bool>("DescriptionInExpander", false);
+                    return _config.GetSetting("DescriptionInExpander", false);
                 }
                 set
                 {

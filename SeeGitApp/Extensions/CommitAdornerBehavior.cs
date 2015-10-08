@@ -66,7 +66,7 @@ namespace SeeGit
 
                               if (null == adornerLayer)
                                   throw new NullReferenceException(
-                                      string.Format("No adorner found in attached object: {0}", AssociatedObject));
+                                      $"No adorner found in attached object: {AssociatedObject}");
 
                               // Create adorner
                               _adornerControl = new ContentControl();
@@ -74,15 +74,17 @@ namespace SeeGit
                               // Add to adorner
                               adornerLayer.Add(
                                   _caTemplatedAdorner =
-                                  new CommitTemplatedAdorner(AssociatedObject as UIElement, _adornerControl));
+                                  new CommitTemplatedAdorner((UIElement)AssociatedObject, _adornerControl));
 
                               // Set related bindings
                               _adornerControl.Content = AdornerTemplate.LoadContent();
                               _adornerControl.Visibility = AdornerVisible;
 
                               // Bind internal dependency to external 
-                              var bindingMargin = new Binding("AdornerMargin");
-                              bindingMargin.Source = this;
+                              var bindingMargin = new Binding("AdornerMargin")
+                              {
+                                  Source = this
+                              };
                               BindingOperations.SetBinding(_caTemplatedAdorner, FrameworkElement.MarginProperty,
                                                            bindingMargin);
                           }
@@ -165,14 +167,19 @@ namespace SeeGit
             {
                 if (_adornerControl.IsMouseOver)
                 {
-                    _adornerControl.MouseLeave -= (s, e) => _adornerControl.Visibility = AdornerVisible;
-                    _adornerControl.MouseLeave += (s, e) => _adornerControl.Visibility = AdornerVisible;
+                    _adornerControl.MouseLeave -= SetVisibility;
+                    _adornerControl.MouseLeave += SetVisibility;
                 }
                 else
                 {
                     _adornerControl.Visibility = AdornerVisible;
                 }
             }
+        }
+
+        private void SetVisibility(object source, MouseEventArgs e)
+        {
+            _adornerControl.Visibility = AdornerVisible;
         }
 
         /// <summary>
@@ -195,11 +202,11 @@ namespace SeeGit
             "AdornerTemplate",
             typeof (DataTemplate),
             typeof (CommitAdornerBehavior), new PropertyMetadata((d, o) =>
-                                                             {
-                                                                 if (null != ((CommitAdornerBehavior)d)._adornerControl)
-                                                                     ((CommitAdornerBehavior)d)._adornerControl.
-                                                                         ContentTemplate = (DataTemplate)o.NewValue;
-                                                             }));
+            {
+                if (null != ((CommitAdornerBehavior)d)._adornerControl)
+                    ((CommitAdornerBehavior)d)._adornerControl.
+                        ContentTemplate = (DataTemplate)o.NewValue;
+            }));
 
         /// <summary>
         /// Data template for the adroner. Used inside a ContentControl. 
@@ -265,16 +272,13 @@ namespace SeeGit
                                         {
                                             var adorner = d as CommitAdornerBehavior;
                                             if (d == null) return;
-                                            if (adorner != null) adorner.SetDelayedState((bool)o.NewValue);
+                                            adorner?.SetDelayedState((bool)o.NewValue);
                                         }));
 
         /// <summary>
         /// Data template for the adroner. Used inside a ContentControl. 
         /// </summary>
-        public bool DelayConstruction
-        {
-            get { return (bool)GetValue(DelayConstructionProperty); }
-        }
+        public bool DelayConstruction => (bool)GetValue(DelayConstructionProperty);
 
         /// <summary>
         /// Data template for the adroner. Used inside a ContentControl. 
@@ -302,7 +306,7 @@ namespace SeeGit
         private static void OnDataContextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var adorner = d as CommitAdornerBehavior;
-            if (adorner == null || adorner._adornerControl == null) return;
+            if (adorner?._adornerControl == null) return;
 
             adorner._adornerControl.DataContext = adorner.DataContext;
         }
