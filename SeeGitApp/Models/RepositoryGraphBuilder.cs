@@ -49,7 +49,13 @@ namespace SeeGit
             AddBranchReferences();
             AddHeadReference();
 
-            _graph.LayoutAlgorithmType = App.LayoutAlgorithm;
+            // Efficient Sugiyama crashes if we have a single commit repository. So we start with CompoundFDP.
+            // The original attempt to fix this, 50ca739aaadd7249f864d17cae060b1a27e22029, had a bug where we never
+            // changed the algorithm back to Efficient Sugiyama. This fixes that.
+            _graph.LayoutAlgorithmType = 
+                _graph.VertexCount == 1
+                ? "CompoundFDP"
+                : App.LayoutAlgorithm;
             return _graph;
         }
 
@@ -130,12 +136,11 @@ namespace SeeGit
             // KeyValuePair is faster than a Tuple in this case.
             // We create as many instances as we pass to the AddCommitToGraph.
             Queue<CommitWithChildVertex> queue = new Queue<CommitWithChildVertex>();
-            CommitWithChildVertex commitIter;
             queue.Enqueue(new CommitWithChildVertex(commit, childVertex));
 
             while (queue.Count != 0)
             {
-                commitIter = queue.Dequeue();
+                var commitIter = queue.Dequeue();
                 if (!AddCommitToGraph(commitIter.Key, commitIter.Value))
                     continue;
 

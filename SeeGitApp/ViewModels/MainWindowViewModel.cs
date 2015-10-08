@@ -62,11 +62,8 @@ namespace SeeGit
 
             _graphBuilder = _graphBuilderThunk(gitPath);
             RepositoryPath = Directory.GetParent(gitPath).FullName;
-            var graph = _graphBuilder.Graph();
 
-            if (graph.VertexCount > 1)
-                graph.LayoutAlgorithmType = App.LayoutAlgorithm;
-            Graph = graph;
+            Graph = _graphBuilder.Graph();
 
             if (!Directory.Exists(gitPath))
                 MonitorForRepositoryCreation(RepositoryPath);
