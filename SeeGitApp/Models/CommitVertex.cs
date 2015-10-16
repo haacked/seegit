@@ -60,9 +60,13 @@ namespace SeeGit
             set
             {
                 if (value.Equals("Visible"))
+                {
                     AdornerMessageVisibility = true;
+                }
                 else if (value.Equals("Hidden"))
+                {
                     AdornerMessageVisibility = false;
+                }
                 _adornerMessageVisibilityType = value;
                 RaisePropertyChanged(() => AdornerMessageVisibility);
             }
@@ -70,7 +74,8 @@ namespace SeeGit
 
         public string Sha
         {
-            get; }
+            get;
+        }
 
         public string ShortSha => Sha.AtMost(ShaLength);
 
