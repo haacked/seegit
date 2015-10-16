@@ -156,7 +156,13 @@ namespace SeeGit
             CommitVertex commitVertex;
             if (!_vertices.TryGetValue(commit.Sha, out commitVertex))
             {
-                commitVertex = new CommitVertex(commit.Sha, commit.MessageShort) { Description = commit.Message };
+                commitVertex = new CommitVertex(commit.Sha, commit.MessageShort)
+                {
+                    Description = commit.Message,
+                    Author = commit.Author.Name,
+                    CommitDate = commit.Author.When
+
+                };
                 _vertices.Add(commit.Sha, commitVertex);
             }
 
