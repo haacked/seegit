@@ -102,6 +102,8 @@
           <StackPanel Orientation="Vertical">
             <TextBlock Text="{Binding Message}" Foreground="White" TextWrapping="Wrap" MaxWidth="150" Visibility="{Binding DescriptionShown, Converter={StaticResource InverseBooleanToVisibilityConverter}}" />
             <TextBlock Text="{Binding Description}" Foreground="White" TextWrapping="Wrap" MaxWidth="250" Visibility="{Binding DescriptionShown, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBlock Text="{Binding Author}" Foreground="#cccccc" TextWrapping="Wrap" MaxWidth="250" Visibility="{Binding DescriptionShown, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="0,10,0,0" />
+            <TextBlock Text="{Binding CommitDate}" Foreground="#cccccc" TextWrapping="Wrap" MaxWidth="250" Visibility="{Binding DescriptionShown, Converter={StaticResource BooleanToVisibilityConverter}}" />
           </StackPanel>
         </Expander>
       </Border>

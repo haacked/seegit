@@ -84,6 +84,17 @@ namespace SeeGit
             get;
             set;
         }
+        public string Author
+        {
+            get;
+            set;
+        }
+
+        public DateTimeOffset CommitDate
+        {
+            get;
+            set;
+        }
 
         public BranchCollection Branches
         {
