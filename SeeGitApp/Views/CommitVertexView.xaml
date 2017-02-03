@@ -96,8 +96,8 @@
           <Expander.Header>
               <StackPanel Orientation="Horizontal">
                   <TextBlock Text="{Binding ShortSha, Mode=OneWay}"></TextBlock>
-                  <TextBlock Text=" "></TextBlock>
-                  <TextBlock Text="{Binding Author, Mode=OneWay}"></TextBlock>
+                  <TextBlock Text=" " Visibility="{Binding AuthorShown, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
+                  <TextBlock Text="{Binding Author, Mode=OneWay}" Visibility="{Binding AuthorShown, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
               </StackPanel>
           </Expander.Header>
           <Expander.Style>

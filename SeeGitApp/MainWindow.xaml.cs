@@ -40,11 +40,17 @@ namespace SeeGit
                 foreach (var vertex in _viewModel.Graph.Vertices)
                 {
                     vertex.AdornerMessageVisibilityType = Configuration.GetSetting("AdornerCommitMessageVisibility", "ExpandedHidden");
+                    vertex.AuthorShown = Configuration.GetSetting("AuthorInHeader", false);
                     vertex.DescriptionShown = Configuration.GetSetting("DescriptionInExpander", false);
                     vertex.ShaLength = Configuration.GetSetting("SHALength", 8);
                 }
                 Configuration.Save();
                 _viewModel.Refresh();
+                // Ideally we wouldn't have to call relayout.  Refreshing the view model would
+                // update the Graph which would then cause the RepositoryGraphLayout control to adjust its layout.
+                // Unfortunately, I am not as familiar with the RepositoryGraphLayout control and when the vertices have their
+                // width's increased due to displaying the author, the graph needs to have its layout adjusted.
+                graphLayout.Relayout();
             }
         }
     }

@@ -15,6 +15,7 @@ namespace SeeGit
             Branches.CollectionChanged += (o, e) => RaisePropertyChanged(() => HasBranches);
             ShaLength = MainWindow.Configuration.GetSetting("SHALength", 8);
             DescriptionShown = MainWindow.Configuration.GetSetting("DescriptionInExpander", false);
+            AuthorShown = MainWindow.Configuration.GetSetting("AuthorInHeader", false);
             AdornerMessageVisibilityType = MainWindow.Configuration.GetSetting("AdornerCommitMessageVisibility", "ExpandedHidden");
             Expanded = false;
         }
@@ -45,6 +46,22 @@ namespace SeeGit
             {
                 _descriptionShown = value;
                 RaisePropertyChanged(() => DescriptionShown);
+            }
+        }
+
+        private bool _authorShown;
+
+        public bool AuthorShown
+        {
+            get
+            {
+                return _authorShown; 
+                
+            }
+            set
+            {
+                _authorShown = value;
+                RaisePropertyChanged(() => AuthorShown);
             }
         }
 
