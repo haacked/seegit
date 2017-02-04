@@ -9,7 +9,7 @@ namespace SeeGit
     /// </summary>
     internal class CommitTemplatedAdorner : Adorner
     {
-        private FrameworkElement _adornedElement;
+        private readonly FrameworkElement _adornedElement;
         /// <summary>
         /// 
         /// </summary>
