@@ -9,6 +9,7 @@ namespace SeeGit
     /// </summary>
     internal class CommitTemplatedAdorner : Adorner
     {
+        private readonly FrameworkElement _adornedElement;
         /// <summary>
         /// 
         /// </summary>
@@ -17,6 +18,8 @@ namespace SeeGit
         public CommitTemplatedAdorner(UIElement adornedElement, FrameworkElement frameworkElementAdorner)
             : base(adornedElement)
         {
+            _adornedElement = (FrameworkElement) adornedElement;
+
             // Assure we get mouse hits
             _frameworkElementAdorner = frameworkElementAdorner;
             AddVisualChild(_frameworkElementAdorner);
@@ -57,7 +60,9 @@ namespace SeeGit
         /// <returns></returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            _frameworkElementAdorner.Arrange(new Rect(new Point(0, 0), finalSize));
+            // Make sure to align to the right of the element being adorned
+            double xloc = _adornedElement.ActualWidth;
+            _frameworkElementAdorner.Arrange(new Rect(new Point(xloc, 0), finalSize));
             return finalSize;
         }
 

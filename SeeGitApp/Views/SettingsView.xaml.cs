@@ -77,6 +77,18 @@ namespace SeeGit.Views
                     _config.SetSetting("DescriptionInExpander", value ? "True" : "False");
                 }
             }
+
+            public bool CommitAuthorShown
+            {
+                get
+                {
+                    return _config.GetSetting("AuthorInHeader", false);
+                }
+                set
+                {
+                    _config.SetSetting("AuthorInHeader", value ? "True" : "False");
+                }
+            }
         }
     }
 }

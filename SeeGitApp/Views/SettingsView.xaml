@@ -26,6 +26,13 @@
 
         <StackPanel Orientation="Vertical">
           <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
+               FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="Show Commit Author" />
+          <CheckBox Name="CommitAuthor" HorizontalAlignment="Center" Margin="10 2 0 0" Background="White"
+               IsChecked="{Binding Path=CommitAuthorShown}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical">
+          <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="10"
                FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0" Content="SHA Length" />
           <TextBox Name="SHALength" Width="60" HorizontalAlignment="Center" Text="{Binding Path=SHALengthInput, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>

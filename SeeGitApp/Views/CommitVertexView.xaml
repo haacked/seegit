@@ -21,7 +21,7 @@
               </Style>
           </Border.Style>
         <i:Interaction.Behaviors>
-          <local:CommitAdornerBehavior AdornerVisible="Visible" AdornerMargin="105,10,0,0" DataContext="{Binding}">
+          <local:CommitAdornerBehavior AdornerVisible="Visible" AdornerMargin="10,10,0,0" DataContext="{Binding}">
             <local:CommitAdornerBehavior.AdornerTemplate>
               <DataTemplate>
                 <StackPanel Orientation="Horizontal">
@@ -91,8 +91,15 @@
           <DropShadowEffect BlurRadius="2" Color="LightGray" Opacity="0.3" Direction="315" />
         </Border.Effect>
 
-        <Expander IsExpanded="False" Header="{Binding ShortSha, Mode=OneWay}" Padding="5"
+        <Expander IsExpanded="False" Padding="5"
                   ToolTip="{Binding Message, Mode=OneWay}" Expanded="Expander_Expanded" Collapsed="Expander_Collapsed">
+          <Expander.Header>
+              <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{Binding ShortSha, Mode=OneWay}"></TextBlock>
+                  <TextBlock Text=" " Visibility="{Binding AuthorShown, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
+                  <TextBlock Text="{Binding Author, Mode=OneWay}" Visibility="{Binding AuthorShown, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
+              </StackPanel>
+          </Expander.Header>
           <Expander.Style>
             <Style TargetType="{x:Type Expander}">
               <Setter Property="Foreground" Value="White" />
