@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Browse Button</title>
+        <style type="text/css">
+            .input-box.attachment{margin: 0 auto;text-align: left; width: 469px;}
+            #uploadFile { width: 38%; margin: 0 10px 0 0; border: 1px solid #D8D8D8; color: #666666; font-family: inherit; font-size: 14px; padding: 7px 12px;}
+            .file-upload input.upload { cursor: pointer; font-size: 14px; margin: 0; opacity: 0; padding: 0; position: absolute; left: 0; top: 0; width: 100%;}
+            .career-index-index .form-list label.attachment-label{float: right;}
+            .file-upload{float: left;margin: 0 10 0px;overflow: hidden; position: relative; background-color: #808080; color: #FFFFFF; background-image: none; border: 1px solid rgba(0, 0, 0, 0); border-radius: 4px; cursor: pointer; display: inline-block; font-size: 14px; font-weight: normal; line-height: 1.42857; padding: 6px 12px; text-align: center; vertical-align: middle; white-space: nowrap;}
+            .file-upload:hover {background-color: #277B3A;}
+        </style>
+    </head>
+    <body>
+        <div class="browse-btn">
+            <div class="input-box attachment">
+                <p style="display: inline;"><input type="text" placeholder="Choose File" disabled="disabled" style="line-height: 16px;" id="uploadFile"></p>
+                <div class="file-upload btn btn-primary">
+                    <span>Upload</span>
+                    <input type="file" id="uploadBtn" class="upload">
+                </div>
+                <label class="attachment-label" for="attachment">ATTACHMENT (if any)</label>
+            </div>
+        </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                document.getElementById("uploadBtn").onchange = function() {
+                    document.getElementById("uploadFile").value = this.value;
+                };
+            });
+        </script>
+    </body>
+</html>
