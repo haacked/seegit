@@ -50,4 +50,4 @@ Some things that will increase the chance that your pull request is accepted.
 # Additional Resources
 
 * [General GitHub documentation](http://help.github.com/)
-* [GitHub pull request documentation](http://help.github.com/send-pull-requests/)
+* [GitHub pull request documentation](https://help.github.com/articles/creating-a-pull-request/)
