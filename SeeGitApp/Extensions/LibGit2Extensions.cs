@@ -6,7 +6,7 @@
         {
             return new BranchReference
             {
-                Name = branch.CanonicalName,
+                Name = branch.FriendlyName,
                 IsRemote = branch.IsRemote,
                 IsHead = branch.IsCurrentRepositoryHead
             };
