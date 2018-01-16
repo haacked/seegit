@@ -3,7 +3,7 @@
     <Configuration>Debug</Configuration>
   </PropertyGroup>
 
-  <UsingTask AssemblyFile=".\packages\xunit.1.9.2\lib\net20\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
+  <UsingTask AssemblyFile=".\xunit.runner.msbuild.2.3.1\build\net452\xunit.runner.msbuild.net452.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
   
   <Target Name="Clean">
     <MSBuild Projects=".\SeeGit.sln" Targets="Clean" Properties="Configuration=$(Configuration)"/>
@@ -14,7 +14,7 @@
   </Target>
 
   <Target Name="RunUnitTests" DependsOnTargets="Build"> 
-    <xunit Assembly=".\UnitTests\bin\$(Configuration)\UnitTests.dll" Xml="UnitTests.results.xml" />
+    <xunit Assemblies=".\UnitTests\bin\$(Configuration)\UnitTests.dll" Xml="UnitTests.results.xml" />
   </Target>
 
   <Target Name="FullBuild" DependsOnTargets="RunUnitTests" />

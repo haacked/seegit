@@ -16,8 +16,8 @@ namespace UnitTests.Models
                 Assert.Equal("commit message", commit.Message);
                 Assert.NotNull(commit.Branches);
                 Assert.Equal(8, commit.ShaLength);
-                Assert.Equal(true, commit.AdornerMessageVisibility);    // expanded is false -> true
-                Assert.Equal(false, commit.DescriptionShown);
+                Assert.True(commit.AdornerMessageVisibility);    // expanded is false -> true
+                Assert.False(commit.DescriptionShown);
             }
         }
 
@@ -47,7 +47,7 @@ namespace UnitTests.Models
             public void ReturnsFalseWhenComparedToNull()
             {
                 var commit = new CommitVertex("sha", "message");
-                CommitVertex other = null;
+                const CommitVertex other = null;
 
                 Assert.False(commit.Equals(other));
                 Assert.False(object.Equals(commit, other));
