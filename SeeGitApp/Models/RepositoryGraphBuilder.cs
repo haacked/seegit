@@ -161,7 +161,6 @@ namespace SeeGit
                     Description = commit.Message,
                     Author = commit.Author.Name,
                     CommitDate = commit.Author.When
-
                 };
                 _vertices.Add(commit.Sha, commitVertex);
             }
