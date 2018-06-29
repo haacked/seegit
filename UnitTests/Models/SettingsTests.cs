@@ -15,7 +15,7 @@ namespace UnitTests.Models
                 var settings = new Settings();
 
                 // Get From File Test
-                Assert.Equal(true, settings.GetSetting<bool>("TrueSetting", false));
+                Assert.True(settings.GetSetting<bool>("TrueSetting", false));
 
                 // Default Setting Test
                 Assert.Equal("default", settings.GetSetting("asdf", "default", true));
@@ -28,7 +28,7 @@ namespace UnitTests.Models
                 Assert.Equal("False", settings.GetSetting("mySetting", String.Empty));
 
                 // Remove Setting
-                string fileValue = settings.GetSetting("ToBeRemovedSetting", "xmlvalue");
+                var fileValue = settings.GetSetting("ToBeRemovedSetting", "xmlvalue");
                 settings.RemoveSetting("ToBeRemovedSetting");
                 Assert.NotEqual(fileValue, settings.GetSetting("ToBeRemovedSetting", "notthexml"));
                 settings.Save();

@@ -15,7 +15,7 @@ namespace UnitTests
 
                 branches.Merge(new SeeGit.BranchReference {Name = "foo"});
 
-                Assert.Equal(1, branches.Count);
+                Assert.Single(branches);
             }
 
             [Fact]
@@ -26,7 +26,7 @@ namespace UnitTests
 
                 branches.Merge(new SeeGit.BranchReference {Name = "foo", IsCurrent = true, IsRemote = true, IsHead = true});
 
-                Assert.Equal(1, branches.Count);
+                Assert.Single(branches);
                 Assert.True(branches.First().IsCurrent);
             }
         }
