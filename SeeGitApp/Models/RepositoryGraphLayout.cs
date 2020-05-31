@@ -1,4 +1,4 @@
-﻿using GraphSharp.Controls;
+﻿using GraphShape.Controls;
 using SeeGit.Models;
 
 namespace SeeGit

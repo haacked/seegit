@@ -7,6 +7,6 @@ namespace SeeGit
     /// </summary>
     public class App : Application
     {
-        public const string LayoutAlgorithm = "EfficientSugiyama"; // Others include: "CompoundFDP"
+        public const string LayoutAlgorithm = "Sugiyama"; // Others include: "CompoundFDP"
     }
 }

@@ -37,8 +37,8 @@ post about [structuring unit tests](http://haacked.com/archive/2012/01/01/struct
 
 * [LibGit2Sharp](https://github.com/libgit2/libgit2sharp) - [License: MIT](https://github.com/libgit2/libgit2sharp/blob/master/LICENSE.md) LibGit2Sharp is a thin .Net layer (well... we try to keep it as thin as possible :-) ) wrapping the libgit2 linkable C Git library.
 
-* [QuickGraph](http://quickgraph.codeplex.com/) - [License: Ms-PL](http://quickgraph.codeplex.com/license) QuickGraph provides generic directed/undirected graph datastructures and algorithms for .NET. 
-* [GraphSharp](http://graphsharp.codeplex.com/) - [License: Ms-PL](http://graphsharp.codeplex.com/) Graph# is a graph layout framework. It contains some layout algorithms and a GraphLayout control for WPF applications
+* [QuikGraph](https://github.com/KeRNeLith/QuikGraph/) - [License: Ms-PL](https://github.com/KeRNeLith/QuikGraph/blob/master/LICENSE) QuikGraph provides generic directed/undirected graph data structures and algorithms for .NET.
+* [GraphShape](https://github.com/KeRNeLith/GraphShape/) - [License: MIT](https://github.com/KeRNeLith/GraphShape/blob/master/LICENSE) GraphShape is a graph layout framework. It contains some layout algorithms and a GraphLayout control for WPF applications.
 * [Reactive Extensions](http://msdn.microsoft.com/en-us/data/gg577609) - [License: EULA](http://msdn.microsoft.com/en-us/devlabs/ff394099.aspx) The Reactive Extensions (Rx) is a library for composing asynchronous and event-based programs using observable sequences and LINQ-style query operators. 
 * [WPFExtensions](http://wpfextensions.codeplex.com/) - [License: Ms-PL](http://wpfextensions.codeplex.com/license) Some extensions for the WPF framework. Controls, attached behaviours, helper classes, etc.
 * [Windows&reg; API Code Pack for Microsoft&reg; .NET Framework](http://archive.msdn.microsoft.com/WindowsAPICodePack) - [License: EULA](http://archive.msdn.microsoft.com/WindowsAPICodePack/Project/License.aspx) provides a source code library that can be used to access some features of Windows 7 and Windows Vista from managed code.

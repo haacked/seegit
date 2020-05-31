@@ -49,13 +49,7 @@ namespace SeeGit
             AddBranchReferences();
             AddHeadReference();
 
-            // Efficient Sugiyama crashes if we have a single commit repository. So we start with CompoundFDP.
-            // The original attempt to fix this, 50ca739aaadd7249f864d17cae060b1a27e22029, had a bug where we never
-            // changed the algorithm back to Efficient Sugiyama. This fixes that.
-            _graph.LayoutAlgorithmType = 
-                _graph.VertexCount == 1
-                ? "CompoundFDP"
-                : App.LayoutAlgorithm;
+            _graph.LayoutAlgorithmType = App.LayoutAlgorithm;
             return _graph;
         }
 

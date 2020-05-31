@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using GraphSharp.Algorithms.Highlight;
-using QuickGraph;
+using GraphShape.Algorithms.Highlight;
+using QuikGraph;
 
 namespace SeeGit.Models
 {
@@ -11,7 +11,7 @@ namespace SeeGit.Models
     {
         private const string HighlightModeName = "Reachable";
 
-        public IHighlightAlgorithm<TVertex, TEdge, TGraph> CreateAlgorithm(string highlightMode,
+        public IHighlightAlgorithm<TVertex, TEdge> CreateAlgorithm(string highlightMode,
                                                                            IHighlightContext<TVertex, TEdge, TGraph>
                                                                                context,
                                                                            IHighlightController<TVertex, TEdge, TGraph>
@@ -27,10 +27,10 @@ namespace SeeGit.Models
 
         public IHighlightParameters CreateParameters(string highlightMode, IHighlightParameters oldParameters)
         {
-            return new HighlightParameterBase();
+            return new HighlightParameters();
         }
 
-        public string GetHighlightMode(IHighlightAlgorithm<TVertex, TEdge, TGraph> algorithm)
+        public string GetHighlightMode(IHighlightAlgorithm<TVertex, TEdge> algorithm)
         {
             if (algorithm is ReachableHighlightAlgorithm<TVertex, TEdge, TGraph>)
             {

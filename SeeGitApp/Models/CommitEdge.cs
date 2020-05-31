@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using QuickGraph;
+using QuikGraph;
 
 namespace SeeGit
 {
