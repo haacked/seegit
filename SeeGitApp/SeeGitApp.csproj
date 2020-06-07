@@ -44,11 +44,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GraphShape, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GraphShape.1.0.0\lib\net40\GraphShape.dll</HintPath>
+    <Reference Include="GraphShape, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GraphShape.1.1.0\lib\net40\GraphShape.dll</HintPath>
     </Reference>
-    <Reference Include="GraphShape.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GraphShape.Controls.1.0.0\lib\net40\GraphShape.Controls.dll</HintPath>
+    <Reference Include="GraphShape.Controls, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GraphShape.Controls.1.1.0\lib\net40\GraphShape.Controls.dll</HintPath>
     </Reference>
     <Reference Include="LibGit2Sharp, Version=0.24.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
       <HintPath>..\packages\LibGit2Sharp.0.24.0\lib\net40\LibGit2Sharp.dll</HintPath>
@@ -63,8 +63,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Windows7APICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
-    <Reference Include="QuikGraph, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\QuikGraph.2.1.0\lib\net40\QuikGraph.dll</HintPath>
+    <Reference Include="QuikGraph, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuikGraph.2.2.0\lib\net40\QuikGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
