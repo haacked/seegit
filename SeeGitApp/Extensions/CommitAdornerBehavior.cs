@@ -4,8 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Interactivity;
-using Microsoft.Expression.Interactivity.Core;
+using Microsoft.Xaml.Behaviors;
+using Microsoft.Xaml.Behaviors.Core;
 
 // Lovingly borrowed from http://www.codeproject.com/Articles/271082/Use-and-DataTemplate-as-an-Adorner
 
