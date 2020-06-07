@@ -2,7 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls" xmlns:local="clr-namespace:SeeGit"
+        xmlns:graphshape="clr-namespace:GraphShape.Controls;assembly=GraphShape.Controls"
+        xmlns:local="clr-namespace:SeeGit"
         xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
         xmlns:view="clr-namespace:SeeGit.Views"
         xmlns:extbehaviour="clr-namespace:WPFExtensions.AttachedBehaviours;assembly=WPFExtensions"
@@ -16,19 +17,19 @@
       </StackPanel>
     </DataTemplate>
 
-    <Style TargetType="{x:Type graphsharp:VertexControl}">
+    <Style TargetType="{x:Type graphshape:VertexControl}">
       <Setter Property="Template">
         <Setter.Value>
-          <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
+          <ControlTemplate TargetType="{x:Type graphshape:VertexControl}">
             <view:CommitVertexView Model="{Binding}" />
           </ControlTemplate>
         </Setter.Value>
       </Setter>
       <Setter Property="extbehaviour:DragBehaviour.IsDragEnabled" Value="True" />
       <Setter Property="extbehaviour:DragBehaviour.X"
-              Value="{Binding RelativeSource={RelativeSource Self},Path=(graphsharp:GraphCanvas.X),Mode=TwoWay}" />
+              Value="{Binding RelativeSource={RelativeSource Self},Path=(graphshape:GraphCanvas.X),Mode=TwoWay}" />
       <Setter Property="extbehaviour:DragBehaviour.Y"
-              Value="{Binding RelativeSource={RelativeSource Self},Path=(graphsharp:GraphCanvas.Y),Mode=TwoWay}" />
+              Value="{Binding RelativeSource={RelativeSource Self},Path=(graphshape:GraphCanvas.Y),Mode=TwoWay}" />
     </Style>
   </Window.Resources>
 

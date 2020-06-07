@@ -1,5 +1,6 @@
-﻿using GraphSharp.Algorithms.Highlight;
-using QuickGraph;
+﻿using System.Linq;
+using GraphShape.Algorithms.Highlight;
+using QuikGraph;
 
 namespace SeeGit.Models
 {
@@ -18,11 +19,11 @@ namespace SeeGit.Models
         private void ClearAllHighlights()
         {
             ClearSemiHighlights();
-            foreach (var vertex in Controller.HighlightedVertices)
+            foreach (var vertex in Controller.HighlightedVertices.ToArray())
             {
                 Controller.RemoveHighlightFromVertex(vertex);
             }
-            foreach (var edge in Controller.HighlightedEdges)
+            foreach (var edge in Controller.HighlightedEdges.ToArray())
             {
                 Controller.RemoveHighlightFromEdge(edge);
             }
@@ -30,11 +31,11 @@ namespace SeeGit.Models
 
         private void ClearSemiHighlights()
         {
-            foreach (var vertex in Controller.SemiHighlightedVertices)
+            foreach (var vertex in Controller.SemiHighlightedVertices.ToArray())
             {
                 Controller.RemoveSemiHighlightFromVertex(vertex);
             }
-            foreach (var edge in Controller.SemiHighlightedEdges)
+            foreach (var edge in Controller.SemiHighlightedEdges.ToArray())
             {
                 Controller.RemoveSemiHighlightFromEdge(edge);
             }

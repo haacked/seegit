@@ -10,7 +10,7 @@ namespace SeeGit
         private string _repositoryPath;
 
         private IRepositoryGraphBuilder _graphBuilder;
-        // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
+        // Tree, LinLog, KK, ISOM, Sugiyama, FR, CompoundFDP, BoundedFR, Circular, Random
 
         private string _layoutAlgorithmType = "Tree";
         private readonly Dispatcher _uiDispatcher;
