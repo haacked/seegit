@@ -25,10 +25,9 @@ the `build.cmd` script (this calls a PowerShell script, `Build-Solution.ps1`).
 
 ## Making Changes
 
-* Create a topic branch off master (don't work directly on master).
+* Create a topic branch off `main` (don't work directly on `main`).
 * Make commits of logical units.
-* Provide descriptive commit messages in the proper format (GitHub for Windows 
-  helps get the format correct).
+* Provide descriptive commit messages.
 * Make sure you have added the necessary tests for your changes.
 * Run _all_ the tests to assure nothing else was accidentally broken.
 

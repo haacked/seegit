@@ -15,7 +15,7 @@ commands, it'll show the git graph in a beautiful manner.
 * I need to add local and remote branch annotations.
 
 # Quick start
-* Visit our [Release Page](https://github.com/Haacked/SeeGit/releases) to download the latest stable release.
+* Visit our [Release Page](https://github.com/haacked/seegit/releases) to download the latest stable release.
 * Unzip files into a directory of your choice.
 * Click on SeeGit.Exe.
 * Point SeeGit to the root of a git repository.
@@ -31,7 +31,7 @@ If you're wondering why the unit tests are structured as they are, read my blog
 post about [structuring unit tests](http://haacked.com/archive/2012/01/01/structuring-unit-tests.aspx).
 
 # License
-[MIT License](https://github.com/Haacked/SeeGit/blob/master/LICENSE.txt)
+[MIT License](https://github.com/haacked/seegit/blob/main/LICENSE.txt)
 
 # Credits
 
